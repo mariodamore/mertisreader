@@ -2,9 +2,9 @@ pages:
   image: ruby:2.7
   stage: deploy
   script:
-  - cd public
+  - cd docs
   - bundle install
-  - bundle exec jekyll build -d public
+  - bundle exec jekyll build -d ../public
   artifacts:
     paths:
     - public
