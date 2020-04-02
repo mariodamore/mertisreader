@@ -1,6 +1,5 @@
-image: ruby:2.7
-
 pages:
+  image: ruby:2.7
   stage: deploy
   script:
   - cd public
