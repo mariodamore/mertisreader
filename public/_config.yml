@@ -61,4 +61,5 @@ sidebars:
 permalink: pretty
 
 theme: jekyll-theme-cayman
-baseurl: /nbdev_template/
+url: /
+baseurl: /nbdev_template
