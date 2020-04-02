@@ -3,6 +3,7 @@ image: ruby:2.7
 pages:
   stage: deploy
   script:
+  - cd public
   - bundle install
   - bundle exec jekyll build -d public
   artifacts:
