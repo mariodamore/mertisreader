@@ -1,3 +1,17 @@
+default:
+  image: ubuntu-latest
+
+
+install: 
+  script:
+  - pip install nbdev jupyter
+  - pip install -e .
+
+read_notebooks:
+  script:
+  - nbdev_read_nbs
+
+ 
 pages:
   image: ruby:2.7
   stage: deploy
@@ -9,9 +23,4 @@ pages:
     paths:
     - public
 
-install:
-  image: python:3.6 
-  script:
-  - pip install packaging jupyter
-  - pip install -e .
-
+ 
