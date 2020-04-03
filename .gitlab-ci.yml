@@ -8,3 +8,10 @@ pages:
   artifacts:
     paths:
     - public
+
+install:
+  image: python:3.6 
+  script:
+  - pip install packaging jupyter
+  - pip install -e .
+
