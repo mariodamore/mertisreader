@@ -17,7 +17,16 @@ check if notebooks are clean:
   - echo "Check that strip out was unnecessary"
   - git status -s # display the status to see which nbs need cleaning up
   - if [ -n "$(git status -uno -s)" ]; then echo -e "!!! Detected unstripped out notebooks\n!!!Remember to run nbdev_install_git_hooks"; false; fi
- 
+
+check if there is diff library/nbs:
+  script:
+  - if [ -n "$(nbdev_diff_nbs)" ]; then echo -e "!!! Detected difference between the notebooks and the library"; false; fi 
+
+run tests:
+  stage: test
+  script:
+  - nbdev_test_nbs
+
 pages:
   image: ruby:2.7
   stage: deploy
