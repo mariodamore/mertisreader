@@ -28,6 +28,8 @@ run tests:
   - nbdev_test_nbs
 
 pages:
+  inherit:
+    default: false
   image: ruby:2.7
   stage: deploy  
   before_script: 
