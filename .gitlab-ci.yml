@@ -30,6 +30,7 @@ run tests:
 pages:
   image: ruby:2.7
   stage: deploy  
+  before_script: 
   script:
   - cd docs
   - bundle install
