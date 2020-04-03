@@ -1,26 +1,26 @@
-default:
+install:
   image: python:3.6 
   before_script:
   - pip install nbdev jupyter
   - pip install -e .
 
-read_notebooks:
-  script:
-  - nbdev_read_nbs
+  read_notebooks:
+    script:
+    - nbdev_read_nbs
 
-check if notebooks are clean:
-  script:
-  - echo "Check we are starting with clean git checkout"
-  - if [ -n "$(git status -uno -s)" ]; then echo "git status is not clean"; false; fi
-  - echo "Trying to strip out notebooks"
-  - nbdev_clean_nbs
-  - echo "Check that strip out was unnecessary"
-  - git status -s # display the status to see which nbs need cleaning up
-  - if [ -n "$(git status -uno -s)" ]; then echo -e "!!! Detected unstripped out notebooks\n!!!Remember to run nbdev_install_git_hooks"; false; fi
+  check if notebooks are clean:
+    script:
+    - echo "Check we are starting with clean git checkout"
+    - if [ -n "$(git status -uno -s)" ]; then echo "git status is not clean"; false; fi
+    - echo "Trying to strip out notebooks"
+    - nbdev_clean_nbs
+    - echo "Check that strip out was unnecessary"
+    - git status -s # display the status to see which nbs need cleaning up
+    - if [ -n "$(git status -uno -s)" ]; then echo -e "!!! Detected unstripped out notebooks\n!!!Remember to run nbdev_install_git_hooks"; false; fi
 
-check if there is diff library/nbs:
-  script:
-  - if [ -n "$(nbdev_diff_nbs)" ]; then echo -e "!!! Detected difference between the notebooks and the library"; false; fi 
+  check if there is diff library/nbs:
+    script:
+    - if [ -n "$(nbdev_diff_nbs)" ]; then echo -e "!!! Detected difference between the notebooks and the library"; false; fi 
 
 run tests:
   stage: test
@@ -29,7 +29,7 @@ run tests:
 
 pages:
   image: ruby:2.7
-  stage: deploy
+  stage: deploy  
   script:
   - cd docs
   - bundle install
