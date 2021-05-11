@@ -11,7 +11,7 @@ entries:
       url: /
     - output: web,pdf
       title: module name here
-      url: core.html
+      url: core
     output: web
     title: nbdev_template
   output: web
