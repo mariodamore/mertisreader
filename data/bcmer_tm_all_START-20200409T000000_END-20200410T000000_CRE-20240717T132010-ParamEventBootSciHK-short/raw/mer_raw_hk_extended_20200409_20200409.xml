@@ -1,0 +1,550 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<?xml-model href="http://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1B00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="http://pds.nasa.gov/pds4/geom/v1/PDS4_GEOM_1A10.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="http://psa.esa.int/psa/v1/PDS4_PSA_1101.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="http://psa.esa.int/psa/bc/v1/PDS4_PSA_BC_1004.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="http://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1B00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="http://pds.nasa.gov/pds4/img/v1/PDS4_IMG_1A10.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational
+    xmlns:disp="http://pds.nasa.gov/pds4/disp/v1"
+    xmlns:geom="http://pds.nasa.gov/pds4/geom/v1"
+    xmlns:img="http://pds.nasa.gov/pds4/img/v1"
+    xmlns:psa="http://psa.esa.int/psa/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://pds.nasa.gov/pds4/pds/v1"
+    xsi:schemaLocation="
+    http://pds.nasa.gov/pds4/pds/v1
+    http://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1B00.xsd
+    http://pds.nasa.gov/pds4/geom/v1
+    http://pds.nasa.gov/pds4/geom/v1/PDS4_GEOM_1A10.xsd
+    http://psa.esa.int/psa/v1
+    http://psa.esa.int/psa/v1/PDS4_PSA_1101.xsd
+    http://psa.esa.int/psa/bc/v1
+    http://psa.esa.int/psa/bc/v1/PDS4_PSA_BC_1004.xsd
+    http://pds.nasa.gov/pds4/disp/v1
+    http://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1B00.xsd
+    http://pds.nasa.gov/pds4/img/v1
+    http://pds.nasa.gov/pds4/img/v1/PDS4_IMG_1A10.xsd">
+    <Identification_Area>
+        <logical_identifier>urn:esa:psa:bc_mpo_mertis:data_raw:mer_raw_hk_extended_20200409_20200409</logical_identifier>
+        <version_id>0.1</version_id>
+        <title>BepiColombo MPO MERTIS RAW extended housekeeping data</title>
+        <information_model_version>1.11.0.0</information_model_version>
+        <product_class>Product_Observational</product_class>
+        
+        <Modification_History>
+            <Modification_Detail>
+                <modification_date>2024-09-05</modification_date>
+                <version_id>0.1</version_id>
+                <description>standard description for version 0.1</description>
+            </Modification_Detail>
+        </Modification_History>
+
+    </Identification_Area>
+    <Observation_Area>
+        <Time_Coordinates>
+            <start_date_time>2020-04-09T05:39:27.579Z</start_date_time>
+            <stop_date_time>2020-04-09T05:41:52.988Z</stop_date_time>
+        </Time_Coordinates>
+        <Primary_Result_Summary>
+            <purpose>Science</purpose>
+            <processing_level>Raw</processing_level>
+            <description>TBW</description>
+            <Science_Facets>
+              <wavelength_range>Infrared</wavelength_range>
+              <discipline_name>Imaging</discipline_name>
+            </Science_Facets>
+        </Primary_Result_Summary>
+        <Investigation_Area><!-- Mission -->
+            <name>BepiColombo</name>
+            <type>Mission</type>
+            <Internal_Reference>
+                <lid_reference>urn:esa:psa:context:investigation:mission.bc</lid_reference>
+                <reference_type>data_to_investigation</reference_type>
+            </Internal_Reference>
+        </Investigation_Area>
+        <Observing_System>
+            <name>BepiColombo MPO MERTIS</name>
+        <Observing_System_Component><!-- Instrument Host -->
+            <name>Mercury Planetary Orbiter</name>
+                <type>Spacecraft</type>
+                <Internal_Reference>
+                    <lid_reference>urn:esa:psa:context:instrument_host:spacecraft.mpo</lid_reference>
+                    <reference_type>is_instrument_host</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+            <Observing_System_Component><!-- Instrument -->
+                <name>MERTIS</name>
+                <type>Instrument</type>
+                <description>Mercury Thermal Infrared Spectrometer</description>
+                <Internal_Reference>
+                    <lid_reference>urn:esa:psa:context:instrument:mertis.mpo</lid_reference>
+                    <reference_type>is_instrument</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+        </Observing_System>
+        <Target_Identification><!-- Target -->
+            <name>Earth</name>
+            <type>Planet</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:target:planet.earth</lid_reference>
+                <reference_type>data_to_target</reference_type>
+            </Internal_Reference>
+        </Target_Identification>
+        <Mission_Area> <!-- Mission Area: Attributes specific to PSA & BepiColombo (from their Local Data Dictionary)   -->
+            <psa:Mission_Information>
+                <psa:spacecraft_clock_start_count>1/0651130766:12595</psa:spacecraft_clock_start_count>
+                <psa:spacecraft_clock_stop_count>1/0651130911:39418</psa:spacecraft_clock_stop_count>
+                <psa:mission_phase_name>Earth Gravity Assist</psa:mission_phase_name>
+                <psa:mission_phase_identifier>ega</psa:mission_phase_identifier>
+                <psa:start_orbit_number>0</psa:start_orbit_number>
+                <psa:stop_orbit_number>0</psa:stop_orbit_number>
+                </psa:Mission_Information>
+            <psa:Sub-Instrument>
+                <psa:identifier>TIS</psa:identifier>
+                <psa:name>Thermal Infrared Radiometer</psa:name>
+                <psa:type>Spectrometer</psa:type>
+            </psa:Sub-Instrument>
+            <psa:Sub-Instrument>
+                <psa:identifier>TIR</psa:identifier>
+                <psa:name>Thermal Infrared Radiometer</psa:name>
+                <psa:type>Spectrometer</psa:type>
+            </psa:Sub-Instrument>
+            <psa:Observation_Context>
+                <psa:instrument_pointing_mode>Surface</psa:instrument_pointing_mode>
+                <psa:instrument_pointing_description>POINTING_DESCRIPTION</psa:instrument_pointing_description>
+                <!-- <psa:observation_identifier>mer_raw_hk_extended_20200409_20200409</psa:observation_identifier> -->
+            </psa:Observation_Context>
+            <psa:Processing_Context>
+                <psa:processing_software_title>bscs-tm2raw-mer</psa:processing_software_title>
+                <psa:processing_software_version>0.2.4</psa:processing_software_version>
+                <psa:Processing_Inputs>
+                    <psa:Processing_Input_Identification>
+                        <psa:type>telemetry</psa:type>
+                        <psa:file_name>bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK.xml</psa:file_name>
+                    </psa:Processing_Input_Identification>
+                </psa:Processing_Inputs>
+            </psa:Processing_Context>
+        </Mission_Area>
+        <Discipline_Area><!-- Discipline Area: Attributes specific to a given discipline e.g. geometry -->
+            <geom:Geometry>
+                 <geom:SPICE_Kernel_Files>
+                    <geom:SPICE_Kernel_Identification>
+                        <geom:kernel_type>mk</geom:kernel_type>
+                        <geom:spice_kernel_file_name>bc_v421_20240730_002_ops.tm</geom:spice_kernel_file_name>
+                    </geom:SPICE_Kernel_Identification>
+                </geom:SPICE_Kernel_Files>
+                <geom:Geometry_Orbiter>
+                    <geom:geometry_reference_time_utc>2020-04-09T05:39:27.579Z</geom:geometry_reference_time_utc>
+                    <geom:geometry_start_time_utc>2020-04-09T05:39:27.579Z</geom:geometry_start_time_utc>
+                    <geom:geometry_stop_time_utc>2020-04-09T05:41:52.988Z</geom:geometry_stop_time_utc>
+                    <geom:Distances>
+                        <geom:Distances_Specific>
+                            <geom:spacecraft_heliocentric_distance unit="km">149466497.67434767</geom:spacecraft_heliocentric_distance>
+                            <geom:spacecraft_target_center_distance unit="km">0</geom:spacecraft_target_center_distance>
+                            <geom:spacecraft_target_boresight_intercept_distance unit="km">0</geom:spacecraft_target_boresight_intercept_distance>
+                            <geom:spacecraft_target_subspacecraft_distance unit="km">0</geom:spacecraft_target_subspacecraft_distance>
+                            <geom:target_geocentric_distance unit="km">0</geom:target_geocentric_distance>
+                            <geom:target_heliocentric_distance unit="km">0</geom:target_heliocentric_distance>
+                        </geom:Distances_Specific>
+                    </geom:Distances>
+                    <geom:Surface_Geometry>
+                        <geom:Surface_Geometry_Specific>
+                            <geom:subsolar_azimuth unit="deg">0</geom:subsolar_azimuth>
+                            <geom:subsolar_latitude unit="deg">0</geom:subsolar_latitude>
+                            <geom:subsolar_longitude unit="deg">0</geom:subsolar_longitude>
+                            <geom:subspacecraft_azimuth unit="deg">0</geom:subspacecraft_azimuth>
+                            <geom:subspacecraft_latitude unit="deg">0</geom:subspacecraft_latitude>
+                            <geom:subspacecraft_longitude unit="deg">0</geom:subspacecraft_longitude>
+                        </geom:Surface_Geometry_Specific>
+                    </geom:Surface_Geometry>
+                    <geom:Illumination_Geometry>
+                        <geom:Illumination_Min_Max>
+                            <geom:minimum_emission_angle unit="deg">0</geom:minimum_emission_angle>
+                            <geom:maximum_emission_angle unit="deg">0</geom:maximum_emission_angle>
+                            <geom:minimum_incidence_angle unit="deg">0</geom:minimum_incidence_angle>
+                            <geom:maximum_incidence_angle unit="deg">0</geom:maximum_incidence_angle>
+                            <geom:minimum_phase_angle unit="deg">0</geom:minimum_phase_angle>
+                            <geom:maximum_phase_angle unit="deg">0</geom:maximum_phase_angle>
+                        </geom:Illumination_Min_Max>
+                    </geom:Illumination_Geometry>
+                </geom:Geometry_Orbiter>
+            </geom:Geometry>
+        </Discipline_Area>
+    </Observation_Area>
+    <File_Area_Observational>
+        <File> <!-- File Information -->
+            <file_name>mer_raw_hk_extended_20200409_20200409.dat</file_name>
+            <creation_date_time>2024-09-05T15:57:43.310Z</creation_date_time>
+            <file_size unit="byte">3171</file_size>
+            <records>7</records>
+            <md5_checksum>2c38d3f46d8dae63569c511869b682a6</md5_checksum>
+        </File>
+        <Table_Delimited> <!-- PDS4 definition for  ASCII Table -->
+            <name>MERTIS RAW EXTENDED HOUSEKEEPING DATA TABLE</name>
+            <local_identifier>MERTIS_RAW_EXTENDED_HOUSEKEEPING_DATA_TABLE</local_identifier>
+            <offset unit="byte">0</offset>
+            <parsing_standard_id>PDS DSV 1</parsing_standard_id>
+            <records>7</records> <!-- number of measurements (ROWS) -->
+            <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+            <field_delimiter>Comma</field_delimiter>
+            <Record_Delimited>
+                <fields>44</fields>
+                <groups>0</groups>
+                <maximum_record_length unit="byte">453</maximum_record_length> <!-- row width in bytes -->
+                <Field_Delimited>
+                    <name>TIME_UTC</name>
+                    <field_number>1</field_number>
+                    <data_type>ASCII_Date_Time_YMD_UTC</data_type>
+                    <maximum_field_length unit="byte">24</maximum_field_length>
+                    <unit>None</unit>
+                    <description>UTC time of acquisition</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>TIME_OBT</name>
+                    <field_number>2</field_number>
+                    <data_type>ASCII_String</data_type>
+                    <maximum_field_length unit="byte">18</maximum_field_length>
+                    <unit>None</unit>
+                    <description>OnBoard Time of acquisition</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>TimeStamp</name>
+                    <field_number>3</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>seconds</unit>
+                    <description>Instrument timestap of acquisition</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_SID</name>
+                    <field_number>4</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Structure Identifier for HK packets</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>PAD</name>
+                    <field_number>5</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Parameter is used for as filling byte</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_BOL_BIAS_VOLT_ACTIVE_PARAM_SET</name>
+                    <field_number>6</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Currently used BIAS voltage parameter set (1…3)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_SH_REF_TEMP_STABLE</name>
+                    <field_number>7</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Reference temperature for the Sensor Head (SH) ist stable/unstable</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_TIS_TEC_STABLE</name>
+                    <field_number>8</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Status of the BOL chip temperature (stable/unstable) controlled by TEC</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_EPA_STATUS</name>
+                    <field_number>9</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Status (activated/not activated) of the Emergency Pointing Cover Actuator (EPA)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>FixVal12</name>
+                    <field_number>10</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Fix filler dummy value</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_POI_BB3_VIEW</name>
+                    <field_number>11</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Status POI position BB3 view (yes/no)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_POI_BB7_VIEW</name>
+                    <field_number>12</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Status POI position BB7 view (yes/no)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_POI_PLANET_VIEW</name>
+                    <field_number>13</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Status POI position Planet view (yes/no)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_POI_SPACE_VIEW</name>
+                    <field_number>14</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Status POI position Space view (yes/no)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_STS</name>
+                    <field_number>15</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Shutter status (open/closed)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_BB3</name>
+                    <field_number>16</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>Status POI position BB3 view (yes/no)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_BB7</name>
+                    <field_number>17</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>Status POI position BB7 view (yes/no)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_EOP_TMA</name>
+                    <field_number>18</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>Entrance Optics/TMA temperature</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_SOP_GRATING</name>
+                    <field_number>19</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>Spectrometer Optics grating temperature</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_SOP_M1</name>
+                    <field_number>20</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>Spectrometer Optics / mirror M1 temperature</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_OST_BASE_PLATE</name>
+                    <field_number>21</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>Optics structure / Base Plate temperature</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_BOL_CHIP</name>
+                    <field_number>22</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>Current Bolometer chip temperature (TEC controlled)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_BOL_HOUSING</name>
+                    <field_number>23</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>Bolometer housing temperature</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_STS</name>
+                    <field_number>24</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>Shutter temperature</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_POI_MOTOR</name>
+                    <field_number>25</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>POI motor temperature</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_POI_MIRROR</name>
+                    <field_number>26</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>POI mirror temperature</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_RBA_FRONT</name>
+                    <field_number>27</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>Baffle front temperature</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_RBA_BACK</name>
+                    <field_number>28</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>Baffle back temperature</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_VOLT_REF_DELTA_SINGLE_ENDED</name>
+                    <field_number>29</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>mV</unit>
+                    <description>Reference HK channel delta voltage (used for single-ended HK channels), measured against the expected value for a 1000Ohm resistor</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_EOP_IR_FILTER</name>
+                    <field_number>30</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>Entrance optics IR-Window temperature</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_REL_NUM_LATCHUP_ERROR</name>
+                    <field_number>31</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Contains the number of detected Latch-Up errors of the REL ADC</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_BEL_NUM_LATCHUP_ERROR</name>
+                    <field_number>32</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Contains the number of detected Latch-Up errors of the BEL ADC</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_TEMP_BB3_REF</name>
+                    <field_number>33</field_number>
+                    <data_type>ASCII_Real</data_type>
+                    <maximum_field_length unit="byte">20</maximum_field_length>
+                    <unit>degC</unit>
+                    <description>BB300 temperature reference sensor (100Ohm resistor compatible with Pt100)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_OBTIME_SYNC_DELTA</name>
+                    <field_number>34</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>ms</unit>
+                    <description>Delta between On-Board time and last received SpW time code for timer synchronization</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_NUM_SPW_ERR_CREDIT</name>
+                    <field_number>35</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Number of detected SpW errors of type Credit Error (CE)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_NUM_SPW_ERR_ESCAPE</name>
+                    <field_number>36</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Number of detected SpW errors of type Escape Error (ER)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_NUM_SPW_ERR_DISCONNECT</name>
+                    <field_number>37</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Number of detected SpW errors of type Disconnect Error (DE)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_NUM_SPW_ERR_PARITY</name>
+                    <field_number>38</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Number of detected SpW errors of type Parity Error (PE)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_NUM_SPW_ERR_WRITESYNC</name>
+                    <field_number>39</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Number of detected SpW errors of type Write Sync Error (WE)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_NUM_SPW_ERR_INVALIDADDRESS</name>
+                    <field_number>40</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Number of detected SpW errors of type Invalid Address (IA)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_NUM_SPW_ERR_EOPEEP</name>
+                    <field_number>41</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Number of detected SpW errors of type Early EOP/EEP (EE)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_NUM_SPW_ERR_RXAHB</name>
+                    <field_number>42</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Number of detected SpW errors of type RX AHB Error (RA)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_NUM_SPW_ERR_TXAHB</name>
+                    <field_number>43</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Number of detected SpW errors of type TX AHB Error (TA)</description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>HK_STAT_NUM_SPW_ERR_TXBLOCKED</name>
+                    <field_number>44</field_number>
+                    <data_type>ASCII_Integer</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <unit>none</unit>
+                    <description>Number of detected SpW errors of type TX Blocked (TB)</description>
+                </Field_Delimited>
+            </Record_Delimited>
+        </Table_Delimited>
+    </File_Area_Observational>
+</Product_Observational>

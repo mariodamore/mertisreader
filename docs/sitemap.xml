@@ -1,24 +1,11 @@
----
-layout: none
-search: exclude
----
-
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {% for post in site.posts %}
-  {% unless post.search == "exclude" %}
   <url>
-    <loc>{{site.url}}{{post.url}}</loc>
+    <loc>//mertisreader/index.html</loc>
+    <lastmod>2024-11-25T15:01:12.170Z</lastmod>
   </url>
-  {% endunless %}
-  {% endfor %}
-
-
-  {% for page in site.pages %}
-  {% unless page.search == "exclude" %}
   <url>
-    <loc>{{site.url}}{{ page.url}}</loc>
+    <loc>//mertisreader/core.html</loc>
+    <lastmod>2024-11-25T15:01:12.240Z</lastmod>
   </url>
-  {% endunless %}
-  {% endfor %}
 </urlset>
