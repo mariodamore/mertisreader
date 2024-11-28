@@ -45,7 +45,7 @@ preview: ## preview documentsion with nbdev_preview on port $SERVE_PORT, default
 	nbdev_preview --port ${SERVE_PORT}
 
 export_on_modify : ## watch the nbs/ directory for modification with inotifywait and run nbdev_export on changes
-	inotifywait -m -e modify nbs/ | while read path action file; do     echo "file mod detected: $file"; nbdev_export ; done
+	inotifywait -m -e modify nbs/ | while read path action file; do     echo "file mod detected: $${file}"; nbdev_export ; done
 
 ###############################################################
 # Cleaning targets
