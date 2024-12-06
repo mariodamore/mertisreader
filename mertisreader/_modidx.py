@@ -3,7 +3,7 @@
 d = { 'settings': { 'branch': 'master',
                 'doc_baseurl': '/mertisreader',
                 'doc_host': '/',
-                'git_url': 'https://gitlab.com/damo_ma/mertisreader/tree/master/',
+                'git_url': 'https://github.com/mariodamore/mertisreader/tree/master/',
                 'lib_path': 'mertisreader'},
   'syms': { 'mertisreader.core': { 'mertisreader.core.MERTISDataPackReader': ('core.html#mertisdatapackreader', 'mertisreader/core.py'),
                                    'mertisreader.core.MERTISDataPackReader.__init__': ( 'core.html#mertisdatapackreader.__init__',
