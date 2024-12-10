@@ -6,4 +6,4 @@ website:
   site-url: "//mertisreader"
   description: "helper routines to read ESA/Bepicolombo space mission - DLR MERTIS instrument data"
   repo-branch: master
-  repo-url: "https://gitlab.com/damo_ma/mertisreader/tree/master/"
+  repo-url: "https://github.com/mariodamore/mertisreader/tree/master/"
