@@ -28,6 +28,8 @@ def extract_mertis_hk_columns(in_path):
     # Create the path to the XML file by appending '.xml' to the input path.
     in_file = in_path.with_suffix('.xml')
 
+    if not in_file.exists():
+        in_file = in_path.with_suffix('.lblx')
     # Open the XML file in read binary mode and parse it using xmltodict.
     with open(in_file, "rb") as f:
         obj = xmltodict.parse(f, xml_attribs=False)
@@ -65,6 +67,48 @@ class MERTISDataPackReader:
         logging.info(f'{input_dir=}')
         self.fits_files = self.get_fits_files()
         self.input_path_dict = self.get_input_path_dict()
+        self.processing_level = self.detect_processing_level()
+
+
+    def detect_processing_level(self):
+        """
+        Detects the processing level (RAW, CAL, PAR) from the files in the input directory.
+        Ensures all files have the same level.
+        """
+        levels = set()
+        for f in self.fits_files:
+            fname = f.name.lower()
+            if fname.startswith("mer_raw_"):
+                levels.add("RAW")
+            elif fname.startswith("mer_cal_"):
+                levels.add("CAL")
+            elif fname.startswith("mer_par_"):
+                levels.add("PAR")
+        if len(levels) == 0:
+            return "UNKNOWN"
+        if len(levels) > 1:
+            raise ValueError(f"Multiple processing levels found in input_dir: {levels}")
+        return levels.pop()
+
+    def __str__(self):
+        info = [
+            f"MERTISDataPackReader(",
+            f"  input_dir={self.input_dir}",
+            f"  output_dir={self.output_dir}",
+            f"  log_level={self.log_level}",
+        ]
+        if hasattr(self, "input_path_dict"):
+            info.append("  file counts: {")
+            for k, v in self.input_path_dict.items():
+                info.append(f"    {k}: {len(v)}")
+            info.append("  }")
+        info.append(")")
+        return "\n".join(info)
+
+    def __repr__(self):
+        return (f"<MERTISDataPackReader(input_dir={self.input_dir!r}, "
+                f"output_dir={self.output_dir!r}, "
+                f"log_level={self.log_level!r})>")
 
     def set_output_dir(self, output_dir):
         """
@@ -124,26 +168,24 @@ class MERTISDataPackReader:
         Print statistics about the files in the input directory.
 
         Prints the number of files in the input directory and the number of files
-        in the input directory that match the pattern '\d{8}_\d{8}'.
+        in the input directory that match the old pattern '\\d{8}_\\d{8}' and the new pattern
+        'mer_cal_sc_tis_YYYYMMDD_\\d+-\\d+-\\d+__\\d+_\\d+.fits'.
         """
-        # Import the Counter class from the collections module.
         from collections import Counter
-        # Compile a regular expression that matches the pattern '\d{8}_\d{8}'.
-        regex = re.compile('\d{8}_\d{8}')
+        # Old pattern: 8 digits underscore 8 digits
+        regex_old = re.compile(r'\d{8}_\d{8}')
+        # New pattern: mer_cal_sc_tis_YYYYMMDD_1-0651130819-21186__0_1.fits
+        regex_new = re.compile(r'mer_cal_sc_tis_\d{8}_\d+-\d+-\d+__\d+_\d+\.fits')
 
-        # Print the number of files in the input directory.
         print('All files in input_dir :')
-        # Count the number of files in the input directory.
-        # The Counter class is used to count the occurrences of each file extension.
         rich.print(Counter([p.suffix for p in self.input_dir.rglob('*')]))
 
-        # Print the number of files in the input directory matching the pattern '\d{8}_\d{8}'.
-        print('All files in input_dir matching \d{8}:')
-        # Count the number of files in the input directory that match the pattern '\d{8}_\d{8}'.
-        # The regular expression is used to search for the pattern in the stem of each file path.
-        # The Counter class is used to count the occurrences of each prefix before the pattern.
-        rich.print(Counter([re.findall('^([^\d]*)_',p.stem)[0] for p in self.input_dir.rglob('*') if regex.search(p.stem)]))
+        print('All files in input_dir matching old pattern <v0.2.6 (\\d{8}_\\d{8}):')
+        rich.print(Counter([re.findall('^([^\\d]*)_', p.stem)[0] for p in self.input_dir.rglob('*') if regex_old.search(p.stem)]))
 
+        print('All files in input_dir matching new pattern >=v0.2.6 (mer_cal_sc_tis_YYYYMMDD_1-...):')
+        rich.print(Counter([re.findall('^(mer_cal_sc_tis)', p.name)[0] for p in self.input_dir.rglob('*') if regex_new.match(p.name)]))
+    
     def filetypes2dict(self):
         """
         Convert the input files into a dictionary, where the keys are the file types and the values are lists of file paths.
@@ -309,29 +351,45 @@ class MERTISDataPackReader:
         wavelengths = {}
         mertis_tis_metadata = {}
         output_str = []
-        
+
         # Iterate over the collected tis data
         for tis_data in track(self.collect_data["tis"],
                               total=len(self.collect_data["tis"]),
                               description="Loading files..."):
             if "table" not in tis_data["path"].name:
+                tis_data_path_stem = tis_data["path"].stem 
                 # Read the data from the FITS file and convert it to a pandas DataFrame
                 tmp_table = Table(tis_data["fits_data"][1].data).to_pandas()
-                tmp_table['file'] = tis_data["path"].stem
-                mertis_tis_metadata[tis_data["path"].stem] = tmp_table
+                mertis_tis_metadata[tis_data_path_stem] = tmp_table
                 
                 print(f'Reading filetype: tis from {tis_data["path"]}')
                 # Convert the data to float64 to keep the native byteorder
-                frames[tis_data["path"].stem] = tis_data["fits_data"]['MERTIS_TIS_CALIB_SCIENCE_DATA'].data.astype(np.float64)
-                wavelengths[tis_data["path"].stem] = tis_data["fits_data"]['MERTIS_TIS_CALIB_SCIENCE_DATA_WAVELENGTH'].data.astype(np.float64) #-wav_correction_factor
+                # new version >=0.2.6
+                level = self.processing_level
+                if level == "PAR":
+                    frames[tis_data_path_stem] = tis_data["fits_data"]['MERTIS_TIS_PAR_SCIENCE_DATA'].data.astype(np.float64)
+                    wavelengths[tis_data_path_stem] = tis_data["fits_data"]['MERTIS_TIS_PAR_SCIENCE_DATA_WAVELENGTH'].data.astype(np.float64)
+                elif level == "RAW":
+                    frames[tis_data_path_stem] = tis_data["fits_data"]['MERTIS_TIS_RAW_SCIENCE_DATA'].data.astype(np.float64)
+                    wavelengths[tis_data_path_stem] = None  # or np.nan, or skip, as appropriate
+                elif level == "CAL":
+                    try:
+                        frames[tis_data_path_stem] = tis_data["fits_data"]['MERTIS_TIS_CAL_SCIENCE_DATA'].data.astype(np.float64)
+                        wavelengths[tis_data_path_stem] = tis_data["fits_data"]['MERTIS_TIS_CAL_SCIENCE_DATA_WAVELENGTH'].data.astype(np.float64)
+                    except KeyError:
+                        frames[tis_data_path_stem] = tis_data["fits_data"]['MERTIS_TIS_CALIB_SCIENCE_DATA'].data.astype(np.float64)
+                        wavelengths[tis_data_path_stem] = tis_data["fits_data"]['MERTIS_TIS_CALIB_SCIENCE_DATA_WAVELENGTH'].data.astype(np.float64)
+                else:
+                    raise ValueError(f"Unknown TIS file level for {level}")
                 
-                # Process the geometry data
-                geom_ls[tis_data["path"].stem] = {k.name: k.data.astype(np.float64) for k in tis_data["fits_data"] if 'GEOM' in k.name}
-                for geo_k, geo_v in geom_ls[tis_data["path"].stem].items():
-                    geo_v[geo_v == NODATA_GEOMETRY] = np.nan
-                geo_k = 'MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'
-                output_str.append([tis_data["path"].stem, np.sum(np.isfinite(geo_v)), geo_v.size])
-        
+                # Only process geometry if not RAW
+                if level != "RAW":
+                    geom_ls[tis_data_path_stem] = {k.name: k.data.astype(np.float64) for k in tis_data["fits_data"] if 'GEOM' in k.name}
+                    for geo_k, geo_v in geom_ls[tis_data["path"].stem].items():
+                        geo_v[geo_v == NODATA_GEOMETRY] = np.nan
+                    geo_k = 'MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'
+                    output_str.append([tis_data_path_stem, np.sum(np.isfinite(geo_v)), geo_v.size])
+            
         # Preserve the original index in the source file
         mertis_tis_metadata_df = pd.concat(mertis_tis_metadata).reset_index(drop=False).drop(columns=['level_0']).rename(columns={"level_1": "file_index"})
 
@@ -347,16 +405,18 @@ class MERTISDataPackReader:
         bb3_index = mertis_tis_metadata_df[mertis_tis_metadata_df['HK_STAT_TIS_DATA_ACQ_TARGET'].str.contains('BB3')].index
         planet_index = mertis_tis_metadata_df[mertis_tis_metadata_df['HK_STAT_TIS_DATA_ACQ_TARGET'].str.contains('Planet')].index
         
-        ########################################################################
-        # generic wavelengths : not precise enough for scientific analysis!
-        wav = wavelengths[list(wavelengths.keys())[-1]].mean(axis=1)
-        n_wav = len(wav)
-        n_corners = geom_ls[list(geom_ls.keys())[0]]['MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'].shape[0]
+        if level != "RAW":
+            ########################################################################
+            # generic wavelengths : not precise enough for scientific analysis!
+            wav = wavelengths[list(wavelengths.keys())[-1]].mean(axis=1)
+            n_wav = len(wav)
+            n_corners = geom_ls[list(geom_ls.keys())[0]]['MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'].shape[0]
         
         # Print the output statistics
         if verbose:
-            print(f'{n_wav=} # generic wavelengths : not precise enough for scientific analysis!')
-            print(pd.DataFrame(columns=["tis_stem", "finite(geo)", "geo.size"], data=output_str).to_markdown())
+            if level != "RAW":
+                print(f'{n_wav=} # generic wavelengths : not precise enough for scientific analysis!')
+                print(pd.DataFrame(columns=["tis_stem", "finite(geo)", "geo.size"], data=output_str).to_markdown())
             print("Indices of measurements targets (HK_STAT_TIS_DATA_ACQ_TARGET):")
             print(f'{space_index.shape=}')
             print(f'{bb7_index.shape=}')
