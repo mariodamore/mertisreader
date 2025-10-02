@@ -169,7 +169,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#mertisreader---quick-cheatsheet" id="toc-mertisreader---quick-cheatsheet" class="nav-link active" data-scroll-target="#mertisreader---quick-cheatsheet">mertisreader - Quick cheatsheet</a></li>
+  <li><a href="#mertisreader---quick-cheatsheet" id="toc-mertisreader---quick-cheatsheet" class="nav-link active" data-scroll-target="#mertisreader---quick-cheatsheet">mertisreader - Quick cheatsheet</a>
+  <ul class="collapse">
+  <li><a href="#initialize-mertisdatapackreader" id="toc-initialize-mertisdatapackreader" class="nav-link" data-scroll-target="#initialize-mertisdatapackreader">Initialize MERTISDataPackReader</a></li>
+  <li><a href="#show-some-data-plots" id="toc-show-some-data-plots" class="nav-link" data-scroll-target="#show-some-data-plots">Show some data &amp; plots</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/mariodamore/mertisreader/tree/master/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -209,7 +213,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Libraries imported successfully.</code></pre>
 </div>
 </div>
-<p><strong>Initialize MERTISDataPackReader</strong></p>
+<section id="initialize-mertisdatapackreader" class="level3">
+<h3 class="anchored" data-anchor-id="initialize-mertisdatapackreader">Initialize MERTISDataPackReader</h3>
 <p>Initialize the MERTISSessionReader with the input directory and optional parameters for output directory and log level.</p>
 <p>The <code>../data/</code> contains a subset of the Moon flyby , technically called Earth Gravity Assist (EGA).</p>
 <p>The directory name reflects ESA-PSA/PDS4 naminhc scheme and the start / stop data acquistion , plus the data pack creation.</p>
@@ -276,7 +281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Output directory: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>output_dir<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Log level: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>log_level<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-10-01 17:12:18,987|3540409|INFO|input_dir=PosixPath('../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal')</code></pre>
+<pre><code>2025-10-02 16:44:54,927|452487|INFO|input_dir=PosixPath('../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal')</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading path ../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal
@@ -351,7 +356,7 @@ tis: 1 files collected</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ms_reader.data_assembler(verbose<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"5c7e6c081d2a4edea28640b5413f8b0d","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+{"model_id":"4f8d6dc8b63248d3a0666e336dfe04cb","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
 <div class="cell-output cell-output-display">
@@ -369,10 +374,10 @@ r_cal_sc_tis_20200409_1-0651130819-21186__0_1.fits
 |---:|:------------------------------------------------|--------------:|-----------:|
 |  0 | mer_cal_sc_tis_20200409_1-0651130819-21186__0_1 |           672 |      10500 |
 Indices of measurements targets (HK_STAT_TIS_DATA_ACQ_TARGET):
-space_index.shape=(21,)
-bb7_index.shape=(0,)
-bb3_index.shape=(0,)
-planet_index.shape=(0,)
+space_index_merged.shape=(21,)
+bb7_index_merged.shape=(0,)
+bb3_index_merged.shape=(0,)
+planet_index_merged.shape=(0,)
 Collected data statistics:
 Number of TIS files: 1
 Number of HK files: 2
@@ -389,19 +394,19 @@ Number of TIR QL files: 0</code></pre>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Frames data keys: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>frames<span class="sc">.</span>keys()<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Wavelengths data keys: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>wavelengths<span class="sc">.</span>keys()<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'MERTIS TIS metadata keys: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>mertis_tis_metadata<span class="sc">.</span>keys()<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Space index shape: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>space_index<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'BB7 index shape: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>bb7_index<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'BB3 index shape: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>bb3_index<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Planet index shape: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>planet_index<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Space index merged shape: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>space_index_merged<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'BB7 index merged shape: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>bb7_index_merged<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'BB3 index merged shape: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>bb3_index_merged<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Planet index merged shape: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>planet_index_merged<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Geometry data keys: dict_keys(['mer_cal_sc_tis_20200409_1-0651130819-21186__0_1'])
 Frames data keys: dict_keys(['mer_cal_sc_tis_20200409_1-0651130819-21186__0_1'])
 Wavelengths data keys: dict_keys(['mer_cal_sc_tis_20200409_1-0651130819-21186__0_1'])
 MERTIS TIS metadata keys: dict_keys(['mer_cal_sc_tis_20200409_1-0651130819-21186__0_1'])
-Space index shape: (21,)
-BB7 index shape: (0,)
-BB3 index shape: (0,)
-Planet index shape: (0,)</code></pre>
+Space index merged shape: (21,)
+BB7 index merged shape: (0,)
+BB3 index merged shape: (0,)
+Planet index merged shape: (0,)</code></pre>
 </div>
 </div>
 <p>A data directory can contains more file for each type, those are collected in a dict for each <code>ms_reader</code> variable , so it is handy to define which file we want to work with after inspection, like the following :</p>
@@ -412,6 +417,9 @@ Planet index shape: (0,)</code></pre>
 <pre><code>Example DataCube shape for file mer_cal_sc_tis_20200409_1-0651130819-21186__0_1: (40, 100, 21)</code></pre>
 </div>
 </div>
+</section>
+<section id="show-some-data-plots" class="level3">
+<h3 class="anchored" data-anchor-id="show-some-data-plots">Show some data &amp; plots</h3>
 <p>now, let’s see some (meta)data:</p>
 <div id="cell-21" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ms_reader.mertis_tis_metadata[file_key].iloc[<span class="dv">0</span>:<span class="dv">4</span>].T</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -643,7 +651,7 @@ Planet index shape: (0,)</code></pre>
 <div id="cell-26" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>full_frames_3D <span class="op">=</span> ms_reader.frames[file_key]</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>wav <span class="op">=</span> ms_reader.wavelengths[file_key]</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plot_index <span class="op">=</span> ms_reader.space_index</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plot_index <span class="op">=</span> ms_reader.space_index[file_key]</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'plot_index: </span><span class="sc">{</span>plot_index<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">2</span>,nrows<span class="op">=</span><span class="dv">2</span>, figsize <span class="op">=</span> [<span class="dv">22</span>,<span class="dv">12</span>])</span>
@@ -660,7 +668,16 @@ Planet index shape: (0,)</code></pre>
 <span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>][<span class="dv">0</span>].set_title(<span class="ss">f'</span><span class="sc">{</span>title<span class="sc">}</span><span class="ss"> - frames std'</span>)</span>
 <span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>][<span class="dv">0</span>].plot(wav,full_frames_3D[:,:,plot_index].std(axis<span class="op">=</span><span class="dv">2</span>))<span class="op">;</span></span>
 <span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>][<span class="dv">1</span>].set_title(<span class="ss">f'</span><span class="sc">{</span>title<span class="sc">}</span><span class="ss"> - frames std'</span>)</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>][<span class="dv">1</span>].imshow(full_frames_3D[:,:,plot_index].std(axis<span class="op">=</span><span class="dv">2</span>),aspect<span class="op">=</span><span class="st">'auto'</span>,cmap<span class="op">=</span>plt.cm.Spectral_r)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>][<span class="dv">1</span>].imshow(full_frames_3D[:,:,plot_index].std(axis<span class="op">=</span><span class="dv">2</span>),aspect<span class="op">=</span><span class="st">'auto'</span>,cmap<span class="op">=</span>plt.cm.Spectral_r)</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> [a.set_xlabel(<span class="st">'Wavelength [nm]'</span>) <span class="cf">for</span> a <span class="kw">in</span> ax[:,<span class="dv">0</span>]]</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> [a.set_ylabel(<span class="st">'Radiance [W/m2/sr/nm]'</span>) <span class="cf">for</span> a <span class="kw">in</span> ax[:,<span class="dv">0</span>]]</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> [a.grid(<span class="va">True</span>) <span class="cf">for</span> a <span class="kw">in</span> ax[:,<span class="dv">0</span>]]</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> [a.set_xlabel(<span class="st">'Frame Index'</span>) <span class="cf">for</span> a <span class="kw">in</span> ax[:,<span class="dv">1</span>]]</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> [a.set_ylabel(<span class="st">'Wavelength Index'</span>) <span class="cf">for</span> a <span class="kw">in</span> ax[:,<span class="dv">1</span>]]</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>plot_index: RangeIndex(start=0, stop=21, step=1)</code></pre>
 </div>
@@ -672,10 +689,26 @@ Planet index shape: (0,)</code></pre>
 </div>
 </div>
 </div>
+<div id="cell-27" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(full_frames_3D[<span class="op">-</span><span class="dv">1</span>,:,plot_index].T,aspect<span class="op">=</span><span class="st">'auto'</span>,cmap<span class="op">=</span>plt.cm.Spectral_r)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fame Index'</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'TIS Spatial Pixel Index'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<pre><code>Text(0, 0.5, 'TIS Spatial Pixel Index')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-15-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>The higher level pixel near 40 are the “first light” MERTIS ever saw in space, from the Moon.</p>
 <p>Now some geometry data , not available in RAW data.</p>
-<div id="cell-28" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>rich.<span class="bu">print</span>(ms_reader.geom_ls[file_key].keys())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-29" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>rich.<span class="bu">print</span>(ms_reader.geom_ls[file_key].keys())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">dict_keys</span><span style="font-weight: bold">([</span><span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'</span>, <span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_TARGET_LATITUDE'</span>, 
 <span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_SUBSPACECRAFT_LONGITUDE'</span>, <span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_SUBSPACECRAFT_LATITUDE'</span>, 
@@ -688,8 +721,8 @@ Planet index shape: (0,)</code></pre>
 </pre>
 </div>
 </div>
-<div id="cell-29" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ms_reader.geom_ls[file_key][<span class="st">'MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'</span>].shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-30" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ms_reader.geom_ls[file_key][<span class="st">'MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'</span>].shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre><code>(5, 100, 21)</code></pre>
 </div>
@@ -709,204 +742,105 @@ C3      C4</code></pre>
 <li><code>n_spatial</code> : number of measurements spatial pixels, depends on pixel spatial binning (1,2,4) result in <code>n_spatial</code> == (100,50,25)</li>
 <li><code>n_frames</code> : number of TIS frames, or measurements, this correspond to the time axis in the TIS datacube.</li>
 </ul>
-<div id="cell-31" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>longitudes <span class="op">=</span> ms_reader.geom_ls[file_key][<span class="st">'MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'</span>]</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>longitudes_center <span class="op">=</span> longitudes[<span class="dv">0</span>,:,:]</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>latitudes <span class="op">=</span> ms_reader.geom_ls[file_key][<span class="st">'MERTIS_TIS_GEOMETRY_TARGET_LATITUDE'</span>]</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>latitudes_center <span class="op">=</span> latitudes[<span class="dv">0</span>,:,:]</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>local_times <span class="op">=</span> ms_reader.geom_ls[file_key][<span class="st">'MERTIS_TIS_GEOMETRY_LOCAL_TIME'</span>]</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>local_times_center <span class="op">=</span> local_times[<span class="dv">0</span>,:,:]</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> plt.scatter(longitudes_center.flatten(), latitudes_center.flatten(), c<span class="op">=</span>local_times_center.flatten(), s<span class="op">=</span><span class="dv">10</span>, cmap<span class="op">=</span><span class="st">'Spectral_r'</span>)</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Longitude'</span>)</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> plt.colorbar(sc)</span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>cbar.set_label(<span class="st">'Local Time'</span>)</span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Latitudes'</span>)</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Scatter plot of Target Longitude vs Latitude centers'</span>)</span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-32" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>longitudes <span class="op">=</span> ms_reader.geom_ls[file_key][<span class="st">'MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'</span>]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>longitudes_center <span class="op">=</span> longitudes[<span class="dv">0</span>,:,:]</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>latitudes <span class="op">=</span> ms_reader.geom_ls[file_key][<span class="st">'MERTIS_TIS_GEOMETRY_TARGET_LATITUDE'</span>]</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>latitudes_center <span class="op">=</span> latitudes[<span class="dv">0</span>,:,:]</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>local_times <span class="op">=</span> ms_reader.geom_ls[file_key][<span class="st">'MERTIS_TIS_GEOMETRY_LOCAL_TIME'</span>]</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>local_times_center <span class="op">=</span> local_times[<span class="dv">0</span>,:,:]</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> plt.scatter(longitudes_center.flatten(), latitudes_center.flatten(), c<span class="op">=</span>local_times_center.flatten(), s<span class="op">=</span><span class="dv">10</span>, cmap<span class="op">=</span><span class="st">'Spectral_r'</span>)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Longitude'</span>)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> plt.colorbar(sc)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>cbar.set_label(<span class="st">'Local Time'</span>)</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Latitudes'</span>)</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Scatter plot of Target Longitude vs Latitude centers'</span>)</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="index_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Let’s find some TIS sptail pixels with defined geometries on all corners</p>
-<div id="cell-33" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> latitudes  <span class="co"># shape (5, 100, 21)</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>not_nan_mask <span class="op">=</span> <span class="op">~</span>np.isnan(arr)</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>all_not_nan <span class="op">=</span> np.<span class="bu">all</span>(not_nan_mask, axis<span class="op">=</span><span class="dv">0</span>)  <span class="co"># shape (100, 21)</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.argwhere(all_not_nan)  <span class="co"># returns (i, j) pairs where all axis=0 are not nan</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(indices))</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(indices)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-34" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> latitudes  <span class="co"># shape (5, 100, 21)</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>not_nan_mask <span class="op">=</span> <span class="op">~</span>np.isnan(arr)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>all_not_nan <span class="op">=</span> np.<span class="bu">all</span>(not_nan_mask, axis<span class="op">=</span><span class="dv">0</span>)  <span class="co"># shape (100, 21)</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.argwhere(all_not_nan)  <span class="co"># returns (i, j) pairs where all axis=0 are not nan</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(indices))</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(indices[:<span class="dv">5</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>105
 [[38  0]
  [38  1]
  [38  2]
  [38  3]
- [38  4]
- [38  5]
- [38  6]
- [38  7]
- [38  8]
- [38  9]
- [38 10]
- [38 11]
- [38 12]
- [38 13]
- [38 14]
- [38 15]
- [38 16]
- [38 17]
- [38 18]
- [38 19]
- [38 20]
- [39  0]
- [39  1]
- [39  2]
- [39  3]
- [39  4]
- [39  5]
- [39  6]
- [39  7]
- [39  8]
- [39  9]
- [39 10]
- [39 11]
- [39 12]
- [39 13]
- [39 14]
- [39 15]
- [39 16]
- [39 17]
- [39 18]
- [39 19]
- [39 20]
- [40  0]
- [40  1]
- [40  2]
- [40  3]
- [40  4]
- [40  5]
- [40  6]
- [40  7]
- [40  8]
- [40  9]
- [40 10]
- [40 11]
- [40 12]
- [40 13]
- [40 14]
- [40 15]
- [40 16]
- [40 17]
- [40 18]
- [40 19]
- [40 20]
- [41  0]
- [41  1]
- [41  2]
- [41  3]
- [41  4]
- [41  5]
- [41  6]
- [41  7]
- [41  8]
- [41  9]
- [41 10]
- [41 11]
- [41 12]
- [41 13]
- [41 14]
- [41 15]
- [41 16]
- [41 17]
- [41 18]
- [41 19]
- [41 20]
- [42  0]
- [42  1]
- [42  2]
- [42  3]
- [42  4]
- [42  5]
- [42  6]
- [42  7]
- [42  8]
- [42  9]
- [42 10]
- [42 11]
- [42 12]
- [42 13]
- [42 14]
- [42 15]
- [42 16]
- [42 17]
- [42 18]
- [42 19]
- [42 20]]</code></pre>
+ [38  4]]</code></pre>
 </div>
 </div>
-<div id="cell-34" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>pixel_index <span class="op">=</span> indices[<span class="dv">0</span>]  <span class="co"># Take the first valid pixel for demonstration</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the corners of the polygon</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(longitudes[<span class="dv">1</span>:,pixel_index[<span class="dv">0</span>],pixel_index[<span class="dv">1</span>] ], latitudes[<span class="dv">1</span>:,pixel_index[<span class="dv">0</span>],pixel_index[<span class="dv">1</span>] ], s<span class="op">=</span><span class="dv">100</span>, c<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the longitude and latitude for the corners (1:5), close the polygon by repeating the first corner</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>poly_lons <span class="op">=</span> longitudes[<span class="dv">1</span>:, pixel_index[<span class="dv">0</span>], pixel_index[<span class="dv">1</span>]]</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>poly_lats <span class="op">=</span> latitudes[<span class="dv">1</span>:, pixel_index[<span class="dv">0</span>], pixel_index[<span class="dv">1</span>]]</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Close the polygon</span></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>poly_lons <span class="op">=</span> np.append(poly_lons, poly_lons[<span class="dv">0</span>])</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>poly_lats <span class="op">=</span> np.append(poly_lats, poly_lats[<span class="dv">0</span>])</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>):</span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    plt.text(</span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>        poly_lons[i<span class="op">-</span><span class="dv">1</span>],</span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>        poly_lats[i<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span><span class="fl">0.5</span>,  <span class="co"># Offset the text slightly above the point</span></span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'Corner_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">'</span>,</span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">'black'</span>,</span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>        ha<span class="op">=</span><span class="st">'left'</span>,</span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>        va<span class="op">=</span><span class="st">'bottom'</span></span>
-<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the connecting lines</span></span>
-<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>plt.plot(poly_lons, poly_lats, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>plt.scatter(longitudes[<span class="dv">0</span>,pixel_index[<span class="dv">0</span>],pixel_index[<span class="dv">1</span>] ], latitudes[<span class="dv">0</span>,pixel_index[<span class="dv">0</span>],pixel_index[<span class="dv">1</span>] ], s<span class="op">=</span><span class="dv">100</span>)</span>
-<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>plt.text(</span>
-<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>    longitudes[<span class="dv">0</span>, pixel_index[<span class="dv">0</span>], pixel_index[<span class="dv">1</span>]],</span>
-<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>    latitudes[<span class="dv">0</span>, pixel_index[<span class="dv">0</span>], pixel_index[<span class="dv">1</span>]]<span class="op">+</span><span class="fl">0.5</span>,  <span class="co"># Offset the text slightly above the point</span></span>
-<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Center'</span>,</span>
-<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">12</span>,</span>
-<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'blue'</span>,</span>
-<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">'left'</span>,</span>
-<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>    va<span class="op">=</span><span class="st">'bottom'</span></span>
-<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-35" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>pixel_index <span class="op">=</span> indices[<span class="dv">0</span>]  <span class="co"># Take the first valid pixel for demonstration</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the corners of the polygon</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(longitudes[<span class="dv">1</span>:,pixel_index[<span class="dv">0</span>],pixel_index[<span class="dv">1</span>] ], latitudes[<span class="dv">1</span>:,pixel_index[<span class="dv">0</span>],pixel_index[<span class="dv">1</span>] ], s<span class="op">=</span><span class="dv">100</span>, c<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the longitude and latitude for the corners (1:5), close the polygon by repeating the first corner</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>poly_lons <span class="op">=</span> longitudes[<span class="dv">1</span>:, pixel_index[<span class="dv">0</span>], pixel_index[<span class="dv">1</span>]]</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>poly_lats <span class="op">=</span> latitudes[<span class="dv">1</span>:, pixel_index[<span class="dv">0</span>], pixel_index[<span class="dv">1</span>]]</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Close the polygon</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>poly_lons <span class="op">=</span> np.append(poly_lons, poly_lons[<span class="dv">0</span>])</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>poly_lats <span class="op">=</span> np.append(poly_lats, poly_lats[<span class="dv">0</span>])</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>):</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    plt.text(</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>        poly_lons[i<span class="op">-</span><span class="dv">1</span>],</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>        poly_lats[i<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span><span class="fl">0.5</span>,  <span class="co"># Offset the text slightly above the point</span></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'Corner_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">'</span>,</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">'black'</span>,</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>        ha<span class="op">=</span><span class="st">'left'</span>,</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>        va<span class="op">=</span><span class="st">'bottom'</span></span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the connecting lines</span></span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>plt.plot(poly_lons, poly_lats, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>plt.scatter(longitudes[<span class="dv">0</span>,pixel_index[<span class="dv">0</span>],pixel_index[<span class="dv">1</span>] ], latitudes[<span class="dv">0</span>,pixel_index[<span class="dv">0</span>],pixel_index[<span class="dv">1</span>] ], s<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>plt.text(</span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>    longitudes[<span class="dv">0</span>, pixel_index[<span class="dv">0</span>], pixel_index[<span class="dv">1</span>]],</span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>    latitudes[<span class="dv">0</span>, pixel_index[<span class="dv">0</span>], pixel_index[<span class="dv">1</span>]]<span class="op">+</span><span class="fl">0.5</span>,  <span class="co"># Offset the text slightly above the point</span></span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Center'</span>,</span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">12</span>,</span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'blue'</span>,</span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">'left'</span>,</span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>    va<span class="op">=</span><span class="st">'bottom'</span></span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre><code>Text(31.43904149826383, -33.20697106068339, 'Center')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/cell-19-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="index_files/figure-html/cell-20-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
