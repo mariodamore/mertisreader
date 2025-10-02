@@ -398,13 +398,19 @@ class MERTISDataPackReader:
         mertis_tis_metadata_df = mertis_tis_metadata_df.sort_values('TIME_UTC').reset_index(drop=True)
         mertis_tis_metadata_df['TIME_UTC'] = pd.to_datetime(mertis_tis_metadata_df['TIME_UTC'], utc=True)
 
+        # Identify the indices of the space, BB7, BB3, and planet measurements in the merged metadata DataFrame for all files
+        space_index_merged = mertis_tis_metadata_df[mertis_tis_metadata_df['HK_STAT_TIS_DATA_ACQ_TARGET'].str.contains('Space')].index
+        bb7_index_merged = mertis_tis_metadata_df[mertis_tis_metadata_df['HK_STAT_TIS_DATA_ACQ_TARGET'].str.contains('BB7')].index
+        bb3_index_merged = mertis_tis_metadata_df[mertis_tis_metadata_df['HK_STAT_TIS_DATA_ACQ_TARGET'].str.contains('BB3')].index
+        planet_index_merged = mertis_tis_metadata_df[mertis_tis_metadata_df['HK_STAT_TIS_DATA_ACQ_TARGET'].str.contains('Planet')].index        
 
-        # Identify the indices of the space, BB7, BB3, and planet measurements
-        space_index = mertis_tis_metadata_df[mertis_tis_metadata_df['HK_STAT_TIS_DATA_ACQ_TARGET'].str.contains('Space')].index
-        bb7_index = mertis_tis_metadata_df[mertis_tis_metadata_df['HK_STAT_TIS_DATA_ACQ_TARGET'].str.contains('BB7')].index
-        bb3_index = mertis_tis_metadata_df[mertis_tis_metadata_df['HK_STAT_TIS_DATA_ACQ_TARGET'].str.contains('BB3')].index
-        planet_index = mertis_tis_metadata_df[mertis_tis_metadata_df['HK_STAT_TIS_DATA_ACQ_TARGET'].str.contains('Planet')].index
-        
+        # Map the merged indices back to the original file-specific indices
+        space_index = {k:v[v['HK_STAT_TIS_DATA_ACQ_TARGET'].str.contains('Space')].index for k,v in mertis_tis_metadata.items()}
+        bb7_index = {k:v[v['HK_STAT_TIS_DATA_ACQ_TARGET'].str.contains('BB7')].index for k,v in mertis_tis_metadata.items()}
+        bb3_index = {k:v[v['HK_STAT_TIS_DATA_ACQ_TARGET'].str.contains('BB3')].index for k,v in mertis_tis_metadata.items()}
+        planet_index = {k:v[v['HK_STAT_TIS_DATA_ACQ_TARGET'].str.contains('Planet')].index for k,v in mertis_tis_metadata.items()}
+
+
         if level != "RAW":
             ########################################################################
             # generic wavelengths : not precise enough for scientific analysis!
@@ -418,10 +424,10 @@ class MERTISDataPackReader:
                 print(f'{n_wav=} # generic wavelengths : not precise enough for scientific analysis!')
                 print(pd.DataFrame(columns=["tis_stem", "finite(geo)", "geo.size"], data=output_str).to_markdown())
             print("Indices of measurements targets (HK_STAT_TIS_DATA_ACQ_TARGET):")
-            print(f'{space_index.shape=}')
-            print(f'{bb7_index.shape=}')
-            print(f'{bb3_index.shape=}')
-            print(f'{planet_index.shape=}')
+            print(f'{space_index_merged.shape=}')
+            print(f'{bb7_index_merged.shape=}')
+            print(f'{bb3_index_merged.shape=}')
+            print(f'{planet_index_merged.shape=}')
             # Print the collected data statistics
             print(f'Collected data statistics:')
             print(f'Number of TIS files: {len(self.collect_data.get("tis", []))}')
@@ -438,4 +444,8 @@ class MERTISDataPackReader:
         self.bb7_index = bb7_index
         self.bb3_index = bb3_index
         self.planet_index = planet_index
+        self.space_index_merged = space_index_merged
+        self.bb7_index_merged = bb7_index_merged
+        self.bb3_index_merged = bb3_index_merged
+        self.planet_index_merged = planet_index_merged
 

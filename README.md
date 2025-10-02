@@ -17,7 +17,7 @@ print("Libraries imported successfully.")
 
     Libraries imported successfully.
 
-**Initialize MERTISDataPackReader**
+### Initialize MERTISDataPackReader
 
 Initialize the MERTISSessionReader with the input directory and optional
 parameters for output directory and log level.
@@ -64,7 +64,7 @@ print(f'Output directory: {ms_reader.output_dir}')
 print(f'Log level: {ms_reader.log_level}')
 ```
 
-    2025-10-01 17:12:18,987|3540409|INFO|input_dir=PosixPath('../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal')
+    2025-10-02 16:44:54,927|452487|INFO|input_dir=PosixPath('../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal')
 
     Reading path ../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal
     MERTISDataPackReader initialized with input directory: ../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal
@@ -149,10 +149,10 @@ r_cal_sc_tis_20200409_1-0651130819-21186__0_1.fits
     |---:|:------------------------------------------------|--------------:|-----------:|
     |  0 | mer_cal_sc_tis_20200409_1-0651130819-21186__0_1 |           672 |      10500 |
     Indices of measurements targets (HK_STAT_TIS_DATA_ACQ_TARGET):
-    space_index.shape=(21,)
-    bb7_index.shape=(0,)
-    bb3_index.shape=(0,)
-    planet_index.shape=(0,)
+    space_index_merged.shape=(21,)
+    bb7_index_merged.shape=(0,)
+    bb3_index_merged.shape=(0,)
+    planet_index_merged.shape=(0,)
     Collected data statistics:
     Number of TIS files: 1
     Number of HK files: 2
@@ -169,20 +169,20 @@ if ms_reader.processing_level != 'RAW':
 print(f'Frames data keys: {ms_reader.frames.keys()}')
 print(f'Wavelengths data keys: {ms_reader.wavelengths.keys()}')
 print(f'MERTIS TIS metadata keys: {ms_reader.mertis_tis_metadata.keys()}')
-print(f'Space index shape: {ms_reader.space_index.shape}')
-print(f'BB7 index shape: {ms_reader.bb7_index.shape}')
-print(f'BB3 index shape: {ms_reader.bb3_index.shape}')
-print(f'Planet index shape: {ms_reader.planet_index.shape}')
+print(f'Space index merged shape: {ms_reader.space_index_merged.shape}')
+print(f'BB7 index merged shape: {ms_reader.bb7_index_merged.shape}')
+print(f'BB3 index merged shape: {ms_reader.bb3_index_merged.shape}')
+print(f'Planet index merged shape: {ms_reader.planet_index_merged.shape}')
 ```
 
     Geometry data keys: dict_keys(['mer_cal_sc_tis_20200409_1-0651130819-21186__0_1'])
     Frames data keys: dict_keys(['mer_cal_sc_tis_20200409_1-0651130819-21186__0_1'])
     Wavelengths data keys: dict_keys(['mer_cal_sc_tis_20200409_1-0651130819-21186__0_1'])
     MERTIS TIS metadata keys: dict_keys(['mer_cal_sc_tis_20200409_1-0651130819-21186__0_1'])
-    Space index shape: (21,)
-    BB7 index shape: (0,)
-    BB3 index shape: (0,)
-    Planet index shape: (0,)
+    Space index merged shape: (21,)
+    BB7 index merged shape: (0,)
+    BB3 index merged shape: (0,)
+    Planet index merged shape: (0,)
 
 A data directory can contains more file for each type, those are
 collected in a dict for each `ms_reader` variable , so it is handy to
@@ -195,6 +195,8 @@ print(f'Example DataCube shape for file {file_key}: {ms_reader.frames[file_key].
 ```
 
     Example DataCube shape for file mer_cal_sc_tis_20200409_1-0651130819-21186__0_1: (40, 100, 21)
+
+### Show some data & plots
 
 now, let’s see some (meta)data:
 
@@ -288,7 +290,7 @@ ms_reader.frames[file_key].shape
 ``` python
 full_frames_3D = ms_reader.frames[file_key]
 wav = ms_reader.wavelengths[file_key]
-plot_index = ms_reader.space_index
+plot_index = ms_reader.space_index[file_key]
 print(f'plot_index: {plot_index}')
 
 fig, ax = plt.subplots(ncols=2,nrows=2, figsize = [22,12])
@@ -306,11 +308,31 @@ ax[1][0].set_title(f'{title} - frames std')
 ax[1][0].plot(wav,full_frames_3D[:,:,plot_index].std(axis=2));
 ax[1][1].set_title(f'{title} - frames std')
 ax[1][1].imshow(full_frames_3D[:,:,plot_index].std(axis=2),aspect='auto',cmap=plt.cm.Spectral_r)
+
+_ = [a.set_xlabel('Wavelength [nm]') for a in ax[:,0]]
+_ = [a.set_ylabel('Radiance [W/m2/sr/nm]') for a in ax[:,0]]
+_ = [a.grid(True) for a in ax[:,0]]
+
+_ = [a.set_xlabel('Frame Index') for a in ax[:,1]]
+_ = [a.set_ylabel('Wavelength Index') for a in ax[:,1]]
+
+plt.tight_layout()
 ```
 
     plot_index: RangeIndex(start=0, stop=21, step=1)
 
 ![](index_files/figure-commonmark/cell-14-output-2.png)
+
+``` python
+plt.imshow(full_frames_3D[-1,:,plot_index].T,aspect='auto',cmap=plt.cm.Spectral_r)
+
+plt.xlabel('Fame Index')
+plt.ylabel('TIS Spatial Pixel Index')
+```
+
+    Text(0, 0.5, 'TIS Spatial Pixel Index')
+
+![](index_files/figure-commonmark/cell-15-output-2.png)
 
 The higher level pixel near 40 are the “first light” MERTIS ever saw in
 space, from the Moon.
@@ -379,7 +401,7 @@ plt.grid(True)
 plt.show()
 ```
 
-![](index_files/figure-commonmark/cell-17-output-1.png)
+![](index_files/figure-commonmark/cell-18-output-1.png)
 
 Let’s find some TIS sptail pixels with defined geometries on all corners
 
@@ -392,7 +414,7 @@ all_not_nan = np.all(not_nan_mask, axis=0)  # shape (100, 21)
 indices = np.argwhere(all_not_nan)  # returns (i, j) pairs where all axis=0 are not nan
 
 print(len(indices))
-print(indices)
+print(indices[:5])
 ```
 
     105
@@ -400,107 +422,7 @@ print(indices)
      [38  1]
      [38  2]
      [38  3]
-     [38  4]
-     [38  5]
-     [38  6]
-     [38  7]
-     [38  8]
-     [38  9]
-     [38 10]
-     [38 11]
-     [38 12]
-     [38 13]
-     [38 14]
-     [38 15]
-     [38 16]
-     [38 17]
-     [38 18]
-     [38 19]
-     [38 20]
-     [39  0]
-     [39  1]
-     [39  2]
-     [39  3]
-     [39  4]
-     [39  5]
-     [39  6]
-     [39  7]
-     [39  8]
-     [39  9]
-     [39 10]
-     [39 11]
-     [39 12]
-     [39 13]
-     [39 14]
-     [39 15]
-     [39 16]
-     [39 17]
-     [39 18]
-     [39 19]
-     [39 20]
-     [40  0]
-     [40  1]
-     [40  2]
-     [40  3]
-     [40  4]
-     [40  5]
-     [40  6]
-     [40  7]
-     [40  8]
-     [40  9]
-     [40 10]
-     [40 11]
-     [40 12]
-     [40 13]
-     [40 14]
-     [40 15]
-     [40 16]
-     [40 17]
-     [40 18]
-     [40 19]
-     [40 20]
-     [41  0]
-     [41  1]
-     [41  2]
-     [41  3]
-     [41  4]
-     [41  5]
-     [41  6]
-     [41  7]
-     [41  8]
-     [41  9]
-     [41 10]
-     [41 11]
-     [41 12]
-     [41 13]
-     [41 14]
-     [41 15]
-     [41 16]
-     [41 17]
-     [41 18]
-     [41 19]
-     [41 20]
-     [42  0]
-     [42  1]
-     [42  2]
-     [42  3]
-     [42  4]
-     [42  5]
-     [42  6]
-     [42  7]
-     [42  8]
-     [42  9]
-     [42 10]
-     [42 11]
-     [42 12]
-     [42 13]
-     [42 14]
-     [42 15]
-     [42 16]
-     [42 17]
-     [42 18]
-     [42 19]
-     [42 20]]
+     [38  4]]
 
 ``` python
 plt.figure(figsize=(8, 6))
@@ -545,4 +467,4 @@ plt.text(
 
     Text(31.43904149826383, -33.20697106068339, 'Center')
 
-![](index_files/figure-commonmark/cell-19-output-2.png)
+![](index_files/figure-commonmark/cell-20-output-2.png)
