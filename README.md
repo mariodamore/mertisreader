@@ -64,7 +64,7 @@ print(f'Output directory: {ms_reader.output_dir}')
 print(f'Log level: {ms_reader.log_level}')
 ```
 
-    2025-10-02 16:44:54,927|452487|INFO|input_dir=PosixPath('../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal')
+    2026-01-27 15:37:58,701|177159|INFO|input_dir=PosixPath('../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal')
 
     Reading path ../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal
     MERTISDataPackReader initialized with input directory: ../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal
@@ -468,3 +468,120 @@ plt.text(
     Text(31.43904149826383, -33.20697106068339, 'Center')
 
 ![](index_files/figure-commonmark/cell-20-output-2.png)
+
+#### Frame Assembly (New Functions)
+
+Test the new lazy assembly functions with frame dimension analysis and
+optional interpolation.
+
+``` python
+# Get raw frames (un-interpolated) directly from data_assembler output
+raw_frames = ms_reader.get_original_frames()
+print("Raw frames (un-interpolated):")
+for key, arr in raw_frames.items():
+    print(f"  {key}: shape {arr.shape}")
+```
+
+    Raw frames (un-interpolated):
+      mer_cal_sc_tis_20200409_1-0651130819-21186__0_1: shape (40, 100, 21)
+
+``` python
+# Analyze frame dimensions
+dims_df = get_frame_dimensions(raw_frames)
+print("\nFrame dimension analysis:")
+print(dims_df)
+```
+
+
+    Frame dimension analysis:
+                                                     n_spectrals  n_pixels  \
+    mer_cal_sc_tis_20200409_1-0651130819-21186__0_1           40       100   
+
+                                                     n_files  
+    mer_cal_sc_tis_20200409_1-0651130819-21186__0_1       21  
+
+``` python
+# Test assembly with mode='match' (safe, should work if all dims match)
+print("\n=== Assembly Test: mode='match' (safe mode, requires matching dims) ===")
+try:
+    cube_match, meta_match = assemble_frames(raw_frames, interp_mode='match', order=1)
+    print(f"✓ Success! Assembled cube shape: {cube_match.shape}")
+    print(f"  Metadata: {meta_match}")
+except ValueError as e:
+    print(f"✗ Failed (expected for heterogeneous frames): {e}")
+```
+
+
+    === Assembly Test: mode='match' (safe mode, requires matching dims) ===
+
+    [Step 1] Dimension Analysis: All dimensions uniform
+                                                     n_spectrals  n_pixels  \
+    mer_cal_sc_tis_20200409_1-0651130819-21186__0_1           40       100   
+
+                                                     n_files  
+    mer_cal_sc_tis_20200409_1-0651130819-21186__0_1       21  
+
+    [Step 3] Stacking frames...
+      Final cube shape: (40, 100, 21)
+    ✓ Success! Assembled cube shape: (40, 100, 21)
+      Metadata: {'interpolation_mode': 'none', 'interpolation_order': 1, 'target_n_spectrals': np.int64(40), 'target_n_pixels': np.int64(100), 'n_temporal_samples': 21, 'source_count': 1, 'frames_resampled': {'mer_cal_sc_tis_20200409_1-0651130819-21186__0_1': (40, 100, 21)}}
+
+``` python
+# Test assembly with mode='up' (upsample all frames to largest size)
+print("\n=== Assembly Test: mode='up' (upsample to largest frame) ===")
+cube_up, meta_up = assemble_frames(raw_frames, interp_mode='up', order=1)
+print(f"Assembled cube shape: {cube_up.shape}")
+print(f"Interpolation mode: {meta_up['interpolation_mode']}")
+print(f"Interpolation order: {meta_up['interpolation_order']}")
+print(f"Temporal samples: {meta_up['n_temporal_samples']}")
+```
+
+
+    === Assembly Test: mode='up' (upsample to largest frame) ===
+    Assembled cube shape: (40, 100, 21)
+    Interpolation mode: none
+    Interpolation order: 1
+    Temporal samples: 21
+
+``` python
+# Test assembly with mode='down' (downsample all frames to smallest size)
+print("\n=== Assembly Test: mode='down' (downsample to smallest frame) ===")
+# Reset cached cube first to test different mode
+cube_down, meta_down = assemble_frames(raw_frames, interp_mode='down', order=3)
+print(f"Assembled cube shape: {cube_down.shape}")
+print(f"Interpolation mode: {meta_down['interpolation_mode']}")
+print(f"Interpolation order: {meta_down['interpolation_order']} (cubic)")
+print(f"Temporal samples: {meta_down['n_temporal_samples']}")
+```
+
+
+    === Assembly Test: mode='down' (downsample to smallest frame) ===
+
+    [Step 1] Dimension Analysis: Downsampling to smallest frame
+                                                     n_spectrals  n_pixels  \
+    mer_cal_sc_tis_20200409_1-0651130819-21186__0_1           40       100   
+
+                                                     n_files  
+    mer_cal_sc_tis_20200409_1-0651130819-21186__0_1       21  
+    Resampling to target: n_spectrals=40, n_pixels=100 (order=3)
+      mer_cal_sc_tis_20200409_1-0651130819-21186__0_1: shape (40, 100, 21) → NO RESAMPLING
+
+    [Step 3] Stacking frames...
+      Final cube shape: (40, 100, 21)
+    Assembled cube shape: (40, 100, 21)
+    Interpolation mode: down
+    Interpolation order: 3 (cubic)
+    Temporal samples: 21
+
+``` python
+# Demonstrate caching: second call returns cached object
+print("\n=== Caching Demonstration ===")
+cube_cached, meta_cached = assemble_frames(raw_frames, interp_mode='down', order=3)
+print(f"Same object returned from cache: {cube_cached is cube_down}")
+print(f"No re-computation needed on second call")
+```
+
+
+    === Caching Demonstration ===
+    Same object returned from cache: True
+    No re-computation needed on second call

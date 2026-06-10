@@ -47,6 +47,10 @@ preview: ## preview documentsion with nbdev_preview on port $SERVE_PORT, default
 export_on_modify : ## watch the nbs/ directory for modification with inotifywait and run nbdev_export on changes
 	inotifywait -m -e modify nbs/ | while read path action file; do     echo "file mod detected: $${file}"; nbdev_export ; done
 
+ 
+install_develop :  ## install the package from setup.py via setuptools as development 
+	python -m pip install --verbose --editable .
+
 ###############################################################
 # Cleaning targets
 #-----------------

@@ -1,11 +1,41 @@
 [build-system]
-requires = ["setuptools>=64.0"]
+requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name="mertisreader"
-requires-python=">=3.7"
-dynamic = [ "keywords", "description", "version", "dependencies", "optional-dependencies", "readme", "license", "authors", "classifiers", "entry-points", "scripts", "urls"]
+name = "mertisreader"
+dynamic = ["version"]
+description = "helper routines to read ESA/Bepicolombo space mission - DLR MERTIS instrument data"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+authors = [{name = "Mario D Amore", email = "mario.damore@dlr.de"}]
+keywords = ['planetary', ',', 'instrument,', 'data']
+classifiers = ["Natural Language :: English", "Intended Audience :: Developers", "Development Status :: 2 - Pre-Alpha", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only"]
+dependencies = ['rich', 'numpy', 'pandas', 'astropy', 'matplotlib', 'xmltodict', 'polars', 'scipy', 'pds4_tools>=1.10.0']
 
-[tool.uv]
-cache-keys = [{ file = "pyproject.toml" }, { file = "settings.ini" }, { file = "setup.py" }]
+[project.urls]
+Repository = "https://github.com/mariodamore/mertisreader/tree/master/"
+Documentation = "https://mariodamore.github.io/mertisreader/"
+
+[project.entry-points.nbdev]
+mertisreader = "mertisreader._modidx:d"
+
+[tool.setuptools.dynamic]
+version = {attr = "mertisreader.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["mertisreader"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v"
+
+[tool.nbdev]
+doc_path = 'docs'
+branch = 'master'
+custom_sidebar = true
+title = 'mertisreader'

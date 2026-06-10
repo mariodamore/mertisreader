@@ -1,1 +1,1 @@
-Sitemap: //mertisreader/sitemap.xml
+Sitemap: https://mariodamore.github.io/mertisreader/sitemap.xml

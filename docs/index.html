@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-dec58ab4b12d89293a6e6e9e7508d858.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -112,13 +112,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="install – mertisreader">
 <meta property="og:description" content="helper routines to read ESA/Bepicolombo space mission - DLR MERTIS instrument data">
-<meta property="og:image" content="//mertisreader/index_files/figure-html/cell-12-output-1.png">
+<meta property="og:image" content="https://mariodamore.github.io/mertisreader/index_files/figure-html/cell-12-output-1.png">
 <meta property="og:site_name" content="mertisreader">
 <meta property="og:image:height" content="1475">
 <meta property="og:image:width" content="989">
 <meta name="twitter:title" content="install – mertisreader">
 <meta name="twitter:description" content="helper routines to read ESA/Bepicolombo space mission - DLR MERTIS instrument data">
-<meta name="twitter:image" content="//mertisreader/index_files/figure-html/cell-12-output-1.png">
+<meta name="twitter:image" content="https://mariodamore.github.io/mertisreader/index_files/figure-html/cell-12-output-1.png">
 <meta name="twitter:image-height" content="1475">
 <meta name="twitter:image-width" content="989">
 <meta name="twitter:card" content="summary_large_image">
@@ -131,8 +131,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">mertisreader</span>
     </a>
@@ -157,10 +155,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
-      </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -203,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="mertisreader---quick-cheatsheet" class="level2">
 <h2 class="anchored" data-anchor-id="mertisreader---quick-cheatsheet">mertisreader - Quick cheatsheet</h2>
 <p>Import Required Libraries</p>
-<div id="cell-5" class="cell">
+<div id="48a75cb6" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pathlib</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rich</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mertisreader <span class="im">as</span> mr</span>
@@ -265,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>TIS Aligned:</strong> : the TIS (Thermal Infrared Spectrometer) wavelength grid is aligned with the detector’s X and Y axes, so all pixels share the same wavelength grid. If not aligned, each pixel has its own wavelength grid, making data comparison and analysis more complex.</li>
 </ul>
 <p>Just change the level directory, the package can handle all the levels and read the data, take care of not calling geometry related paramter on RAW.</p>
-<div id="cell-7" class="cell">
+<div id="05479829" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>input_path <span class="op">=</span> pathlib.Path(<span class="st">'../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal'</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>output_path <span class="op">=</span> pathlib.Path(<span class="st">'/tmp/'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>log_level <span class="op">=</span> <span class="st">'INFO'</span></span>
@@ -281,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Output directory: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>output_dir<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Log level: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>log_level<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-10-02 16:44:54,927|452487|INFO|input_dir=PosixPath('../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal')</code></pre>
+<pre><code>2026-01-27 15:37:58,701|177159|INFO|input_dir=PosixPath('../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal')</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading path ../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal
@@ -291,7 +285,7 @@ Log level: INFO</code></pre>
 </div>
 </div>
 <p>Show Files in Input Directory</p>
-<div id="cell-9" class="cell">
+<div id="4be8606f" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ms_reader.show_files()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>All files in input_dir :</code></pre>
@@ -316,7 +310,7 @@ Log level: INFO</code></pre>
 </div>
 </div>
 <p>List File Types</p>
-<div id="cell-11" class="cell">
+<div id="98a61ff8" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ms_reader.listfiletypes()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">{</span>
@@ -335,7 +329,7 @@ Log level: INFO</code></pre>
 </div>
 </div>
 <p>Collect Data</p>
-<div id="cell-13" class="cell">
+<div id="e2ed7b95" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ms_reader.data_collector()</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Collected data keys: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>collect_data<span class="sc">.</span>keys()<span class="sc">}</span><span class="ss">'</span>)</span>
@@ -352,11 +346,11 @@ tis: 1 files collected</code></pre>
 </div>
 </div>
 <p>Assemble Data</p>
-<div id="cell-15" class="cell">
+<div id="3c9ce4c3" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ms_reader.data_assembler(verbose<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"4f8d6dc8b63248d3a0666e336dfe04cb","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+{"model_id":"8ef28f8817014dd88e4f8b09f6e4b5a4","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
 <div class="cell-output cell-output-display">
@@ -387,7 +381,7 @@ Number of TIR QL files: 0</code></pre>
 </div>
 </div>
 <p>Verify the Assembled Data</p>
-<div id="cell-17" class="cell">
+<div id="fc9d1ac8" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RAW does not have geometry data</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ms_reader.processing_level <span class="op">!=</span> <span class="st">'RAW'</span>:</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Geometry data keys: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>geom_ls<span class="sc">.</span>keys()<span class="sc">}</span><span class="ss">'</span>)</span>
@@ -410,7 +404,7 @@ Planet index merged shape: (0,)</code></pre>
 </div>
 </div>
 <p>A data directory can contains more file for each type, those are collected in a dict for each <code>ms_reader</code> variable , so it is handy to define which file we want to work with after inspection, like the following :</p>
-<div id="cell-19" class="cell">
+<div id="ab404625" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>file_key <span class="op">=</span> <span class="bu">list</span>(ms_reader.frames.keys())[<span class="dv">0</span>]</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Example DataCube shape for file </span><span class="sc">{</span>file_key<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>frames[file_key]<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -421,9 +415,9 @@ Planet index merged shape: (0,)</code></pre>
 <section id="show-some-data-plots" class="level3">
 <h3 class="anchored" data-anchor-id="show-some-data-plots">Show some data &amp; plots</h3>
 <p>now, let’s see some (meta)data:</p>
-<div id="cell-21" class="cell">
+<div id="e7afec9f" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ms_reader.mertis_tis_metadata[file_key].iloc[<span class="dv">0</span>:<span class="dv">4</span>].T</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 
 
@@ -612,7 +606,7 @@ Planet index merged shape: (0,)</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-22" class="cell">
+<div id="c1f38981" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.dates <span class="im">as</span> mdates</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -636,9 +630,9 @@ Planet index merged shape: (0,)</code></pre>
 <p>Now some data from TIS detector, each one a 2D array.</p>
 <p>For those data, dufing cruise, the scientific data are collected ueing the Space port and not Planet port.</p>
 <p>TIS Datacube size is the union of several TIS 2D array measurement, each one typically <code>(40, 100)</code> = (<code>n_spectral</code>,<code>n_spatial</code>), depending on binning and windowing.</p>
-<div id="cell-24" class="cell">
+<div id="e1b61f2e" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ms_reader.frames[file_key].shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>(40, 100, 21)</code></pre>
 </div>
 </div>
@@ -648,7 +642,7 @@ Planet index merged shape: (0,)</code></pre>
 <li><code>n_spatial</code> : number of measurements spatial pixels, depends on pixel spatial binning (1,2,4) result in <code>n_spatial</code> == (100,50,25)</li>
 <li><code>n_frames</code> : number of TIS frames, or measurements, this correspond to the time axis.</li>
 </ul>
-<div id="cell-26" class="cell">
+<div id="86be2d16" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>full_frames_3D <span class="op">=</span> ms_reader.frames[file_key]</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>wav <span class="op">=</span> ms_reader.wavelengths[file_key]</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plot_index <span class="op">=</span> ms_reader.space_index[file_key]</span>
@@ -689,12 +683,12 @@ Planet index merged shape: (0,)</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-27" class="cell">
+<div id="37fecdef" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(full_frames_3D[<span class="op">-</span><span class="dv">1</span>,:,plot_index].T,aspect<span class="op">=</span><span class="st">'auto'</span>,cmap<span class="op">=</span>plt.cm.Spectral_r)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fame Index'</span>)</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'TIS Spatial Pixel Index'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>Text(0, 0.5, 'TIS Spatial Pixel Index')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -707,7 +701,7 @@ Planet index merged shape: (0,)</code></pre>
 </div>
 <p>The higher level pixel near 40 are the “first light” MERTIS ever saw in space, from the Moon.</p>
 <p>Now some geometry data , not available in RAW data.</p>
-<div id="cell-29" class="cell">
+<div id="eab60ccb" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>rich.<span class="bu">print</span>(ms_reader.geom_ls[file_key].keys())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">dict_keys</span><span style="font-weight: bold">([</span><span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'</span>, <span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_TARGET_LATITUDE'</span>, 
@@ -721,9 +715,9 @@ Planet index merged shape: (0,)</code></pre>
 </pre>
 </div>
 </div>
-<div id="cell-30" class="cell">
+<div id="70fe91aa" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ms_reader.geom_ls[file_key][<span class="st">'MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'</span>].shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>(5, 100, 21)</code></pre>
 </div>
 </div>
@@ -742,7 +736,7 @@ C3      C4</code></pre>
 <li><code>n_spatial</code> : number of measurements spatial pixels, depends on pixel spatial binning (1,2,4) result in <code>n_spatial</code> == (100,50,25)</li>
 <li><code>n_frames</code> : number of TIS frames, or measurements, this correspond to the time axis in the TIS datacube.</li>
 </ul>
-<div id="cell-32" class="cell">
+<div id="6b8e247e" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>longitudes <span class="op">=</span> ms_reader.geom_ls[file_key][<span class="st">'MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'</span>]</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>longitudes_center <span class="op">=</span> longitudes[<span class="dv">0</span>,:,:]</span>
@@ -769,7 +763,7 @@ C3      C4</code></pre>
 </div>
 </div>
 <p>Let’s find some TIS sptail pixels with defined geometries on all corners</p>
-<div id="cell-34" class="cell">
+<div id="23438429" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> latitudes  <span class="co"># shape (5, 100, 21)</span></span>
@@ -788,7 +782,7 @@ C3      C4</code></pre>
  [38  4]]</code></pre>
 </div>
 </div>
-<div id="cell-35" class="cell">
+<div id="689adfb3" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>pixel_index <span class="op">=</span> indices[<span class="dv">0</span>]  <span class="co"># Take the first valid pixel for demonstration</span></span>
@@ -827,7 +821,7 @@ C3      C4</code></pre>
 <span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">'left'</span>,</span>
 <span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>    va<span class="op">=</span><span class="st">'bottom'</span></span>
 <span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>Text(31.43904149826383, -33.20697106068339, 'Center')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -838,8 +832,126 @@ C3      C4</code></pre>
 </div>
 </div>
 </div>
+<section id="frame-assembly-new-functions" class="level4">
+<h4 class="anchored" data-anchor-id="frame-assembly-new-functions">Frame Assembly (New Functions)</h4>
+<p>Test the new lazy assembly functions with frame dimension analysis and optional interpolation.</p>
+<div id="02528459" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get raw frames (un-interpolated) directly from data_assembler output</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>raw_frames <span class="op">=</span> ms_reader.get_original_frames()</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Raw frames (un-interpolated):"</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, arr <span class="kw">in</span> raw_frames.items():</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>key<span class="sc">}</span><span class="ss">: shape </span><span class="sc">{</span>arr<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Raw frames (un-interpolated):
+  mer_cal_sc_tis_20200409_1-0651130819-21186__0_1: shape (40, 100, 21)</code></pre>
+</div>
+</div>
+<div id="0f6da14e" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze frame dimensions</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>dims_df <span class="op">=</span> get_frame_dimensions(raw_frames)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Frame dimension analysis:"</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dims_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Frame dimension analysis:
+                                                 n_spectrals  n_pixels  \
+mer_cal_sc_tis_20200409_1-0651130819-21186__0_1           40       100   
+
+                                                 n_files  
+mer_cal_sc_tis_20200409_1-0651130819-21186__0_1       21  </code></pre>
+</div>
+</div>
+<div id="7c4b77b8" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test assembly with mode='match' (safe, should work if all dims match)</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Assembly Test: mode='match' (safe mode, requires matching dims) ==="</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    cube_match, meta_match <span class="op">=</span> ms_reader.get_assembled_frames(interp_mode<span class="op">=</span><span class="st">'match'</span>, order<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"✓ Success! Assembled cube shape: </span><span class="sc">{</span>cube_match<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  Metadata: </span><span class="sc">{</span>meta_match<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> e:</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"✗ Failed (expected for heterogeneous frames): </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+=== Assembly Test: mode='match' (safe mode, requires matching dims) ===
+
+[Step 1] Dimension Analysis: All dimensions uniform
+                                                 n_spectrals  n_pixels  \
+mer_cal_sc_tis_20200409_1-0651130819-21186__0_1           40       100   
+
+                                                 n_files  
+mer_cal_sc_tis_20200409_1-0651130819-21186__0_1       21  
+
+[Step 3] Stacking frames...
+  Final cube shape: (40, 100, 21)
+✓ Success! Assembled cube shape: (40, 100, 21)
+  Metadata: {'interpolation_mode': 'none', 'interpolation_order': 1, 'target_n_spectrals': np.int64(40), 'target_n_pixels': np.int64(100), 'n_temporal_samples': 21, 'source_count': 1, 'frames_resampled': {'mer_cal_sc_tis_20200409_1-0651130819-21186__0_1': (40, 100, 21)}}</code></pre>
+</div>
+</div>
+<div id="60ae82bb" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test assembly with mode='up' (upsample all frames to largest size)</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Assembly Test: mode='up' (upsample to largest frame) ==="</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>cube_up, meta_up <span class="op">=</span> ms_reader.get_assembled_frames(interp_mode<span class="op">=</span><span class="st">'up'</span>, order<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Assembled cube shape: </span><span class="sc">{</span>cube_up<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Interpolation mode: </span><span class="sc">{</span>meta_up[<span class="st">'interpolation_mode'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Interpolation order: </span><span class="sc">{</span>meta_up[<span class="st">'interpolation_order'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Temporal samples: </span><span class="sc">{</span>meta_up[<span class="st">'n_temporal_samples'</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+=== Assembly Test: mode='up' (upsample to largest frame) ===
+Assembled cube shape: (40, 100, 21)
+Interpolation mode: none
+Interpolation order: 1
+Temporal samples: 21</code></pre>
+</div>
+</div>
+<div id="f1fa0dc6" class="cell" data-execution_count="30">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test assembly with mode='down' (downsample all frames to smallest size)</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Assembly Test: mode='down' (downsample to smallest frame) ==="</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Reset cached cube first to test different mode</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>ms_reader._assembled_cube <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>ms_reader._assembly_metadata <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>cube_down, meta_down <span class="op">=</span> ms_reader.get_assembled_frames(interp_mode<span class="op">=</span><span class="st">'down'</span>, order<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Assembled cube shape: </span><span class="sc">{</span>cube_down<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Interpolation mode: </span><span class="sc">{</span>meta_down[<span class="st">'interpolation_mode'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Interpolation order: </span><span class="sc">{</span>meta_down[<span class="st">'interpolation_order'</span>]<span class="sc">}</span><span class="ss"> (cubic)"</span>)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Temporal samples: </span><span class="sc">{</span>meta_down[<span class="st">'n_temporal_samples'</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+=== Assembly Test: mode='down' (downsample to smallest frame) ===
+
+[Step 1] Dimension Analysis: Downsampling to smallest frame
+                                                 n_spectrals  n_pixels  \
+mer_cal_sc_tis_20200409_1-0651130819-21186__0_1           40       100   
+
+                                                 n_files  
+mer_cal_sc_tis_20200409_1-0651130819-21186__0_1       21  
+Resampling to target: n_spectrals=40, n_pixels=100 (order=3)
+  mer_cal_sc_tis_20200409_1-0651130819-21186__0_1: shape (40, 100, 21) → NO RESAMPLING
+
+[Step 3] Stacking frames...
+  Final cube shape: (40, 100, 21)
+Assembled cube shape: (40, 100, 21)
+Interpolation mode: down
+Interpolation order: 3 (cubic)
+Temporal samples: 21</code></pre>
+</div>
+</div>
+<div id="508f2548" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demonstrate caching: second call returns cached object</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Caching Demonstration ==="</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>cube_cached, meta_cached <span class="op">=</span> ms_reader.get_assembled_frames(interp_mode<span class="op">=</span><span class="st">'down'</span>, order<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Same object returned from cache: </span><span class="sc">{</span>cube_cached <span class="kw">is</span> cube_down<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"No re-computation needed on second call"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+=== Caching Demonstration ===
+Same object returned from cache: True
+No re-computation needed on second call</code></pre>
+</div>
+</div>
 
 
+</section>
 </section>
 </section>
 
@@ -920,7 +1032,7 @@ C3      C4</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("\/\/mertisreader");
+        var filterRegex = new RegExp("https:\/\/mariodamore\.github\.io\/mertisreader");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

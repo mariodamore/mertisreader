@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /home/kidpixo/work/esa/mertis_data_management/mertisreader/.ai/decisions /home/kidpixo/work/esa/mertis_data_management/mertisreader/.ai/sessions /home/kidpixo/work/esa/mertis_data_management/mertisreader/.ai/archive)",
+      "Bash(find /home/kidpixo/work/esa/mertis_data_management -type f -name \"*ADR*\" -o -name \"*adr*\" -o -name \"*004*\" 2>/dev/null | head -20)",
+      "Read(//home/kidpixo/work/esa/mertis_data_management/**)",
+      "Bash(python3)",
+      "Bash(conda activate *)",
+      "Bash(python -m nbdev.build_lib)",
+      "Bash(nbdev_export)",
+      "Bash(python)",
+      "Bash(python -c ' *)",
+      "Bash(pip install *)",
+      "Bash(jupytext --version)",
+      "Bash(jupytext --to script nbs/00_core.ipynb --output nbs/00_core.py)",
+      "Bash(jupytext --to notebook nbs/02_frame_utils.py --output nbs/02_frame_utils.ipynb)",
+      "Bash(grep -n \"^def get_frame_dimensions\\\\|^# %%$\" nbs/00_core.py)",
+      "Bash(sed -i '1109d' nbs/00_core.py)",
+      "Bash(sed -n '1105,1115p' nbs/00_core.py)",
+      "Bash(jupytext --to notebook nbs/00_core.py --output nbs/00_core.ipynb)",
+      "Bash(python -c \"from mertisreader import *; print\\('Imports OK'\\); print\\(f'get_frame_dimensions: {get_frame_dimensions}'\\); print\\(f'assemble_frames: {assemble_frames}'\\); print\\(f'test_assemble_frames: {test_assemble_frames}'\\); print\\(f'normalize_raw_axis_order: {normalize_raw_axis_order}'\\)\")",
+      "Bash(sed -i '1091d' nbs/00_core.py)",
+      "Bash(sed -n '1089,1105p' nbs/00_core.py)",
+      "Bash(sed -i '1089d' nbs/00_core.py)",
+      "Bash(sed -n '1087,1105p' nbs/00_core.py)",
+      "Bash(sed -i '1089i # %%' nbs/00_core.py)",
+      "Bash(sed -n '1087,1110p' nbs/00_core.py)",
+      "Bash(nbdev_build)",
+      "Bash(jupytext --to script nbs/00_core.ipynb --output mertisreader/core.py)",
+      "Bash(python -c \"from mertisreader import *; print\\('Imports OK'\\); test_assemble_frames\\(\\)\")",
+      "Bash(jupytext --to notebook nbs/02_frame_utils.py)",
+      "Bash(git checkout *)",
+      "Bash(pytest tests/ -v)",
+      "Bash(jupytext --to py:percent nbs/00_core.ipynb --output nbs/00_core.py)",
+      "Bash(pytest tests/test_integration.py -v)",
+      "Bash(python3 -c \"import json; nb=json.load\\(open\\('/home/kidpixo/work/esa/mertis_data_management/mertisreader/nbs/00_core.ipynb'\\)\\); print\\('Cells:', len\\(nb['cells']\\)\\); print\\('Metadata keys:', list\\(nb.get\\('metadata', {}\\).keys\\(\\)\\)\\); print\\('nbdev_version:', nb.get\\('metadata', {}\\).get\\('nbdev', {}\\).get\\('version', 'N/A'\\)\\)\")"
+    ],
+    "additionalDirectories": [
+      "/home/kidpixo/work/esa/mertis_data_management/mertisreader/.ai"
+    ]
+  }
+}
