@@ -1,0 +1,15 @@
+website:
+  sidebar:
+  - contents:
+    - reference/index.qmd
+    - contents:
+      - reference/MERTISDataPackReader.qmd
+      - reference/LazyArray.qmd
+      - reference/LazyCSVLoader.qmd
+      - reference/validate_pds4_label.qmd
+      - reference/extract_label_metadata.qmd
+      - reference/get_csv_field_metadata.qmd
+      - reference/extract_mertis_hk_columns.qmd
+      section: Core API
+    id: reference
+  - id: dummy-sidebar

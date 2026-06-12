@@ -1,0 +1,147 @@
+# LazyArray { #mertisreader.LazyArray }
+
+```python
+LazyArray(fits_data, header=None, hdu=None)
+```
+
+Lazy-loading proxy for FITS data arrays using memmap.
+
+Per ADR-006:
+- Defer I/O via astropy.io.fits.open(..., memmap=True)
+- .shape, .dtype, .header never trigger I/O
+- Safe: slicing, iteration, .mean(), .sum()
+- Unsafe (raise NotImplementedError): fancy indexing, reshape, transpose
+- .materialize() forces full load into RAM
+
+## Attributes
+
+| Name | Description |
+| --- | --- |
+| [dtype](#mertisreader.LazyArray.dtype) | Array data type. No I/O triggered. |
+| [header](#mertisreader.LazyArray.header) | FITS header. No I/O triggered. |
+| [materialized](#mertisreader.LazyArray.materialized) | Whether array has been materialized into RAM. |
+| [ndim](#mertisreader.LazyArray.ndim) | Number of dimensions. No I/O triggered. |
+| [shape](#mertisreader.LazyArray.shape) | Array shape. No I/O triggered. |
+| [size](#mertisreader.LazyArray.size) | Total number of elements. No I/O triggered. |
+
+## Methods
+
+| Name | Description |
+| --- | --- |
+| [astype](#mertisreader.LazyArray.astype) | Cast array to specified dtype - works on memmap data. |
+| [copy](#mertisreader.LazyArray.copy) | Create a copy of the array - triggers materialization. |
+| [flatten](#mertisreader.LazyArray.flatten) | Flatten array - requires materialization. |
+| [materialize](#mertisreader.LazyArray.materialize) | Force full array load into RAM and return a copy. |
+| [max](#mertisreader.LazyArray.max) | Compute maximum - works on memmap data. |
+| [mean](#mertisreader.LazyArray.mean) | Compute mean - works on memmap data without full load. |
+| [min](#mertisreader.LazyArray.min) | Compute minimum - works on memmap data. |
+| [ravel](#mertisreader.LazyArray.ravel) | Flatten array - requires materialization. |
+| [reshape](#mertisreader.LazyArray.reshape) | Reshape array - requires materialization. |
+| [std](#mertisreader.LazyArray.std) | Compute standard deviation - works on memmap data. |
+| [sum](#mertisreader.LazyArray.sum) | Compute sum - works on memmap data without full load. |
+| [swapaxes](#mertisreader.LazyArray.swapaxes) | Swap axes - requires materialization. |
+| [transpose](#mertisreader.LazyArray.transpose) | Transpose array - requires materialization. |
+
+### astype { #mertisreader.LazyArray.astype }
+
+```python
+LazyArray.astype(dtype)
+```
+
+Cast array to specified dtype - works on memmap data.
+
+### copy { #mertisreader.LazyArray.copy }
+
+```python
+LazyArray.copy()
+```
+
+Create a copy of the array - triggers materialization.
+
+### flatten { #mertisreader.LazyArray.flatten }
+
+```python
+LazyArray.flatten()
+```
+
+Flatten array - requires materialization.
+
+### materialize { #mertisreader.LazyArray.materialize }
+
+```python
+LazyArray.materialize()
+```
+
+Force full array load into RAM and return a copy.
+
+### max { #mertisreader.LazyArray.max }
+
+```python
+LazyArray.max(axis=None, dtype=None, out=None)
+```
+
+Compute maximum - works on memmap data.
+
+### mean { #mertisreader.LazyArray.mean }
+
+```python
+LazyArray.mean(axis=None, dtype=None, out=None)
+```
+
+Compute mean - works on memmap data without full load.
+
+### min { #mertisreader.LazyArray.min }
+
+```python
+LazyArray.min(axis=None, dtype=None, out=None)
+```
+
+Compute minimum - works on memmap data.
+
+### ravel { #mertisreader.LazyArray.ravel }
+
+```python
+LazyArray.ravel()
+```
+
+Flatten array - requires materialization.
+
+### reshape { #mertisreader.LazyArray.reshape }
+
+```python
+LazyArray.reshape(*args, **kwargs)
+```
+
+Reshape array - requires materialization.
+
+### std { #mertisreader.LazyArray.std }
+
+```python
+LazyArray.std(axis=None, dtype=None, out=None)
+```
+
+Compute standard deviation - works on memmap data.
+
+### sum { #mertisreader.LazyArray.sum }
+
+```python
+LazyArray.sum(axis=None, dtype=None, out=None)
+```
+
+Compute sum - works on memmap data without full load.
+
+### swapaxes { #mertisreader.LazyArray.swapaxes }
+
+```python
+LazyArray.swapaxes(axis1, axis2)
+```
+
+Swap axes - requires materialization.
+
+### transpose { #mertisreader.LazyArray.transpose }
+
+```python
+LazyArray.transpose(*args)
+```
+
+Transpose array - requires materialization.

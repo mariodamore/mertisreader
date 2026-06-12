@@ -1,0 +1,191 @@
+# MERTISDataPackReader { #mertisreader.MERTISDataPackReader }
+
+```python
+MERTISDataPackReader(input_dir, output_dir='', log_level='', lazy=False)
+```
+
+Class to read and process MERTIS data.
+
+Attributes:
+    input_dir (pathlib.Path): Input directory.
+    output_dir (pathlib.Path): Output directory.
+    log_level (str): Log level.
+    fits_files (list): List of FITS files.
+    input_path_dict (dict): Dictionary of input paths.
+    collect_data (dict): Dictionary of collected data.
+
+## Methods
+
+| Name | Description |
+| --- | --- |
+| [data_assembler](#mertisreader.MERTISDataPackReader.data_assembler) | Assembles the collected data into convenient data structures. |
+| [data_collector](#mertisreader.MERTISDataPackReader.data_collector) | Collect data from the input files and store it in the collect_data attribute. |
+| [detect_processing_level](#mertisreader.MERTISDataPackReader.detect_processing_level) | Detects the processing level (RAW, CAL, PAR) from the files in the input directory. |
+| [filetypes2dict](#mertisreader.MERTISDataPackReader.filetypes2dict) | Convert the input files into a dictionary, where the keys are the file types and the values are lists of file paths. |
+| [get_fits_files](#mertisreader.MERTISDataPackReader.get_fits_files) | Get the list of FITS files. |
+| [get_input_path_dict](#mertisreader.MERTISDataPackReader.get_input_path_dict) | Get the dictionary of input paths. |
+| [get_original_frames](#mertisreader.MERTISDataPackReader.get_original_frames) | Return the original frames dictionary after assembly. |
+| [listfiletypes](#mertisreader.MERTISDataPackReader.listfiletypes) | Print the list of file types and the number of files for each file type. |
+| [save_plot](#mertisreader.MERTISDataPackReader.save_plot) | Save a plot to the output directory. |
+| [set_logger](#mertisreader.MERTISDataPackReader.set_logger) | Set the logger. |
+| [set_output_dir](#mertisreader.MERTISDataPackReader.set_output_dir) | Set the output directory. |
+| [show_files](#mertisreader.MERTISDataPackReader.show_files) | Print statistics about the files in the input directory. |
+
+### data_assembler { #mertisreader.MERTISDataPackReader.data_assembler }
+
+```python
+MERTISDataPackReader.data_assembler(verbose=False)
+```
+
+Assembles the collected data into convenient data structures.
+
+This function processes the collected data and stores it in convenient data structures. The processed data includes:
+- ``geom_ls``: a dictionary of dictionaries, where each dictionary contains the data for a specific file, and each inner dictionary contains the data for a specific parameter.
+- ``frames``: a dictionary of numpy arrays, where each array contains the data for a specific file.
+- ``wavelengths``: a dictionary of numpy arrays, where each array contains the wavelength data for a specific file.
+- ``mertis_tis_metadata``: a dictionary of pandas DataFrames, where each DataFrame contains the metadata for a specific file.
+- ``space_index``: a pandas Index object containing the indices of the space measurements.
+- ``bb7_index``: a pandas Index object containing the indices of the BB7 measurements.
+- ``bb3_index``: a pandas Index object containing the indices of the BB3 measurements.
+- ``planet_index``: a pandas Index object containing the indices of the planet measurements.
+
+### data_collector { #mertisreader.MERTISDataPackReader.data_collector }
+
+```python
+MERTISDataPackReader.data_collector()
+```
+
+Collect data from the input files and store it in the collect_data attribute.
+
+This function iterates over the input_path_dict dictionary, which contains the file paths for each file type.
+For each file type, it checks if there are files available and reads the data from the files.
+The collected data is stored in the collect_data attribute.
+
+In lazy mode (self.lazy=True), FITS data is wrapped in LazyArray and HK data in LazyCSVLoader
+to defer I/O until data is actually accessed.
+
+Returns:
+    None
+
+### detect_processing_level { #mertisreader.MERTISDataPackReader.detect_processing_level }
+
+```python
+MERTISDataPackReader.detect_processing_level()
+```
+
+Detects the processing level (RAW, CAL, PAR) from the files in the input directory.
+Ensures all files have the same level.
+
+### filetypes2dict { #mertisreader.MERTISDataPackReader.filetypes2dict }
+
+```python
+MERTISDataPackReader.filetypes2dict()
+```
+
+Convert the input files into a dictionary, where the keys are the file types and the values are lists of file paths.
+
+Returns:
+    dict: A dictionary where the keys are the file types and the values are lists of file paths.
+
+### get_fits_files { #mertisreader.MERTISDataPackReader.get_fits_files }
+
+```python
+MERTISDataPackReader.get_fits_files()
+```
+
+Get the list of FITS files.
+
+Returns:
+    list: List of FITS files.
+
+### get_input_path_dict { #mertisreader.MERTISDataPackReader.get_input_path_dict }
+
+```python
+MERTISDataPackReader.get_input_path_dict()
+```
+
+Get the dictionary of input paths.
+
+Returns:
+    dict: Dictionary of input paths.
+
+### get_original_frames { #mertisreader.MERTISDataPackReader.get_original_frames }
+
+```python
+MERTISDataPackReader.get_original_frames()
+```
+
+Return the original frames dictionary after assembly.
+
+Per ADR-004: This method is cached - returns the same object on subsequent calls.
+
+Returns:
+    dict: The frames dictionary with keys as file stems and values as 3D numpy arrays.
+
+Raises:
+    RuntimeError: If data_assembler() has not been called yet.
+
+### listfiletypes { #mertisreader.MERTISDataPackReader.listfiletypes }
+
+```python
+MERTISDataPackReader.listfiletypes()
+```
+
+Print the list of file types and the number of files for each file type.
+
+This function iterates over the input_path_dict dictionary and prints the file types and the number
+of files for each file type. The file types and the number of files are printed using the rich.print
+function.
+
+Returns:
+    None
+
+### save_plot { #mertisreader.MERTISDataPackReader.save_plot }
+
+```python
+MERTISDataPackReader.save_plot(out_file, dpi=150, out_format='jpg')
+```
+
+Save a plot to the output directory.
+
+Args:
+    out_file (str): The name of the output file.
+    dpi (int): The resolution of the saved image in dots per inch. Default is 150.
+    out_format (str): The format of the saved image. Default is 'jpg'.
+
+Returns:
+    None
+
+### set_logger { #mertisreader.MERTISDataPackReader.set_logger }
+
+```python
+MERTISDataPackReader.set_logger()
+```
+
+Set the logger.
+
+### set_output_dir { #mertisreader.MERTISDataPackReader.set_output_dir }
+
+```python
+MERTISDataPackReader.set_output_dir(output_dir)
+```
+
+Set the output directory.
+
+Args:
+    output_dir (str or pathlib.Path): Output directory.
+
+Returns:
+    pathlib.Path: Output directory.
+
+### show_files { #mertisreader.MERTISDataPackReader.show_files }
+
+```python
+MERTISDataPackReader.show_files()
+```
+
+Print statistics about the files in the input directory.
+
+Prints the number of files in the input directory and the number of files
+in the input directory that match the old pattern '\d{8}_\d{8}' and the new pattern
+'mer_cal_sc_tis_YYYYMMDD_\d+-\d+-\d+__\d+_\d+.fits'.

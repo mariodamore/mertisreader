@@ -1,0 +1,58 @@
+---
+title: PDS4 Validation
+---
+
+# PDS4 Validation
+
+This page covers the label validation helpers from `nbs/03_pds4_validation.py`.
+
+## Import the Helpers
+
+```{python}
+#| echo: true
+from pathlib import Path
+
+from mertisreader.pds4_validation import (
+    PDS4_TOOLS_AVAILABLE,
+    extract_label_metadata,
+    extract_mertis_hk_columns,
+    get_csv_field_metadata,
+    validate_pds4_label,
+)
+
+print(f"pds4_tools available: {PDS4_TOOLS_AVAILABLE}")
+```
+
+## Locate a Sample Label
+
+```{python}
+#| echo: true
+candidate_roots = [Path.cwd().resolve(), Path.cwd().resolve().parent, Path.cwd().resolve().parent.parent]
+repo_root = next(root for root in candidate_roots if (root / "data").exists())
+sample_dir = repo_root / "data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/raw"
+
+hk_files = list(sample_dir.glob("*_hk_*.dat")) if sample_dir.exists() else []
+print(f"Sample directory exists: {sample_dir.exists()}")
+print(f"HK files found: {len(hk_files)}")
+```
+
+## Extract Metadata When Available
+
+```{python}
+#| echo: true
+if hk_files:
+    metadata = extract_label_metadata(hk_files[0])
+    print(metadata)
+
+    columns = extract_mertis_hk_columns(hk_files[0])
+    print(columns[:5])
+
+    field_meta = get_csv_field_metadata(hk_files[0])
+    print(field_meta.head())
+else:
+    print("No HK sample file available in the current checkout.")
+```
+
+## Notes
+
+The helper functions prefer `pds4_tools` when it is installed and fall back to XML parsing when needed.

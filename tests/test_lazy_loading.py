@@ -16,6 +16,7 @@ Coverage:
 
 import numpy as np
 import pytest
+from pathlib import Path
 
 from mertisreader.lazy_loading import LazyArray
 
@@ -181,11 +182,41 @@ class TestLazyArrayMaterialize:
         # They are equal but not the same object
         assert result1 is not result2
 
+    def test_materialize_from_memmap_uses_memmap_branch(self, tmp_path):
+        path = tmp_path / "lazy_array.dat"
+        memmap = np.memmap(path, dtype=np.float64, mode="w+", shape=(2, 3))
+        memmap[:] = np.arange(6, dtype=np.float64).reshape(2, 3)
+        memmap.flush()
+
+        la = LazyArray(memmap, header={})
+        result = la.materialize()
+
+        assert isinstance(result, np.ndarray)
+        np.testing.assert_array_equal(result, np.arange(6, dtype=np.float64).reshape(2, 3))
+
     def test_numpy_array_conversion(self, small_numpy_array):
         la = make_lazy(small_numpy_array)
         result = np.array(la)
         assert isinstance(result, np.ndarray)
         np.testing.assert_array_almost_equal(result, small_numpy_array)
+
+    def test_numpy_array_conversion_with_dtype(self, small_numpy_array):
+        la = make_lazy(small_numpy_array)
+        result = np.array(la, dtype=np.float32)
+        assert result.dtype == np.float32
+        np.testing.assert_array_almost_equal(result, small_numpy_array.astype(np.float32))
+
+    def test_numpy_array_conversion_copy_false(self, small_numpy_array):
+        la = make_lazy(small_numpy_array)
+        result = np.array(la, copy=False)
+        assert isinstance(result, np.ndarray)
+        np.testing.assert_array_almost_equal(result, small_numpy_array)
+
+    def test_numpy_array_conversion_copy_false_with_dtype(self, small_numpy_array):
+        la = make_lazy(small_numpy_array)
+        result = np.array(la, copy=False, dtype=np.float32)
+        assert result.dtype == np.float32
+        np.testing.assert_array_almost_equal(result, small_numpy_array.astype(np.float32))
 
 
 # ---------------------------------------------------------------------------
@@ -232,6 +263,11 @@ class TestLazyArrayAggregations:
         # At least one NaN/Inf → result should not be a finite scalar
         assert not np.isfinite(result)
 
+    def test_setitem_mutates_underlying_array(self, small_numpy_array):
+        la = make_lazy(small_numpy_array)
+        la[0, 0, 0] = 123.0
+        assert la[0, 0, 0] == 123.0
+
 
 # ---------------------------------------------------------------------------
 # Type casting
@@ -257,6 +293,14 @@ class TestLazyArrayAstype:
         la = make_lazy(small_numpy_array)
         result = la.astype(np.float32)
         assert result.shape == small_numpy_array.shape
+
+    def test_astype_falls_back_to_casted_value_without_shape(self):
+        class FakeCastable:
+            def astype(self, dtype):
+                return 42
+
+        la = LazyArray(FakeCastable(), header={})
+        assert la.astype(np.float32) == 42
 
 
 # ---------------------------------------------------------------------------
@@ -303,6 +347,10 @@ class TestLazyArrayCopy:
     def test_copy_values_match(self, small_numpy_array):
         la = make_lazy(small_numpy_array)
         np.testing.assert_array_almost_equal(la.copy(), small_numpy_array)
+
+    def test_str_matches_repr(self, small_numpy_array):
+        la = make_lazy(small_numpy_array)
+        assert str(la) == repr(la)
 
 
 # ---------------------------------------------------------------------------

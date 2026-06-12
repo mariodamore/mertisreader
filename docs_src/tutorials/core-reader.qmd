@@ -1,0 +1,71 @@
+---
+title: Core Reader
+---
+
+# Core Reader
+
+This page documents the main `MERTISDataPackReader` workflow that used to live in `nbs/00_core.py`.
+
+## Import the Reader
+
+```{python}
+#| echo: true
+from pathlib import Path
+
+import mertisreader as mr
+```
+
+## Locate the Repository Data
+
+```{python}
+#| echo: true
+candidate_roots = [Path.cwd().resolve(), Path.cwd().resolve().parent, Path.cwd().resolve().parent.parent]
+repo_root = next(root for root in candidate_roots if (root / "data").exists())
+
+input_path = repo_root / "data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal"
+output_path = Path("/tmp/")
+
+print(f"Repo root: {repo_root}")
+print(f"Input path exists: {input_path.exists()}")
+```
+
+## Build the Reader
+
+```{python}
+#| echo: true
+ms_reader = mr.MERTISDataPackReader(input_dir=input_path, output_dir=output_path, log_level="INFO")
+
+print(ms_reader)
+```
+
+## Inspect the Input Files
+
+```{python}
+#| echo: true
+ms_reader.show_files()
+ms_reader.listfiletypes()
+```
+
+## Assemble the Data
+
+```{python}
+#| echo: true
+ms_reader.data_collector()
+ms_reader.data_assembler(verbose=True)
+
+print(f"Frames: {list(ms_reader.frames.keys())}")
+print(f"Wavelengths: {list(ms_reader.wavelengths.keys())}")
+print(f"Metadata tables: {list(ms_reader.mertis_tis_metadata.keys())}")
+```
+
+## Reuse the Cached Frames
+
+```{python}
+#| echo: true
+original_frames = ms_reader.get_original_frames()
+first_key = next(iter(original_frames))
+
+print(f"Original frame shape for {first_key}: {original_frames[first_key].shape}")
+```
+
+The code above mirrors the old notebook flow, but the published site now stays in Quarto while the API is documented separately from docstrings.

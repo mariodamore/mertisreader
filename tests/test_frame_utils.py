@@ -26,7 +26,9 @@ from mertisreader.frame_utils import (
     get_frame_dimensions,
     detect_interpolation_target,
     resample_frame,
+    selective_resample_frames,
     assemble_frames,
+    assemble_geometry,
     filter_frames_by_size,
     get_frames_by_shape_groups,
 )
@@ -175,6 +177,14 @@ class TestResampleFrame:
         assert result.shape == arr.shape
         assert status == "none"
 
+    def test_no_resample_verbose_prints(self, capsys):
+        arr = np.ones((8, 10, 20))
+        result, status = resample_frame(arr, {"n_spectrals": 8, "n_pixels": 10}, frame_key="demo", verbose=True)
+        captured = capsys.readouterr()
+        assert result.shape == arr.shape
+        assert status == "none"
+        assert "NO RESAMPLING" in captured.out
+
     def test_upsample_doubles_spectrals(self):
         arr = np.ones((8, 10, 20))
         result, status = resample_frame(arr, {"n_spectrals": 16, "n_pixels": 10}, verbose=False)
@@ -191,6 +201,13 @@ class TestResampleFrame:
         arr = np.ones((8, 10, 20))
         _, status = resample_frame(arr, {"n_spectrals": 16, "n_pixels": 20}, verbose=False)
         assert "zoom" in status
+
+    def test_verbose_zoom_prints(self, capsys):
+        arr = np.ones((8, 10, 20))
+        _, status = resample_frame(arr, {"n_spectrals": 16, "n_pixels": 20}, frame_key="demo", verbose=True)
+        captured = capsys.readouterr()
+        assert "zoom" in status
+        assert "shape" in captured.out
 
     def test_output_is_float(self):
         arr = np.ones((8, 10, 20), dtype=np.float32)
@@ -317,6 +334,118 @@ class TestGetFramesByShapeGroups:
         groups = get_frames_by_shape_groups(frames)
         assert len(groups) == 1
 
+    def test_sort_by_time_with_metadata(self):
+        frames = {
+            "a": np.full((2, 3, 1), 1.0),
+            "b": np.full((2, 3, 1), 2.0),
+        }
+        metadata = pd.DataFrame(
+            {
+                "TIME_UTC": ["2024-01-02T00:00:00Z", "2024-01-01T00:00:00Z"],
+            },
+            index=[0, 1],
+        )
+
+        groups = get_frames_by_shape_groups(frames, metadata_df=metadata, sort_by_time=True)
+
+        assert len(groups) == 1
+        group = next(iter(groups.values()))
+        assert group["cube"].shape == (2, 3, 2)
+        assert group["metadata"]["n_files"] == 2
+        assert group["metadata"]["shape_key"] == (3, 2)
+
+
+# ---------------------------------------------------------------------------
+# selective_resample_frames / assemble_geometry
+# ---------------------------------------------------------------------------
+
+class TestSelectiveResampleFrames:
+    def test_no_interpolation_returns_original_dict(self):
+        frames = {"a": np.zeros((4, 5, 6))}
+        target_dims = {"n_spectrals": None, "n_pixels": None, "mode_applied": "none"}
+
+        result = selective_resample_frames(frames, target_dims, verbose=False)
+
+        assert result is frames
+
+    def test_verbose_resample_prints(self, capsys):
+        frames = {"a": np.ones((2, 3, 4))}
+        target_dims = {"n_spectrals": 4, "n_pixels": 6, "mode_applied": "up"}
+
+        result = selective_resample_frames(frames, target_dims, verbose=True)
+        captured = capsys.readouterr()
+
+        assert set(result.keys()) == {"a"}
+        assert "Resampling to target" in captured.out
+
+    def test_resamples_to_target_shape(self):
+        frames = {
+            "a": np.ones((4, 5, 6)),
+            "b": np.ones((2, 3, 6)),
+        }
+        target_dims = {"n_spectrals": 4, "n_pixels": 5, "mode_applied": "up"}
+
+        result = selective_resample_frames(frames, target_dims, verbose=False)
+
+        assert set(result.keys()) == {"a", "b"}
+        assert result["a"].shape == (4, 5, 6)
+        assert result["b"].shape[0] == 4
+        assert result["b"].shape[1] == 5
+
+
+class TestAssembleGeometry:
+    def test_no_interpolation_preserves_geometry(self):
+        geom = {"lon": np.zeros((4, 5, 6))}
+        target_dims = {"n_spectrals": None, "n_pixels": None, "mode_applied": "none"}
+
+        result = assemble_geometry(geom, target_dims, sort_indices=np.array([0, 1, 2, 3, 4, 5]))
+
+        assert set(result.keys()) == {"lon"}
+        np.testing.assert_array_equal(result["lon"], geom["lon"])
+
+    def test_resample_and_sort_geometry(self):
+        geom = {"lon": np.arange(24, dtype=float).reshape(2, 3, 4)}
+        target_dims = {"n_spectrals": 4, "n_pixels": 6, "mode_applied": "up"}
+        sort_indices = np.array([3, 2, 1, 0])
+
+        result = assemble_geometry(geom, target_dims, sort_indices=sort_indices, order=1)
+
+        assert set(result.keys()) == {"lon"}
+        assert result["lon"].shape[0] == 4
+        assert result["lon"].shape[1] == 6
+        assert result["lon"].shape[2] == 4
+
+    def test_empty_geometry_returns_empty_dict(self):
+        result = assemble_geometry({}, {"n_spectrals": None, "n_pixels": None, "mode_applied": "none"})
+        assert result == {}
+
+
+class TestModuleLevelAssemblyHelper:
+    def test_test_assemble_frames_helper_runs(self, capsys):
+        from mertisreader.frame_utils import test_assemble_frames
+
+        test_assemble_frames()
+
+        captured = capsys.readouterr()
+        assert "All assembly tests passed" in captured.out
+
+    def test_test_assemble_frames_assert_branch(self, monkeypatch):
+        import mertisreader.frame_utils as fu
+
+        def fake_assemble_frames(frames_dict, interp_mode='match', order=1):
+            if interp_mode == 'up':
+                return np.zeros((40, 200, 8)), {"interpolation_mode": "up", "interpolation_order": order, "n_temporal_samples": 8}
+            if interp_mode == 'down':
+                return np.zeros((40, 100, 8)), {"interpolation_mode": "down", "interpolation_order": order, "n_temporal_samples": 8}
+            if interp_mode == 'match':
+                return np.zeros((40, 100, 8)), {"interpolation_mode": "none", "interpolation_order": order, "n_temporal_samples": 8}
+            return np.zeros((40, 100, 8)), {"interpolation_mode": interp_mode, "interpolation_order": order, "n_temporal_samples": 8}
+
+        monkeypatch.setattr(fu, "assemble_frames", fake_assemble_frames)
+
+        with pytest.raises(AssertionError, match="Should have raised ValueError"):
+            fu.test_assemble_frames()
+
 
 # ---------------------------------------------------------------------------
 # MERTISDataPackReader — error handling
@@ -401,3 +530,58 @@ class TestExtractMertisHkColumns:
         fake = tmp_path / "no_such_file.dat"
         with pytest.raises(Exception):
             extract_mertis_hk_columns(fake)
+
+
+# ---------------------------------------------------------------------------
+# MERTISDataPackReader — utility methods
+# ---------------------------------------------------------------------------
+
+class TestMERTISDataPackReaderUtilities:
+    def test_str_and_repr_include_paths(self, raw_dir):
+        from mertisreader.core import MERTISDataPackReader
+
+        reader = MERTISDataPackReader(raw_dir)
+        text = str(reader)
+        rep = repr(reader)
+
+        assert "MERTISDataPackReader(" in text
+        assert str(raw_dir) in text
+        assert "input_dir=" in rep
+        assert str(raw_dir) in rep
+
+    def test_file_discovery_methods_match(self, raw_dir):
+        from mertisreader.core import MERTISDataPackReader
+
+        reader = MERTISDataPackReader(raw_dir)
+
+        assert reader.get_fits_files() == reader.fits_files
+        assert reader.filetypes2dict() == reader.input_path_dict
+
+    def test_show_files_and_listfiletypes_emit_output(self, raw_dir, capsys):
+        from mertisreader.core import MERTISDataPackReader
+
+        reader = MERTISDataPackReader(raw_dir)
+        reader.show_files()
+        reader.listfiletypes()
+
+        captured = capsys.readouterr()
+        assert "All files in input_dir" in captured.out
+        assert "matching new pattern" in captured.out
+        assert "hk_default" in captured.out
+
+    def test_save_plot_uses_output_dir(self, raw_dir, tmp_path, monkeypatch):
+        from mertisreader.core import MERTISDataPackReader
+
+        reader = MERTISDataPackReader(raw_dir, output_dir=str(tmp_path))
+        saved = {}
+
+        def fake_savefig(path, dpi=None):
+            saved["path"] = path
+            saved["dpi"] = dpi
+
+        monkeypatch.setattr("mertisreader.core.plt.savefig", fake_savefig)
+
+        reader.save_plot("example_plot", dpi=200, out_format="png")
+
+        assert saved["path"] == tmp_path / "example_plot.png"
+        assert saved["dpi"] == 200

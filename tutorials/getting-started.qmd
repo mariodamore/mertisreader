@@ -1,0 +1,91 @@
+---
+title: Getting Started
+---
+
+# Getting Started with `mertisreader`
+
+This page is a Quarto version of the old notebook walkthrough. It keeps the narrative and executable examples together, while the package API remains documented through docstrings.
+
+## Quick Install
+
+Use a Python virtual environment or conda environment, then install the package in editable mode while the migration is in progress.
+
+```bash
+python -m pip install -e ".[docs]"
+```
+
+## Import Required Libraries
+
+```{python}
+#| echo: true
+from pathlib import Path
+
+import rich
+import mertisreader as mr
+
+print("Libraries imported successfully.")
+```
+
+## Initialize `MERTISDataPackReader`
+
+```{python}
+#| echo: true
+candidate_roots = [Path.cwd().resolve(), Path.cwd().resolve().parent, Path.cwd().resolve().parent.parent]
+repo_root = next(root for root in candidate_roots if (root / "data").exists())
+
+input_path = repo_root / "data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal"
+output_path = Path("/tmp/")
+log_level = "INFO"
+
+if not input_path.exists():
+    print(f"Input path {input_path} does not exist.")
+else:
+    print(f"Reading path {input_path}")
+
+ms_reader = mr.MERTISDataPackReader(input_dir=input_path, output_dir=output_path, log_level=log_level)
+
+print(f"MERTISDataPackReader initialized with input directory: {ms_reader.input_dir}")
+print(f"Output directory: {ms_reader.output_dir}")
+print(f"Log level: {ms_reader.log_level}")
+```
+
+## Inspect the Input Data
+
+```{python}
+#| echo: true
+ms_reader.show_files()
+ms_reader.listfiletypes()
+```
+
+## Collect and Assemble Data
+
+```{python}
+#| echo: true
+ms_reader.data_collector()
+
+print(f"Collected data keys: {ms_reader.collect_data.keys()}")
+for key, value in ms_reader.collect_data.items():
+    print(f"{key}: {len(value)} files collected")
+
+ms_reader.data_assembler(verbose=True)
+```
+
+## Verify the Result
+
+```{python}
+#| echo: true
+if ms_reader.processing_level != "RAW":
+    print(f"Geometry data keys: {ms_reader.geom_ls.keys()}")
+
+print(f"Frames data keys: {ms_reader.frames.keys()}")
+print(f"Wavelengths data keys: {ms_reader.wavelengths.keys()}")
+print(f"MERTIS TIS metadata keys: {ms_reader.mertis_tis_metadata.keys()}")
+print(f"Space index merged shape: {ms_reader.space_index_merged.shape}")
+print(f"BB7 index merged shape: {ms_reader.bb7_index_merged.shape}")
+print(f"BB3 index merged shape: {ms_reader.bb3_index_merged.shape}")
+print(f"Planet index merged shape: {ms_reader.planet_index_merged.shape}")
+```
+
+## Next Steps
+
+Once you know which file key you want to explore, you can inspect frames, metadata, and plots exactly as in the notebook version. The API reference on this site comes from quartodoc-generated pages built from docstrings.

@@ -4,25 +4,26 @@ Hard rules. These are non-negotiable unless an ADR with a Waiver field explicitl
 
 ## Core Workflow (NON-NEGOTIABLE)
 
-- **Source of Truth**: All logic belongs in Jupyter Notebooks (`nbs/`). Never edit `mertisreader/*.py` files directly — they are read-only auto-generated artifacts.
-- **Cell-Ready Output**: Always provide code in blocks formatted for notebooks. Start library code with `#| export`.
-- **Verification**: Every logic change must include a test case or an `assert` suitable for an nbdev test cell.
+- **Source of Truth**: All logic belongs in the maintained Python modules under `mertisreader/`; Quarto tutorial pages live in `docs_src/tutorials/`.
+- **Cell-Ready Output**: When authoring tutorial content, provide executable code blocks that Quarto can run.
+- **Verification**: Every logic change must include a test case or an `assert` suitable for pytest or a Quarto-executed example.
 
 ## Required Technologies
 
-- **nbdev** — Reason: Project uses Jupyter notebooks as source code; exports must go through `#| export` cells
+- **Quarto** — Reason: Project publishes tutorial documentation and the site is built with `quarto render`
+- **quartodoc** — Reason: API reference is generated from Python docstrings
 - **Python 3.7+** — Reason: Declared minimum version in `settings.ini`
 - **NumPy, pandas, astropy, matplotlib, xmltodict, rich** — Reason: Core dependencies declared in `settings.ini`
 
 ## Forbidden Technologies
 
-- **Direct edits to `mertisreader/core.py`** — Reason: Auto-generated from `nbs/00_core.ipynb`; changes will be overwritten on export
+- **Direct edits to generated docs under `docs/`** — Reason: These are built artifacts from Quarto/quartodoc
 - **`setup.py` manual edits** — Reason: Version and metadata come from `settings.ini` and `__init__.py`
 
 ## Forbidden Patterns
 
-- **Editing `docs/` or `nbs/docs/` manually** — Reason: These are built artifacts from nbdev/quarto
-- **Non-deterministic ordering in notebook exports** — Reason: Keep outputs reproducible; sort lists by numeric suffix as current code does
+- **Editing `docs/` manually** — Reason: These are built artifacts from Quarto/quartodoc
+- **Non-deterministic ordering in examples** — Reason: Keep outputs reproducible; sort lists by numeric suffix as current code does
 - **Mixing processing levels in input directories** — Reason: `detect_processing_level()` raises if mixed RAW/CAL/PAR levels detected
 
 ## External Boundaries

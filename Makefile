@@ -5,7 +5,8 @@
 # This Makefile is used to manage the project. It defines the following targets:
 #
 # - helpcol: This is the default target. It shows a help message with the available targets and their descriptions.
-# - preview: Preview the documentation with nbdev_preview on port $SERVE_PORT, default 8888.
+# - preview: Preview the documentation with Quarto on port $SERVE_PORT, default 8888.
+# - render: Render the Quarto documentation site.
 #
 # Requirements
 # ------------
@@ -21,35 +22,39 @@
 # -----
 #
 # - To show the available targets and their descriptions, run `make helpcol`.
-# - To preview the documentation with nbdev_preview, run `make preview`.
-# - To enable automatict export on modification in nbs/ folder, run `make export_on_modify`, nbdev_preview will live autoreload.
+# - To preview the documentation with Quarto, run `make preview`.
+# - To render the documentation site, run `make render`.
 #
 # Note
 # ----
 #
-# The Makefile is inspired by the article "Makefiles in Python projects" by Krzysztof Żuraw, 
+# The Makefile is inspired by the article "Makefiles in Python projects" by Krzysztof Żuraw,
 # see https://krzysztofzuraw.com/makefiles-in-python/
 #
 ###############################################################
 # Defintions
 #-----------
-# define default target
 .DEFAULT_GOAL := helpcol
-# default port to serve the documentation at, use can overwrite this at runinng time
-SERVE_PORT?=8888
+SERVE_PORT ?= 8888
 
 ###############################################################
 # Main targets
 #-------------
-preview: ## preview documentsion with nbdev_preview on port $SERVE_PORT, default 8888
-	nbdev_preview --port ${SERVE_PORT}
 
-export_on_modify : ## watch the nbs/ directory for modification with inotifywait and run nbdev_export on changes
-	inotifywait -m -e modify nbs/ | while read path action file; do     echo "file mod detected: $${file}"; nbdev_export ; done
+quartodoc-build: ## build the quartodoc API reference pages into reference/
+	python -m quartodoc build
 
- 
-install_develop :  ## install the package from setup.py via setuptools as development 
-	python -m pip install --verbose --editable .
+readme: ## render the Quarto-backed README.md from README.qmd
+	quarto render README.qmd --to gfm --output README.md
+
+preview: quartodoc-build ## preview documentation with quarto preview on port $SERVE_PORT, default 8888
+	quarto preview --port ${SERVE_PORT}
+
+render: quartodoc-build readme ## render the Quarto documentation site and refresh README.md
+	quarto render
+
+install_develop :  ## install the package in editable mode with docs extras
+	python -m pip install --verbose --editable ".[docs]"
 
 ###############################################################
 # Cleaning targets
@@ -68,7 +73,7 @@ clean-build: ## clean all build products
 # Testing targets
 #----------------
 test: clean-pyc ## run clean-pyc and test
-	py.test --verbose --color=yes
+	pytest --verbose --color=yes
 
 #################################################################################
 # Self Documenting Commands                                                     #

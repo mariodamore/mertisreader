@@ -91,7 +91,7 @@ The migration should be executed in this order:
 
 1. Convert the generated Python modules into maintained source files.
 2. Replace packaging metadata with a single `pyproject.toml`.
-3. Introduce or refine Quarto + quartodoc docs configuration.
+3. Introduce or refine Quarto + quartodoc docs configuration : we can use existing nbs/*ipynb as starting point for quarto doc.
 4. Rework example notebooks into LLM-friendly tutorial assets.
 5. Update automation and CI.
-6. Remove stale nbdev scaffolding once the new workflow is verified.
+6. Remove stale nbdev scaffolding once the new workflow is verified, check git nbdev filters.

@@ -1,0 +1,28 @@
+# validate_pds4_label { #mertisreader.validate_pds4_label }
+
+```python
+validate_pds4_label(label_path)
+```
+
+Validate a PDS4 label against its associated data structure.
+
+Per ADR-008: Uses pds4_tools to verify label declarations match actual data.
+
+Args:
+    label_path: Path to PDS4 label file (.lbl or .xml)
+
+Returns:
+    dict with keys:
+        - 'valid': bool - Whether label passes validation
+        - 'warnings': list - List of warning messages
+        - 'structure': dict - Extracted structure information
+
+Raises:
+    ImportError: If pds4_tools is not installed
+    FileNotFoundError: If label file does not exist
+
+Example:
+    >>> from mertisreader import validate_pds4_label
+    >>> result = validate_pds4_label('path/to/label.lbl')
+    >>> print(f"Valid: {result['valid']}")
+    >>> print(f"Warnings: {result['warnings']}")

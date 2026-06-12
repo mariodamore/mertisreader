@@ -16,6 +16,7 @@ Coverage:
 """
 
 import pathlib
+import warnings
 
 import numpy as np
 import pandas as pd
@@ -57,6 +58,10 @@ class TestLazyCSVLoaderInit:
         loader = LazyCSVLoader(tmp_csv_file)
         loader.materialize()
         assert "materialized" in repr(loader).lower()
+
+    def test_str_matches_repr(self, tmp_csv_file):
+        loader = LazyCSVLoader(tmp_csv_file)
+        assert str(loader) == repr(loader)
 
 
 # ---------------------------------------------------------------------------
@@ -118,6 +123,18 @@ class TestLazyCSVLoaderMaterialize:
         df = loader.materialize()
         assert set(df.columns) == {"col_x", "col_y"}
 
+    def test_columns_property_creates_lazy_plan(self, tmp_csv_file):
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b"])
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            assert loader.columns == ["a", "b"]
+        assert caught == []
+
+    def test_shape_property_creates_lazy_plan(self, tmp_csv_file):
+        loader = LazyCSVLoader(tmp_csv_file)
+        with pytest.raises(AttributeError):
+            _ = loader.shape
+
 
 # ---------------------------------------------------------------------------
 # filter()
@@ -175,6 +192,11 @@ class TestLazyCSVLoaderSelect:
         loader = LazyCSVLoader(tmp_csv_file)
         result = loader.select("a")
         assert result is loader
+
+    def test_getitem_returns_lazyframe_slice(self, tmp_csv_file):
+        loader = LazyCSVLoader(tmp_csv_file)
+        result = loader[0:2]
+        assert hasattr(result, "collect")
 
 
 # ---------------------------------------------------------------------------

@@ -1,0 +1,29 @@
+# extract_label_metadata { #mertisreader.extract_label_metadata }
+
+```python
+extract_label_metadata(label_path)
+```
+
+Extract structured metadata from a PDS4 label.
+
+Per ADR-008: Uses pds4tools Label.to_dict() for structured metadata access.
+
+Args:
+    label_path: Path to PDS4 label file (.lbl or .xml)
+
+Returns:
+    dict with extracted metadata including:
+        - product_line: PDS product line identifier
+        - label_version: PDS4 label version
+        - processing_level: MERTIS processing level (RAW/CAL/PAR)
+        - acquisition: Acquisition parameters if available
+        - instrument: Instrument configuration if available
+
+Raises:
+    ImportError: If pds4_tools is not installed
+    FileNotFoundError: If label file not found
+
+Example:
+    >>> from mertisreader import extract_label_metadata
+    >>> meta = extract_label_metadata('path/to/label.lbl')
+    >>> print(f"Processing level: {meta.get('processing_level')}")

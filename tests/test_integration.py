@@ -241,6 +241,30 @@ class TestLazyModeIntegration:
         for entry in reader.collect_data.get("tis", []):
             assert isinstance(entry["fits_data"], LazyArray)
 
+    @pytest.mark.parametrize(
+        "directory_fixture, expected_level",
+        [
+            ("raw_dir", "RAW"),
+            ("cal_dir", "CAL"),
+            ("par_dir", "PAR"),
+        ],
+    )
+    def test_lazy_tis_loading_works_for_all_levels(self, request, directory_fixture, expected_level):
+        from mertisreader.lazy_loading import LazyArray
+
+        data_dir = request.getfixturevalue(directory_fixture)
+        reader = MERTISDataPackReader(data_dir, lazy=True)
+
+        assert reader.processing_level == expected_level
+
+        reader.data_collector()
+
+        assert "tis" in reader.collect_data
+        assert len(reader.collect_data["tis"]) > 0
+
+        for entry in reader.collect_data["tis"]:
+            assert isinstance(entry["fits_data"], LazyArray)
+
     def test_lazy_hk_data_is_lazy_csv(self, raw_dir):
         from mertisreader.lazy_loading import LazyCSVLoader
         reader = MERTISDataPackReader(raw_dir, lazy=True)

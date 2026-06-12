@@ -5,9 +5,8 @@ It is read by AI coding agents (Claude Code, GitHub Copilot) and by human contri
 
 ## About the Project
 
-**mertisreader** is an nbdev-based Python library for reading ESA BepiColombo MERTIS instrument data.
-The library uses Jupyter notebooks (`nbs/`) as the source of truth, with code auto-generated
-to `mertisreader/core.py` via nbdev.
+**mertisreader** is a Python library for reading ESA BepiColombo MERTIS instrument data.
+The current workflow uses plain Python source in `mertisreader/`, Quarto tutorial pages in `docs_src/tutorials/`, and quartodoc for API reference generation.
 
 ## Files at a glance
 
@@ -32,7 +31,7 @@ Start here: `03_CURRENT_STATUS.md` → `00_CONSTRAINTS.md` → `02_ROADMAP.md` �
 
 ## Quick Links
 
-- **Core API**: `MERTISDataPackReader` class in `mertisreader/core.py` (generated from `nbs/00_core.ipynb`)
-- **Source Notebooks**: `nbs/00_core.ipynb` (library code), `nbs/index.ipynb` (documentation)
+- **Core API**: `MERTISDataPackReader` class in `mertisreader/core.py`
+- **Tutorials**: `docs_src/tutorials/`
 - **Sample Data**: `data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/`
 - **Quick Reference**: `ASSEMBLY_QUICK_REFERENCE.md` for frame assembly patterns

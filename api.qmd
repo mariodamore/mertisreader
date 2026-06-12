@@ -1,0 +1,15 @@
+---
+title: API Reference
+---
+
+# API Reference
+
+The API reference is generated from Python docstrings with quartodoc.
+
+Generate the reference pages with:
+
+```bash
+quartodoc build
+```
+
+The generated pages are rendered from the `reference/` directory.

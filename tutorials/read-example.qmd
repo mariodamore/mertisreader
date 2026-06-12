@@ -1,0 +1,93 @@
+---
+title: Example Workflow
+---
+
+# Example Workflow
+
+This page preserves the exploratory flow from the example notebook, but in a Quarto-friendly form that can be rendered with the rest of the site.
+
+## Imports
+
+```{python}
+#| echo: true
+from pathlib import Path
+
+import matplotlib.dates as mdates
+from matplotlib import pyplot as plt
+import mertisreader as mr
+import pandas as pd
+import rich
+```
+
+## Initialize the Reader
+
+```{python}
+#| echo: true
+candidate_roots = [Path.cwd().resolve(), Path.cwd().resolve().parent, Path.cwd().resolve().parent.parent]
+repo_root = next(root for root in candidate_roots if (root / "data").exists())
+
+input_path = repo_root / "data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal"
+output_path = Path("/tmp/")
+log_level = "INFO"
+
+ms_reader = mr.MERTISDataPackReader(input_dir=input_path, output_dir=output_path, log_level=log_level)
+ms_reader.data_collector()
+ms_reader.data_assembler(verbose=True)
+```
+
+## Inspect the Assembled Data
+
+```{python}
+#| echo: true
+file_key = list(ms_reader.frames.keys())[0]
+
+print(f"Example DataCube shape for file {file_key}: {ms_reader.frames[file_key].shape}")
+print(f"Geometry keys: {ms_reader.geom_ls[file_key].keys()}")
+```
+
+## Preview Metadata
+
+```{python}
+#| echo: true
+ms_reader.mertis_tis_metadata[file_key].iloc[0:4].T
+```
+
+## Plot a Frame Summary
+
+```{python}
+#| echo: true
+full_frames_3D = ms_reader.frames[file_key]
+wav = ms_reader.wavelengths[file_key]
+plot_index = ms_reader.space_index[file_key]
+
+fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(22, 12))
+fig.suptitle(
+    f"MERTIS TIS DataCube - {file_key}\n"
+    f"average over the measurements {full_frames_3D.shape} -> {full_frames_3D[:, :, 0].shape}",
+    fontsize=16,
+)
+
+title = "Space"
+ax[0][0].plot(wav, full_frames_3D[:, :, plot_index].mean(axis=2))
+ax[0][0].set_title(f"{title} - frames average")
+ax[0][1].imshow(full_frames_3D[:, :, plot_index].mean(axis=2), aspect="auto", cmap=plt.cm.Spectral_r)
+ax[0][1].set_title(f"{title} - frames average")
+
+ax[1][0].set_title(f"{title} - frames std")
+ax[1][0].plot(wav, full_frames_3D[:, :, plot_index].std(axis=2))
+ax[1][1].set_title(f"{title} - frames std")
+ax[1][1].imshow(full_frames_3D[:, :, plot_index].std(axis=2), aspect="auto", cmap=plt.cm.Spectral_r)
+
+_ = [a.set_xlabel("Wavelength [nm]") for a in ax[:, 0]]
+_ = [a.set_ylabel("Radiance [W/m2/sr/nm]") for a in ax[:, 0]]
+_ = [a.grid(True) for a in ax[:, 0]]
+
+_ = [a.set_xlabel("Frame Index") for a in ax[:, 1]]
+_ = [a.set_ylabel("Wavelength Index") for a in ax[:, 1]]
+
+plt.tight_layout()
+```
+
+## Notes
+
+This is the user-facing version of the example workflow. The notebook under `examples/` can stay as the exploratory starting point, while the QMD page becomes part of the published docs.

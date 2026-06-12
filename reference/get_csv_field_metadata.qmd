@@ -1,0 +1,29 @@
+# get_csv_field_metadata { #mertisreader.get_csv_field_metadata }
+
+```python
+get_csv_field_metadata(hk_path)
+```
+
+Extract CSV column metadata from PDS4 table labels.
+
+Per ADR-008: Extracts field-level metadata (units, descriptions, types) from
+PDS4 Table_Delimited sections.
+
+Args:
+    hk_path: Path to HK data file (.dat). Will search for matching .xml/.lblx label.
+
+Returns:
+    pd.DataFrame with columns:
+        - name: Field/column name
+        - unit: Physical unit (if specified)
+        - description: Field description
+        - data_type: PDS4 data type (ASCII_String, ASCII_Real, etc.)
+
+Raises:
+    ImportError: If pds4_tools is not installed
+    FileNotFoundError: If label file not found
+
+Example:
+    >>> from mertisreader import get_csv_field_metadata
+    >>> meta_df = get_csv_field_metadata('path/to/hk.dat')
+    >>> print(meta_df[['name', 'unit', 'description']])

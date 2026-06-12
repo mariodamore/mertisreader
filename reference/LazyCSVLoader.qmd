@@ -1,0 +1,78 @@
+# LazyCSVLoader { #mertisreader.LazyCSVLoader }
+
+```python
+LazyCSVLoader(csv_path, columns=None)
+```
+
+Lazy CSV loader using Polars scan_csv.
+
+Per ADR-006:
+- Uses polars.scan_csv() for unevaluated query plan
+- .materialize() calls .collect() to return DataFrame
+- Falls back to pandas DataFrame when materialized
+
+## Attributes
+
+| Name | Description |
+| --- | --- |
+| [columns](#mertisreader.LazyCSVLoader.columns) | Column names. Creates lazy plan but does not load data. |
+| [shape](#mertisreader.LazyCSVLoader.shape) | Shape estimate. Creates lazy plan but does not load data. |
+
+## Methods
+
+| Name | Description |
+| --- | --- |
+| [filter](#mertisreader.LazyCSVLoader.filter) | Add lazy filter condition. |
+| [head](#mertisreader.LazyCSVLoader.head) | Add lazy head operation. |
+| [materialize](#mertisreader.LazyCSVLoader.materialize) | Force full CSV load and return as pandas DataFrame. |
+| [select](#mertisreader.LazyCSVLoader.select) | Add lazy column selection. |
+| [tail](#mertisreader.LazyCSVLoader.tail) | Add lazy tail operation. |
+| [with_columns](#mertisreader.LazyCSVLoader.with_columns) | Add lazy column computation. |
+
+### filter { #mertisreader.LazyCSVLoader.filter }
+
+```python
+LazyCSVLoader.filter(*args, **kwargs)
+```
+
+Add lazy filter condition.
+
+### head { #mertisreader.LazyCSVLoader.head }
+
+```python
+LazyCSVLoader.head(n=10)
+```
+
+Add lazy head operation.
+
+### materialize { #mertisreader.LazyCSVLoader.materialize }
+
+```python
+LazyCSVLoader.materialize()
+```
+
+Force full CSV load and return as pandas DataFrame.
+
+### select { #mertisreader.LazyCSVLoader.select }
+
+```python
+LazyCSVLoader.select(*args)
+```
+
+Add lazy column selection.
+
+### tail { #mertisreader.LazyCSVLoader.tail }
+
+```python
+LazyCSVLoader.tail(n=10)
+```
+
+Add lazy tail operation.
+
+### with_columns { #mertisreader.LazyCSVLoader.with_columns }
+
+```python
+LazyCSVLoader.with_columns(*args, **kwargs)
+```
+
+Add lazy column computation.

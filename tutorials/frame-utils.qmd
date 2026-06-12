@@ -1,0 +1,52 @@
+---
+title: Frame Utilities
+---
+
+# Frame Utilities
+
+This page documents the frame assembly helpers from `nbs/02_frame_utils.py`.
+
+## Normalize RAW Axis Order
+
+```{python}
+#| echo: true
+import numpy as np
+
+from mertisreader.frame_utils import normalize_raw_axis_order, get_frame_dimensions, detect_interpolation_target, assemble_frames
+
+raw_arr = np.arange(24, dtype=np.float64).reshape(2, 3, 4)
+normalized = normalize_raw_axis_order(raw_arr)
+
+print(raw_arr.shape)
+print(normalized.shape)
+```
+
+## Describe Frame Dimensions
+
+```{python}
+#| echo: true
+frames_dict = {
+    "sample_a": np.ones((2, 3, 4), dtype=np.float64),
+    "sample_b": np.zeros((2, 3, 2), dtype=np.float64),
+}
+
+dims = get_frame_dimensions(frames_dict)
+target = detect_interpolation_target(frames_dict, mode="up")
+
+print(dims)
+print(target)
+```
+
+## Assemble Frames
+
+```{python}
+#| echo: true
+cube, metadata = assemble_frames(frames_dict, interp_mode="up")
+
+print(cube.shape)
+print(metadata)
+```
+
+## Notes
+
+The module keeps the axis handling explicit so RAW, CAL, and PAR data can be normalized and assembled with the same downstream workflow.

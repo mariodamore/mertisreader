@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools>=64"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
 
 [project]
 name = "mertisreader"
@@ -14,18 +14,18 @@ keywords = ['planetary', ',', 'instrument,', 'data']
 classifiers = ["Natural Language :: English", "Intended Audience :: Developers", "Development Status :: 2 - Pre-Alpha", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only"]
 dependencies = ['rich', 'numpy', 'pandas', 'astropy', 'matplotlib', 'xmltodict', 'polars', 'scipy', 'pds4_tools>=1.10.0']
 
+[project.optional-dependencies]
+docs = ["quartodoc>=0.11", "griffe<2", "jupytext>=1.16"]
+
 [project.urls]
 Repository = "https://github.com/mariodamore/mertisreader/tree/master/"
 Documentation = "https://mariodamore.github.io/mertisreader/"
 
-[project.entry-points.nbdev]
-mertisreader = "mertisreader._modidx:d"
+[tool.hatch.version]
+path = "mertisreader/__init__.py"
 
-[tool.setuptools.dynamic]
-version = {attr = "mertisreader.__version__"}
-
-[tool.setuptools.packages.find]
-include = ["mertisreader"]
+[tool.hatch.build.targets.wheel]
+packages = ["mertisreader"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -33,9 +33,3 @@ python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"
 addopts = "-v"
-
-[tool.nbdev]
-doc_path = 'docs'
-branch = 'master'
-custom_sidebar = true
-title = 'mertisreader'

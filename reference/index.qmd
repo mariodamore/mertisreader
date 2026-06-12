@@ -1,0 +1,15 @@
+# Function reference {.doc .doc-index}
+
+## Core API
+
+Main reader and helper classes.
+
+| | |
+| --- | --- |
+| [MERTISDataPackReader](MERTISDataPackReader.qmd#mertisreader.MERTISDataPackReader) | Class to read and process MERTIS data. |
+| [LazyArray](LazyArray.qmd#mertisreader.LazyArray) | Lazy-loading proxy for FITS data arrays using memmap. |
+| [LazyCSVLoader](LazyCSVLoader.qmd#mertisreader.LazyCSVLoader) | Lazy CSV loader using Polars scan_csv. |
+| [validate_pds4_label](validate_pds4_label.qmd#mertisreader.validate_pds4_label) | Validate a PDS4 label against its associated data structure. |
+| [extract_label_metadata](extract_label_metadata.qmd#mertisreader.extract_label_metadata) | Extract structured metadata from a PDS4 label. |
+| [get_csv_field_metadata](get_csv_field_metadata.qmd#mertisreader.get_csv_field_metadata) | Extract CSV column metadata from PDS4 table labels. |
+| [extract_mertis_hk_columns](extract_mertis_hk_columns.qmd#mertisreader.extract_mertis_hk_columns) | Extract column names from an MERTIS HK XML/LBLX label file. |

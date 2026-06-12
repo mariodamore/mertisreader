@@ -1,0 +1,11 @@
+---
+title: mertisreader
+---
+
+The MERTIS reader helps you load, inspect, and validate MERTIS data from plain Python.
+
+## Quickstart
+
+1. Read the [Tutorials](tutorials/index.qmd) for a short guided walkthrough.
+2. Open the [API Reference](api.qmd) for the generated function and class docs.
+3. Try the example notebook in [examples/read_merstis_test.ipynb](examples/read_merstis_test.ipynb).

@@ -1,0 +1,8 @@
+main.content#quarto-document-content {
+	width: min(80vw, 100%);
+	max-width: 80vw;
+	min-width: 0;
+	margin-left: auto;
+	margin-right: auto;
+	box-sizing: border-box;
+}

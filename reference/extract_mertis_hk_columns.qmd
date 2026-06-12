@@ -1,0 +1,21 @@
+# extract_mertis_hk_columns { #mertisreader.extract_mertis_hk_columns }
+
+```python
+extract_mertis_hk_columns(in_path, use_pds4_tools=True)
+```
+
+Extract column names from an MERTIS HK XML/LBLX label file.
+
+Per ADR-008: Updated to use pds4tools when available, with fallback to xmltodict.
+
+Args:
+    in_path: Path to HK data file (.dat)
+    use_pds4_tools: If True (default), attempt to use pds4tools. Falls back to xmltodict.
+
+Returns:
+    list of column names from the HK table definition
+
+Example:
+    >>> from mertisreader import extract_mertis_hk_columns
+    >>> columns = extract_mertis_hk_columns('path/to/hk.dat')
+    >>> print(columns)

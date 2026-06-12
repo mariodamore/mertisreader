@@ -1,0 +1,47 @@
+---
+title: Lazy Loading
+---
+
+# Lazy Loading
+
+This page captures the utilities from `nbs/01_lazy_loading.py`.
+
+## Array Proxy
+
+```{python}
+#| echo: true
+import numpy as np
+
+from mertisreader.lazy_loading import LazyArray
+
+base = np.arange(12, dtype=np.float64).reshape(3, 4)
+lazy = LazyArray(base, header={"SIMPLE": True})
+
+print(lazy)
+print(lazy.shape)
+print(lazy.dtype)
+print(lazy.mean())
+print(lazy.materialize())
+```
+
+## CSV Proxy
+
+```{python}
+#| echo: true
+from pathlib import Path
+
+from mertisreader.lazy_loading import LazyCSVLoader
+
+sample_csv = Path("/tmp/mertisreader_lazy_loading_sample.csv")
+sample_csv.write_text("a,b,c\n1,2,3\n4,5,6\n", encoding="utf-8")
+
+loader = LazyCSVLoader(sample_csv)
+
+print(loader)
+print(loader.columns)
+print(loader.materialize())
+```
+
+## Notes
+
+`LazyArray` keeps FITS-backed data accessible without forcing an immediate load, while `LazyCSVLoader` defers CSV reads until the data is explicitly collected.

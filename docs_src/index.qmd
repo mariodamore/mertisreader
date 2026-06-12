@@ -1,0 +1,19 @@
+---
+title: mertisreader
+---
+
+# mertisreader
+
+This site is the migration target for the repository docs.
+
+The package is moving to plain Python source with Quarto documentation. Tutorial pages live under [Tutorials](tutorials/index.qmd), API pages are generated from docstrings, and the example notebook remains available for hands-on exploration.
+
+## Current Direction
+
+- Package source: `mertisreader/*.py`
+- Documentation source: `docs_src/*.qmd`
+- Example notebooks: `examples/`
+- API docs: `quartodoc`
+- Tutorials: `docs_src/tutorials/*.qmd`
+
+See the [API Reference](api.qmd) for the generated documentation entry point.

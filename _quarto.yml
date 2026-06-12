@@ -1,20 +1,54 @@
 project:
   type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - api.qmd
+    - README.qmd
+    - tutorials/**/*.qmd
+    - reference/**/*.qmd
 
 format:
   html:
-    theme: cosmo
-    css: styles.css
+    theme:
+      dark: superhero
+      light: litera
     toc: true
-
+    page-layout: full     # Full width, no sidebar or margin
 website:
+  title: mertisreader
+  repo-url: https://github.com/mariodamore/mertisreader
   twitter-card: true
   open-graph: true
   repo-actions: [issue]
   navbar:
     background: primary
     search: true
+    left:
+      - href: index.qmd
+        text: Home
+      - href: tutorials/index.qmd
+        text: Tutorials
+      - href: api.qmd
+        text: API
   sidebar:
     style: floating
 
-metadata-files: [nbdev.yml, sidebar.yml]
+metadata-files:
+  - reference/_sidebar.yml
+
+quartodoc:
+  package: mertisreader
+  sidebar: reference/_sidebar.yml
+  css: reference/_styles-quartodoc.css
+  sections:
+    - title: Core API
+      desc: Main reader and helper classes.
+      contents:
+        - MERTISDataPackReader
+        - LazyArray
+        - LazyCSVLoader
+        - validate_pds4_label
+        - extract_label_metadata
+        - get_csv_field_metadata
+        - extract_mertis_hk_columns

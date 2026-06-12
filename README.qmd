@@ -1,0 +1,39 @@
+---
+title: mertisreader
+---
+
+`mertisreader` reads ESA BepiColombo MERTIS data and now ships with a Quarto documentation site plus quartodoc-generated API reference.
+
+## Documentation
+
+- Site home: [docs_src/index.qmd](docs_src/index.qmd)
+- Tutorials: [tutorials/index.qmd](tutorials/index.qmd)
+- API reference: [api.qmd](api.qmd)
+
+## Quick Start
+
+```python
+import pathlib
+import mertisreader as mr
+
+input_path = pathlib.Path("data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal")
+reader = mr.MERTISDataPackReader(input_dir=input_path, output_dir="/tmp", log_level="INFO")
+```
+
+## What Changed
+
+- Documentation moved from nbdev-generated notebook sources to Quarto tutorial pages.
+- API pages are generated from Python docstrings with quartodoc.
+- The published site is built with `quarto render`.
+
+## Installation
+
+Use the project environment and install the package with the docs extra when you need the documentation toolchain:
+
+```bash
+python -m pip install -e ".[docs]"
+```
+
+## Examples
+
+For an interactive walkthrough, open [examples/read_merstis_test.ipynb](examples/read_merstis_test.ipynb) or the matching tutorial pages under [tutorials/](tutorials/).

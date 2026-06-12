@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>install – mertisreader</title>
+<title>mertisreader</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,48 +17,13 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -72,10 +37,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dec58ab4b12d89293a6e6e9e7508d858.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6ad1da411858ed4c4fbfedd8158e9532.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-0041f584c5b46cc2d4bcb298d094982e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -103,28 +70,177 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 
 
-<link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="install – mertisreader">
-<meta property="og:description" content="helper routines to read ESA/Bepicolombo space mission - DLR MERTIS instrument data">
-<meta property="og:image" content="https://mariodamore.github.io/mertisreader/index_files/figure-html/cell-12-output-1.png">
+<meta property="og:title" content="mertisreader">
+<meta property="og:description" content="">
 <meta property="og:site_name" content="mertisreader">
-<meta property="og:image:height" content="1475">
-<meta property="og:image:width" content="989">
-<meta name="twitter:title" content="install – mertisreader">
-<meta name="twitter:description" content="helper routines to read ESA/Bepicolombo space mission - DLR MERTIS instrument data">
-<meta name="twitter:image" content="https://mariodamore.github.io/mertisreader/index_files/figure-html/cell-12-output-1.png">
-<meta name="twitter:image-height" content="1475">
-<meta name="twitter:image-width" content="989">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="mertisreader">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar floating nav-fixed quarto-light">
+<body class="nav-sidebar floating nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -135,9 +251,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <span class="navbar-title">mertisreader</span>
     </a>
   </div>
-        <div class="quarto-navbar-tools tools-end">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page">
+<span class="menu-text">Home</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./tutorials/index.html">
+<span class="menu-text">Tutorials</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./api.html">
+<span class="menu-text">API</span></a>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
@@ -145,822 +281,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">install</li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">mertisreader</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-</nav>
+
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
-   
+
   <ul>
-  <li><a href="#mertisreader---quick-cheatsheet" id="toc-mertisreader---quick-cheatsheet" class="nav-link active" data-scroll-target="#mertisreader---quick-cheatsheet">mertisreader - Quick cheatsheet</a>
-  <ul class="collapse">
-  <li><a href="#initialize-mertisdatapackreader" id="toc-initialize-mertisdatapackreader" class="nav-link" data-scroll-target="#initialize-mertisdatapackreader">Initialize MERTISDataPackReader</a></li>
-  <li><a href="#show-some-data-plots" id="toc-show-some-data-plots" class="nav-link" data-scroll-target="#show-some-data-plots">Show some data &amp; plots</a></li>
-  </ul></li>
+  <li><a href="#quickstart" id="toc-quickstart" class="nav-link active" data-scroll-target="#quickstart">Quickstart</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/mariodamore/mertisreader/tree/master/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/mariodamore/mertisreader/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
+
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">install</h1>
+<h1 class="title">mertisreader</h1>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-left">
 
-    
-  
-    
+
+
+
   </div>
-  
+
 
 
 </header>
 
 
-<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
-<section id="mertisreader---quick-cheatsheet" class="level2">
-<h2 class="anchored" data-anchor-id="mertisreader---quick-cheatsheet">mertisreader - Quick cheatsheet</h2>
-<p>Import Required Libraries</p>
-<div id="48a75cb6" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pathlib</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rich</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mertisreader <span class="im">as</span> mr</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Libraries imported successfully."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Libraries imported successfully.</code></pre>
-</div>
-</div>
-<section id="initialize-mertisdatapackreader" class="level3">
-<h3 class="anchored" data-anchor-id="initialize-mertisdatapackreader">Initialize MERTISDataPackReader</h3>
-<p>Initialize the MERTISSessionReader with the input directory and optional parameters for output directory and log level.</p>
-<p>The <code>../data/</code> contains a subset of the Moon flyby , technically called Earth Gravity Assist (EGA).</p>
-<p>The directory name reflects ESA-PSA/PDS4 naminhc scheme and the start / stop data acquistion , plus the data pack creation.</p>
-<p>Under this, there the different data levels :</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 10%">
-<col style="width: 25%">
-<col style="width: 14%">
-<col style="width: 29%">
-<col style="width: 19%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Level</th>
-<th>Units</th>
-<th>Geometry</th>
-<th>Calibration Targets</th>
-<th>TIS Aligned</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>raw</td>
-<td>Digital Numbers</td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>par</td>
-<td>Physical Units</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td>cal</td>
-<td>Physical Units</td>
-<td>Yes</td>
-<td>No</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><strong>Calibration Target</strong> : if the currnet level contains calibration target measurements or only scientifically relevant one.</li>
-<li><strong>TIS Aligned:</strong> : the TIS (Thermal Infrared Spectrometer) wavelength grid is aligned with the detector’s X and Y axes, so all pixels share the same wavelength grid. If not aligned, each pixel has its own wavelength grid, making data comparison and analysis more complex.</li>
-</ul>
-<p>Just change the level directory, the package can handle all the levels and read the data, take care of not calling geometry related paramter on RAW.</p>
-<div id="05479829" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>input_path <span class="op">=</span> pathlib.Path(<span class="st">'../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal'</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>output_path <span class="op">=</span> pathlib.Path(<span class="st">'/tmp/'</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>log_level <span class="op">=</span> <span class="st">'INFO'</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> input_path.exists():</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Input path </span><span class="sc">{</span>input_path<span class="sc">}</span><span class="ss"> does not exist."</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Reading path </span><span class="sc">{</span>input_path<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>ms_reader <span class="op">=</span> mr.MERTISDataPackReader(input_dir<span class="op">=</span>input_path, output_dir<span class="op">=</span>output_path, log_level<span class="op">=</span>log_level)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'MERTISDataPackReader initialized with input directory: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>input_dir<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Output directory: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>output_dir<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Log level: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>log_level<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>2026-01-27 15:37:58,701|177159|INFO|input_dir=PosixPath('../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal')</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Reading path ../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal
-MERTISDataPackReader initialized with input directory: ../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal
-Output directory: /tmp
-Log level: INFO</code></pre>
-</div>
-</div>
-<p>Show Files in Input Directory</p>
-<div id="4be8606f" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ms_reader.show_files()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>All files in input_dir :</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Counter</span><span style="font-weight: bold">({</span><span style="color: #008000; text-decoration-color: #008000">'.dat'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>, <span style="color: #008000; text-decoration-color: #008000">'.lblx'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>, <span style="color: #008000; text-decoration-color: #008000">'.fits'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="font-weight: bold">})</span>
-</pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>All files in input_dir matching old pattern &lt;v0.2.6 (\d{8}_\d{8}):</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Counter</span><span style="font-weight: bold">()</span>
-</pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>All files in input_dir matching new pattern &gt;=v0.2.6 (mer_cal_sc_tis_YYYYMMDD_1-...):</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Counter</span><span style="font-weight: bold">({</span><span style="color: #008000; text-decoration-color: #008000">'mer_cal_sc_tis'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="font-weight: bold">})</span>
-</pre>
-</div>
-</div>
-<p>List File Types</p>
-<div id="98a61ff8" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ms_reader.listfiletypes()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">{</span>
-    <span style="color: #008000; text-decoration-color: #008000">'hk_default'</span>: <span style="font-weight: bold">[</span><span style="color: #008000; text-decoration-color: #008000">'mer_cal_hk_default_20200409_1-0651130766-12538__0_1.dat'</span><span style="font-weight: bold">]</span>,
-    <span style="color: #008000; text-decoration-color: #008000">'hk_extended'</span>: <span style="font-weight: bold">[</span><span style="color: #008000; text-decoration-color: #008000">'mer_cal_hk_extended_20200409_1-0651130766-12595__0_1.dat'</span><span style="font-weight: bold">]</span>,
-    <span style="color: #008000; text-decoration-color: #008000">'sc_tis'</span>: <span style="font-weight: bold">[</span><span style="color: #008000; text-decoration-color: #008000">'mer_cal_sc_tis_20200409_1-0651130819-21186__0_1.fits'</span><span style="font-weight: bold">]</span>,
-    <span style="color: #008000; text-decoration-color: #008000">'sc_tir'</span>: <span style="font-weight: bold">[]</span>,
-    <span style="color: #008000; text-decoration-color: #008000">'sc_tis_ql'</span>: <span style="font-weight: bold">[]</span>,
-    <span style="color: #008000; text-decoration-color: #008000">'sc_tir_ql'</span>: <span style="font-weight: bold">[]</span>
-<span style="font-weight: bold">}</span>
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'hk_default'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>, <span style="color: #008000; text-decoration-color: #008000">'hk_extended'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>, <span style="color: #008000; text-decoration-color: #008000">'sc_tis'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>, <span style="color: #008000; text-decoration-color: #008000">'sc_tir'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>, <span style="color: #008000; text-decoration-color: #008000">'sc_tis_ql'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>, <span style="color: #008000; text-decoration-color: #008000">'sc_tir_ql'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span><span style="font-weight: bold">}</span>
-</pre>
-</div>
-</div>
-<p>Collect Data</p>
-<div id="e2ed7b95" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ms_reader.data_collector()</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Collected data keys: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>collect_data<span class="sc">.</span>keys()<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, value <span class="kw">in</span> ms_reader.collect_data.items():</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>key<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span><span class="bu">len</span>(value)<span class="sc">}</span><span class="ss"> files collected'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Reading filetype: hk_default from mer_cal_hk_default_20200409_1-0651130766-12538__0_1
-Reading filetype: hk_extended from mer_cal_hk_extended_20200409_1-0651130766-12595__0_1
-Reading filetype: tis from mer_cal_sc_tis_20200409_1-0651130819-21186__0_1
-Collected data keys: dict_keys(['hk_default', 'hk_extended', 'tis'])
-hk_default: 1 files collected
-hk_extended: 1 files collected
-tis: 1 files collected</code></pre>
-</div>
-</div>
-<p>Assemble Data</p>
-<div id="3c9ce4c3" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ms_reader.data_assembler(verbose<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"8ef28f8817014dd88e4f8b09f6e4b5a4","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">Reading filetype: tis from 
-../data/bcmer_tm_all_START-20200409T000000_END-20200410T000000_CRE-20240717T132010-ParamEventBootSciHK-short/cal/me
-r_cal_sc_tis_20200409_1-0651130819-21186__0_1.fits
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>n_wav=40 # generic wavelengths : not precise enough for scientific analysis!
-|    | tis_stem                                        |   finite(geo) |   geo.size |
-|---:|:------------------------------------------------|--------------:|-----------:|
-|  0 | mer_cal_sc_tis_20200409_1-0651130819-21186__0_1 |           672 |      10500 |
-Indices of measurements targets (HK_STAT_TIS_DATA_ACQ_TARGET):
-space_index_merged.shape=(21,)
-bb7_index_merged.shape=(0,)
-bb3_index_merged.shape=(0,)
-planet_index_merged.shape=(0,)
-Collected data statistics:
-Number of TIS files: 1
-Number of HK files: 2
-Number of TIR files: 0
-Number of TIS QL files: 0
-Number of TIR QL files: 0</code></pre>
-</div>
-</div>
-<p>Verify the Assembled Data</p>
-<div id="fc9d1ac8" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RAW does not have geometry data</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ms_reader.processing_level <span class="op">!=</span> <span class="st">'RAW'</span>:</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Geometry data keys: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>geom_ls<span class="sc">.</span>keys()<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Frames data keys: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>frames<span class="sc">.</span>keys()<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Wavelengths data keys: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>wavelengths<span class="sc">.</span>keys()<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'MERTIS TIS metadata keys: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>mertis_tis_metadata<span class="sc">.</span>keys()<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Space index merged shape: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>space_index_merged<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'BB7 index merged shape: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>bb7_index_merged<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'BB3 index merged shape: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>bb3_index_merged<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Planet index merged shape: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>planet_index_merged<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Geometry data keys: dict_keys(['mer_cal_sc_tis_20200409_1-0651130819-21186__0_1'])
-Frames data keys: dict_keys(['mer_cal_sc_tis_20200409_1-0651130819-21186__0_1'])
-Wavelengths data keys: dict_keys(['mer_cal_sc_tis_20200409_1-0651130819-21186__0_1'])
-MERTIS TIS metadata keys: dict_keys(['mer_cal_sc_tis_20200409_1-0651130819-21186__0_1'])
-Space index merged shape: (21,)
-BB7 index merged shape: (0,)
-BB3 index merged shape: (0,)
-Planet index merged shape: (0,)</code></pre>
-</div>
-</div>
-<p>A data directory can contains more file for each type, those are collected in a dict for each <code>ms_reader</code> variable , so it is handy to define which file we want to work with after inspection, like the following :</p>
-<div id="ab404625" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>file_key <span class="op">=</span> <span class="bu">list</span>(ms_reader.frames.keys())[<span class="dv">0</span>]</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Example DataCube shape for file </span><span class="sc">{</span>file_key<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>ms_reader<span class="sc">.</span>frames[file_key]<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Example DataCube shape for file mer_cal_sc_tis_20200409_1-0651130819-21186__0_1: (40, 100, 21)</code></pre>
-</div>
-</div>
-</section>
-<section id="show-some-data-plots" class="level3">
-<h3 class="anchored" data-anchor-id="show-some-data-plots">Show some data &amp; plots</h3>
-<p>now, let’s see some (meta)data:</p>
-<div id="e7afec9f" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ms_reader.mertis_tis_metadata[file_key].iloc[<span class="dv">0</span>:<span class="dv">4</span>].T</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
-<div>
+<p>The MERTIS reader helps you load, inspect, and validate MERTIS data from plain Python.</p>
+<section id="quickstart" class="level2">
+<h2 class="anchored" data-anchor-id="quickstart">Quickstart</h2>
+<ol type="1">
+<li>Read the <a href="./tutorials/index.html">Tutorials</a> for a short guided walkthrough.</li>
+<li>Open the <a href="./api.html">API Reference</a> for the generated function and class docs.</li>
+<li>Try the example notebook in <a href="examples/read_merstis_test.ipynb">examples/read_merstis_test.ipynb</a>.</li>
+</ol>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">0</th>
-<th data-quarto-table-cell-role="th">1</th>
-<th data-quarto-table-cell-role="th">2</th>
-<th data-quarto-table-cell-role="th">3</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">TIME_UTC</th>
-<td>2020-04-09T05:40:20.710Z</td>
-<td>2020-04-09T05:40:31.748Z</td>
-<td>2020-04-09T05:40:32.548Z</td>
-<td>2020-04-09T05:40:33.348Z</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">TIME_OBT</th>
-<td>1/0651130819:21186</td>
-<td>1/0651130830:23689</td>
-<td>1/0651130831:10567</td>
-<td>1/0651130831:62998</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">TimeStamp</th>
-<td>651130823.044403</td>
-<td>651130830.950928</td>
-<td>651130831.746674</td>
-<td>651130832.544235</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">HK_STAT_TIS_DATA_ACQ_ID</th>
-<td>3740</td>
-<td>3743</td>
-<td>3744</td>
-<td>3745</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">HK_STAT_TIS_DATA_ACQ_TYPE</th>
-<td>Sci_Raw</td>
-<td>Sci_Subtracted_BB3</td>
-<td>Sci_Subtracted_BB3</td>
-<td>Sci_Subtracted_BB3</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">HK_STAT_TIS_DATA_ACQ_TARGET</th>
-<td>Space</td>
-<td>Space</td>
-<td>Space</td>
-<td>Space</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">HK_STAT_BOL_BIAS_VOLT_ACTIVE_PARAM_SET</th>
-<td>2</td>
-<td>2</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">HK_STAT_TIS_DATA_ACQ_TIME</th>
-<td>651130819.323273</td>
-<td>651130830.361465</td>
-<td>651130831.16124</td>
-<td>651130831.961273</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">PAR_TIS_BIN_MODE</th>
-<td>1x2</td>
-<td>1x2</td>
-<td>1x2</td>
-<td>1x2</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">PAR_TIS_WIN_SIZE</th>
-<td>100x80pixel</td>
-<td>100x80pixel</td>
-<td>100x80pixel</td>
-<td>100x80pixel</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">PAR_TIS_COMP_MODE</th>
-<td>lossless</td>
-<td>lossless</td>
-<td>lossless</td>
-<td>lossless</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">HK_STAT_TIS_COMP_VERSION</th>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">HK_STAT_TIS_COMP_RICE_K_VALUE</th>
-<td>8</td>
-<td>8</td>
-<td>8</td>
-<td>8</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">HK_STAT_TIS_COMP_INPUT_LENGTH</th>
-<td>100</td>
-<td>100</td>
-<td>100</td>
-<td>100</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">HK_STAT_TIS_COMP_NUM_BANDS</th>
-<td>5</td>
-<td>5</td>
-<td>5</td>
-<td>5</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">HK_STAT_TIS_NUM_OVERSAMP</th>
-<td>0</td>
-<td>32</td>
-<td>32</td>
-<td>32</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">HK_TEMP_BOL_CHIP</th>
-<td>15.0</td>
-<td>15.0</td>
-<td>15.003</td>
-<td>15.002</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">DAT_TIS_OFFSET_MACRO_PIXEL</th>
-<td>1</td>
-<td>2052</td>
-<td>2052</td>
-<td>2053</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">HK_TEMP_BOL_HOUSING</th>
-<td>9.527</td>
-<td>9.519</td>
-<td>9.519</td>
-<td>9.52</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">HK_TEMP_OST_BASE_PLATE</th>
-<td>9.894</td>
-<td>9.891</td>
-<td>9.889</td>
-<td>9.889</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">PAR_TIS_DATA_NOISE_REDUCTION</th>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">HK_STAT_TIS_TOTAL_PACKET_NUM</th>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">HK_STAT_TIS_CURRENT_PACKET_NUM</th>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">HK_STAT_TIS_NUM_DATA_WORDS</th>
-<td>384</td>
-<td>1206</td>
-<td>1200</td>
-<td>1208</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div id="c1f38981" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.dates <span class="im">as</span> mdates</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> ms_reader.mertis_tis_metadata[file_key]<span class="op">\</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    .set_index(<span class="st">'TIME_UTC'</span>).loc[:,<span class="st">'HK_STAT_TIS_COMP_VERSION'</span>:]<span class="op">\</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        .plot(figsize<span class="op">=</span>[<span class="dv">10</span>,<span class="dv">15</span>], legend<span class="op">=</span><span class="va">True</span>, title<span class="op">=</span><span class="st">'MERTIS TIS Metadata'</span>, grid<span class="op">=</span><span class="va">True</span>, subplots<span class="op">=</span><span class="va">True</span>)<span class="op">;</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="op">-</span><span class="dv">1</span>].xaxis.set_major_formatter(mdates.DateFormatter(<span class="st">'%H:%M:%S'</span>))</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="op">-</span><span class="dv">1</span>].set_xlabel(<span class="st">'TIME_UTC'</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Now some data from TIS detector, each one a 2D array.</p>
-<p>For those data, dufing cruise, the scientific data are collected ueing the Space port and not Planet port.</p>
-<p>TIS Datacube size is the union of several TIS 2D array measurement, each one typically <code>(40, 100)</code> = (<code>n_spectral</code>,<code>n_spatial</code>), depending on binning and windowing.</p>
-<div id="e1b61f2e" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ms_reader.frames[file_key].shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
-<pre><code>(40, 100, 21)</code></pre>
-</div>
-</div>
-<p><code>(40, 100, 21)</code> = (<code>n_spectral</code>,<code>n_spatial</code>,<code>n_frames</code>)</p>
-<ul>
-<li><code>n_spectral</code> : number of spectral channels, depends on pixel spectral binning (1,2,4) result in <code>n_spatial</code> == (80,40,20)</li>
-<li><code>n_spatial</code> : number of measurements spatial pixels, depends on pixel spatial binning (1,2,4) result in <code>n_spatial</code> == (100,50,25)</li>
-<li><code>n_frames</code> : number of TIS frames, or measurements, this correspond to the time axis.</li>
-</ul>
-<div id="86be2d16" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>full_frames_3D <span class="op">=</span> ms_reader.frames[file_key]</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>wav <span class="op">=</span> ms_reader.wavelengths[file_key]</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plot_index <span class="op">=</span> ms_reader.space_index[file_key]</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'plot_index: </span><span class="sc">{</span>plot_index<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">2</span>,nrows<span class="op">=</span><span class="dv">2</span>, figsize <span class="op">=</span> [<span class="dv">22</span>,<span class="dv">12</span>])</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="ss">f'MERTIS TIS DataCube - </span><span class="sc">{</span>file_key<span class="sc">}</span><span class="ss"> </span><span class="ch">\n</span><span class="ss">'</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>             <span class="ss">f'average over the measurements </span><span class="sc">{</span>full_frames_3D<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> -&gt; </span><span class="sc">{</span>full_frames_3D[:,:,<span class="dv">0</span>]<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>,</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>             fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">'Space'</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>][<span class="dv">0</span>].plot(wav,full_frames_3D[:,:,plot_index].mean(axis<span class="op">=</span><span class="dv">2</span>))<span class="op">;</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>][<span class="dv">0</span>].set_title(<span class="ss">f'</span><span class="sc">{</span>title<span class="sc">}</span><span class="ss"> - frames average '</span>)</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>][<span class="dv">1</span>].imshow(full_frames_3D[:,:,plot_index].mean(axis<span class="op">=</span><span class="dv">2</span>),aspect<span class="op">=</span><span class="st">'auto'</span>,cmap<span class="op">=</span>plt.cm.Spectral_r)</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>][<span class="dv">1</span>].set_title(<span class="ss">f'</span><span class="sc">{</span>title<span class="sc">}</span><span class="ss"> - frames average'</span>)</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>][<span class="dv">0</span>].set_title(<span class="ss">f'</span><span class="sc">{</span>title<span class="sc">}</span><span class="ss"> - frames std'</span>)</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>][<span class="dv">0</span>].plot(wav,full_frames_3D[:,:,plot_index].std(axis<span class="op">=</span><span class="dv">2</span>))<span class="op">;</span></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>][<span class="dv">1</span>].set_title(<span class="ss">f'</span><span class="sc">{</span>title<span class="sc">}</span><span class="ss"> - frames std'</span>)</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>][<span class="dv">1</span>].imshow(full_frames_3D[:,:,plot_index].std(axis<span class="op">=</span><span class="dv">2</span>),aspect<span class="op">=</span><span class="st">'auto'</span>,cmap<span class="op">=</span>plt.cm.Spectral_r)</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> [a.set_xlabel(<span class="st">'Wavelength [nm]'</span>) <span class="cf">for</span> a <span class="kw">in</span> ax[:,<span class="dv">0</span>]]</span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> [a.set_ylabel(<span class="st">'Radiance [W/m2/sr/nm]'</span>) <span class="cf">for</span> a <span class="kw">in</span> ax[:,<span class="dv">0</span>]]</span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> [a.grid(<span class="va">True</span>) <span class="cf">for</span> a <span class="kw">in</span> ax[:,<span class="dv">0</span>]]</span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> [a.set_xlabel(<span class="st">'Frame Index'</span>) <span class="cf">for</span> a <span class="kw">in</span> ax[:,<span class="dv">1</span>]]</span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> [a.set_ylabel(<span class="st">'Wavelength Index'</span>) <span class="cf">for</span> a <span class="kw">in</span> ax[:,<span class="dv">1</span>]]</span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>plot_index: RangeIndex(start=0, stop=21, step=1)</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-14-output-2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="37fecdef" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(full_frames_3D[<span class="op">-</span><span class="dv">1</span>,:,plot_index].T,aspect<span class="op">=</span><span class="st">'auto'</span>,cmap<span class="op">=</span>plt.cm.Spectral_r)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fame Index'</span>)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'TIS Spatial Pixel Index'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
-<pre><code>Text(0, 0.5, 'TIS Spatial Pixel Index')</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-15-output-2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The higher level pixel near 40 are the “first light” MERTIS ever saw in space, from the Moon.</p>
-<p>Now some geometry data , not available in RAW data.</p>
-<div id="eab60ccb" class="cell" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>rich.<span class="bu">print</span>(ms_reader.geom_ls[file_key].keys())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #800080; text-decoration-color: #800080; font-weight: bold">dict_keys</span><span style="font-weight: bold">([</span><span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'</span>, <span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_TARGET_LATITUDE'</span>, 
-<span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_SUBSPACECRAFT_LONGITUDE'</span>, <span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_SUBSPACECRAFT_LATITUDE'</span>, 
-<span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_SUB_SUN_LONGITUDE'</span>, <span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_SUB_SUN_LATITUDE'</span>, 
-<span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_TARGET_ALTITUDE'</span>, <span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_SUBSPACECRAFT_ALTITUDE'</span>, 
-<span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_SUB_SUN_ALTITUDE'</span>, <span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_TARGET_DISTANCE'</span>, 
-<span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_TARGET_ANGULAR_DIAMETER'</span>, <span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_LOCAL_TIME'</span>, 
-<span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_TARGET_PHASE_ANGLE'</span>, <span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_TARGET_EMISSION_ANGLE'</span>, 
-<span style="color: #008000; text-decoration-color: #008000">'MERTIS_TIS_GEOMETRY_TARGET_INCIDENCE_ANGLE'</span><span style="font-weight: bold">])</span>
-</pre>
-</div>
-</div>
-<div id="70fe91aa" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ms_reader.geom_ls[file_key][<span class="st">'MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'</span>].shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
-<pre><code>(5, 100, 21)</code></pre>
-</div>
-</div>
-<p>The dimension for the geoemtry variables are <code>(5, 100, 21)</code> == (corners, n_spatial, n_frames) :</p>
-<ul>
-<li><strong>Corners</strong> of each pixel used for SPICE calculation, in order, looking from instrument , X axis up = (center, upper left, upper right, lower right, lower left)</li>
-</ul>
-<pre><code>C2       C1
- +-------+
- |       |
- |  C0   |
- |       |
- +-------+
-C3      C4</code></pre>
-<ul>
-<li><code>n_spatial</code> : number of measurements spatial pixels, depends on pixel spatial binning (1,2,4) result in <code>n_spatial</code> == (100,50,25)</li>
-<li><code>n_frames</code> : number of TIS frames, or measurements, this correspond to the time axis in the TIS datacube.</li>
-</ul>
-<div id="6b8e247e" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>longitudes <span class="op">=</span> ms_reader.geom_ls[file_key][<span class="st">'MERTIS_TIS_GEOMETRY_TARGET_LONGITUDE'</span>]</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>longitudes_center <span class="op">=</span> longitudes[<span class="dv">0</span>,:,:]</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>latitudes <span class="op">=</span> ms_reader.geom_ls[file_key][<span class="st">'MERTIS_TIS_GEOMETRY_TARGET_LATITUDE'</span>]</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>latitudes_center <span class="op">=</span> latitudes[<span class="dv">0</span>,:,:]</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>local_times <span class="op">=</span> ms_reader.geom_ls[file_key][<span class="st">'MERTIS_TIS_GEOMETRY_LOCAL_TIME'</span>]</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>local_times_center <span class="op">=</span> local_times[<span class="dv">0</span>,:,:]</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> plt.scatter(longitudes_center.flatten(), latitudes_center.flatten(), c<span class="op">=</span>local_times_center.flatten(), s<span class="op">=</span><span class="dv">10</span>, cmap<span class="op">=</span><span class="st">'Spectral_r'</span>)</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Longitude'</span>)</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> plt.colorbar(sc)</span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>cbar.set_label(<span class="st">'Local Time'</span>)</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Latitudes'</span>)</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Scatter plot of Target Longitude vs Latitude centers'</span>)</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Let’s find some TIS sptail pixels with defined geometries on all corners</p>
-<div id="23438429" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> latitudes  <span class="co"># shape (5, 100, 21)</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>not_nan_mask <span class="op">=</span> <span class="op">~</span>np.isnan(arr)</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>all_not_nan <span class="op">=</span> np.<span class="bu">all</span>(not_nan_mask, axis<span class="op">=</span><span class="dv">0</span>)  <span class="co"># shape (100, 21)</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.argwhere(all_not_nan)  <span class="co"># returns (i, j) pairs where all axis=0 are not nan</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(indices))</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(indices[:<span class="dv">5</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>105
-[[38  0]
- [38  1]
- [38  2]
- [38  3]
- [38  4]]</code></pre>
-</div>
-</div>
-<div id="689adfb3" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>pixel_index <span class="op">=</span> indices[<span class="dv">0</span>]  <span class="co"># Take the first valid pixel for demonstration</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the corners of the polygon</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(longitudes[<span class="dv">1</span>:,pixel_index[<span class="dv">0</span>],pixel_index[<span class="dv">1</span>] ], latitudes[<span class="dv">1</span>:,pixel_index[<span class="dv">0</span>],pixel_index[<span class="dv">1</span>] ], s<span class="op">=</span><span class="dv">100</span>, c<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the longitude and latitude for the corners (1:5), close the polygon by repeating the first corner</span></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>poly_lons <span class="op">=</span> longitudes[<span class="dv">1</span>:, pixel_index[<span class="dv">0</span>], pixel_index[<span class="dv">1</span>]]</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>poly_lats <span class="op">=</span> latitudes[<span class="dv">1</span>:, pixel_index[<span class="dv">0</span>], pixel_index[<span class="dv">1</span>]]</span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Close the polygon</span></span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>poly_lons <span class="op">=</span> np.append(poly_lons, poly_lons[<span class="dv">0</span>])</span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>poly_lats <span class="op">=</span> np.append(poly_lats, poly_lats[<span class="dv">0</span>])</span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>):</span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    plt.text(</span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>        poly_lons[i<span class="op">-</span><span class="dv">1</span>],</span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>        poly_lats[i<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span><span class="fl">0.5</span>,  <span class="co"># Offset the text slightly above the point</span></span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'Corner_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">'</span>,</span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">'black'</span>,</span>
-<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>        ha<span class="op">=</span><span class="st">'left'</span>,</span>
-<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>        va<span class="op">=</span><span class="st">'bottom'</span></span>
-<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the connecting lines</span></span>
-<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>plt.plot(poly_lons, poly_lats, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>plt.scatter(longitudes[<span class="dv">0</span>,pixel_index[<span class="dv">0</span>],pixel_index[<span class="dv">1</span>] ], latitudes[<span class="dv">0</span>,pixel_index[<span class="dv">0</span>],pixel_index[<span class="dv">1</span>] ], s<span class="op">=</span><span class="dv">100</span>)</span>
-<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>plt.text(</span>
-<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>    longitudes[<span class="dv">0</span>, pixel_index[<span class="dv">0</span>], pixel_index[<span class="dv">1</span>]],</span>
-<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>    latitudes[<span class="dv">0</span>, pixel_index[<span class="dv">0</span>], pixel_index[<span class="dv">1</span>]]<span class="op">+</span><span class="fl">0.5</span>,  <span class="co"># Offset the text slightly above the point</span></span>
-<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Center'</span>,</span>
-<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">12</span>,</span>
-<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'blue'</span>,</span>
-<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">'left'</span>,</span>
-<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>    va<span class="op">=</span><span class="st">'bottom'</span></span>
-<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
-<pre><code>Text(31.43904149826383, -33.20697106068339, 'Center')</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-20-output-2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="frame-assembly-new-functions" class="level4">
-<h4 class="anchored" data-anchor-id="frame-assembly-new-functions">Frame Assembly (New Functions)</h4>
-<p>Test the new lazy assembly functions with frame dimension analysis and optional interpolation.</p>
-<div id="02528459" class="cell" data-execution_count="26">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get raw frames (un-interpolated) directly from data_assembler output</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>raw_frames <span class="op">=</span> ms_reader.get_original_frames()</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Raw frames (un-interpolated):"</span>)</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, arr <span class="kw">in</span> raw_frames.items():</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>key<span class="sc">}</span><span class="ss">: shape </span><span class="sc">{</span>arr<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Raw frames (un-interpolated):
-  mer_cal_sc_tis_20200409_1-0651130819-21186__0_1: shape (40, 100, 21)</code></pre>
-</div>
-</div>
-<div id="0f6da14e" class="cell" data-execution_count="27">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze frame dimensions</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>dims_df <span class="op">=</span> get_frame_dimensions(raw_frames)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Frame dimension analysis:"</span>)</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dims_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Frame dimension analysis:
-                                                 n_spectrals  n_pixels  \
-mer_cal_sc_tis_20200409_1-0651130819-21186__0_1           40       100   
-
-                                                 n_files  
-mer_cal_sc_tis_20200409_1-0651130819-21186__0_1       21  </code></pre>
-</div>
-</div>
-<div id="7c4b77b8" class="cell" data-execution_count="28">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test assembly with mode='match' (safe, should work if all dims match)</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Assembly Test: mode='match' (safe mode, requires matching dims) ==="</span>)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    cube_match, meta_match <span class="op">=</span> ms_reader.get_assembled_frames(interp_mode<span class="op">=</span><span class="st">'match'</span>, order<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"✓ Success! Assembled cube shape: </span><span class="sc">{</span>cube_match<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  Metadata: </span><span class="sc">{</span>meta_match<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> e:</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"✗ Failed (expected for heterogeneous frames): </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-=== Assembly Test: mode='match' (safe mode, requires matching dims) ===
-
-[Step 1] Dimension Analysis: All dimensions uniform
-                                                 n_spectrals  n_pixels  \
-mer_cal_sc_tis_20200409_1-0651130819-21186__0_1           40       100   
-
-                                                 n_files  
-mer_cal_sc_tis_20200409_1-0651130819-21186__0_1       21  
-
-[Step 3] Stacking frames...
-  Final cube shape: (40, 100, 21)
-✓ Success! Assembled cube shape: (40, 100, 21)
-  Metadata: {'interpolation_mode': 'none', 'interpolation_order': 1, 'target_n_spectrals': np.int64(40), 'target_n_pixels': np.int64(100), 'n_temporal_samples': 21, 'source_count': 1, 'frames_resampled': {'mer_cal_sc_tis_20200409_1-0651130819-21186__0_1': (40, 100, 21)}}</code></pre>
-</div>
-</div>
-<div id="60ae82bb" class="cell" data-execution_count="29">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test assembly with mode='up' (upsample all frames to largest size)</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Assembly Test: mode='up' (upsample to largest frame) ==="</span>)</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>cube_up, meta_up <span class="op">=</span> ms_reader.get_assembled_frames(interp_mode<span class="op">=</span><span class="st">'up'</span>, order<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Assembled cube shape: </span><span class="sc">{</span>cube_up<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Interpolation mode: </span><span class="sc">{</span>meta_up[<span class="st">'interpolation_mode'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Interpolation order: </span><span class="sc">{</span>meta_up[<span class="st">'interpolation_order'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Temporal samples: </span><span class="sc">{</span>meta_up[<span class="st">'n_temporal_samples'</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-=== Assembly Test: mode='up' (upsample to largest frame) ===
-Assembled cube shape: (40, 100, 21)
-Interpolation mode: none
-Interpolation order: 1
-Temporal samples: 21</code></pre>
-</div>
-</div>
-<div id="f1fa0dc6" class="cell" data-execution_count="30">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test assembly with mode='down' (downsample all frames to smallest size)</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Assembly Test: mode='down' (downsample to smallest frame) ==="</span>)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Reset cached cube first to test different mode</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>ms_reader._assembled_cube <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>ms_reader._assembly_metadata <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>cube_down, meta_down <span class="op">=</span> ms_reader.get_assembled_frames(interp_mode<span class="op">=</span><span class="st">'down'</span>, order<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Assembled cube shape: </span><span class="sc">{</span>cube_down<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Interpolation mode: </span><span class="sc">{</span>meta_down[<span class="st">'interpolation_mode'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Interpolation order: </span><span class="sc">{</span>meta_down[<span class="st">'interpolation_order'</span>]<span class="sc">}</span><span class="ss"> (cubic)"</span>)</span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Temporal samples: </span><span class="sc">{</span>meta_down[<span class="st">'n_temporal_samples'</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-=== Assembly Test: mode='down' (downsample to smallest frame) ===
-
-[Step 1] Dimension Analysis: Downsampling to smallest frame
-                                                 n_spectrals  n_pixels  \
-mer_cal_sc_tis_20200409_1-0651130819-21186__0_1           40       100   
-
-                                                 n_files  
-mer_cal_sc_tis_20200409_1-0651130819-21186__0_1       21  
-Resampling to target: n_spectrals=40, n_pixels=100 (order=3)
-  mer_cal_sc_tis_20200409_1-0651130819-21186__0_1: shape (40, 100, 21) → NO RESAMPLING
-
-[Step 3] Stacking frames...
-  Final cube shape: (40, 100, 21)
-Assembled cube shape: (40, 100, 21)
-Interpolation mode: down
-Interpolation order: 3 (cubic)
-Temporal samples: 21</code></pre>
-</div>
-</div>
-<div id="508f2548" class="cell" data-execution_count="31">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demonstrate caching: second call returns cached object</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Caching Demonstration ==="</span>)</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>cube_cached, meta_cached <span class="op">=</span> ms_reader.get_assembled_frames(interp_mode<span class="op">=</span><span class="st">'down'</span>, order<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Same object returned from cache: </span><span class="sc">{</span>cube_cached <span class="kw">is</span> cube_down<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"No re-computation needed on second call"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-=== Caching Demonstration ===
-Same object returned from cache: True
-No re-computation needed on second call</code></pre>
-</div>
-</div>
-
-
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
-<script type="application/vnd.jupyter.widget-state+json">
-{"state":{},"version_major":2,"version_minor":0}
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -970,7 +362,7 @@ No re-computation needed on second call</code></pre>
     anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
+        if (clz.startsWith('code-annotation-')) {
           return true;
         }
       }
@@ -990,11 +382,11 @@ No re-computation needed on second call</code></pre>
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
         button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
+        tooltip = new bootstrap.Tooltip(button,
+          { trigger: "manual",
             customClass: "code-copy-button-tooltip",
             offset: [0, -8]});
-        tooltip.show();    
+        tooltip.show();
       }
       setTimeout(function() {
         if (tooltip) {
@@ -1032,7 +424,7 @@ No re-computation needed on second call</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/mariodamore\.github\.io\/mertisreader");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1071,7 +463,7 @@ No re-computation needed on second call</code></pre>
       if (onUntriggerFn) {
         config.onUntrigger = onUntriggerFn;
       }
-      window.tippy(el, config); 
+      window.tippy(el, config);
     }
     const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
     for (var i=0; i<noterefs.length; i++) {
@@ -1146,7 +538,7 @@ No re-computation needed on second call</code></pre>
       tippyHover(xref, undefined, function(instance) {
         instance.disable();
         let url = xref.getAttribute('href');
-        let hash = undefined; 
+        let hash = undefined;
         if (url.startsWith('#')) {
           hash = url;
         } else {
@@ -1174,7 +566,7 @@ No re-computation needed on second call</code></pre>
               if (note !== null) {
                 const html = processXRef(id, note);
                 instance.setContent(html);
-              } 
+              }
             }).finally(() => {
               instance.enable();
               instance.show();
@@ -1198,7 +590,7 @@ No re-computation needed on second call</code></pre>
               }
               const html = processXRef(null, note);
               instance.setContent(html);
-            } 
+            }
           }).finally(() => {
             instance.enable();
             instance.show();
@@ -1238,7 +630,7 @@ No re-computation needed on second call</code></pre>
               height = bottom - top;
             }
             if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
+              // cook up a div (if necessary) and position it
               let div = window.document.getElementById("code-annotation-line-highlight");
               if (div === null) {
                 div = window.document.createElement("div");
@@ -1364,4 +756,4 @@ No re-computation needed on second call</code></pre>
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/mariodamore/mertisreader/tree/master/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/mariodamore/mertisreader/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
