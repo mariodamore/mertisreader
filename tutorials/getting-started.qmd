@@ -86,6 +86,30 @@ print(f"BB3 index merged shape: {ms_reader.bb3_index_merged.shape}")
 print(f"Planet index merged shape: {ms_reader.planet_index_merged.shape}")
 ```
 
+## Lazy Loading with Helpers
+
+For large datasets, use lazy mode with the helper methods introduced in the `MERTISDataPackReader` docs. They keep I/O deferred until you explicitly access data.
+
+```{python}
+#| echo: true
+lazy_reader = mr.MERTISDataPackReader(input_path, lazy=True)
+lazy_reader.data_collector()
+
+# Get product without loading data into memory
+product = lazy_reader.get_tis_product()
+print(product['frames'])  # LazyArray - data still on disk
+print(product['frames'].shape)  # Accessible without I/O
+print(product['wavelengths'])  # LazyArray or None depending on level
+```
+
+Materialize only when running actual analysis:
+
+```{python}
+#| echo: true
+science_frames = product['frames'].materialize()  # Now data is read
+print(f"Materialised shape: {science_frames.shape}")
+```
+
 ## Next Steps
 
 Once you know which file key you want to explore, you can inspect frames, metadata, and plots exactly as in the notebook version. The API reference on this site comes from quartodoc-generated pages built from docstrings.

@@ -6,6 +6,35 @@ title: Lazy Loading
 
 This page captures the utilities from `nbs/01_lazy_loading.py`.
 
+## Helper Methods
+
+`MERTISDataPackReader` exposes convenience methods that hide the `collect_data` plumbing and return `LazyArray` instances ready to use.
+
+```{python}
+#| echo: true
+from pathlib import Path
+
+import mertisreader as mr
+
+# Assume a CAL or PAR directory exists; the reader picks the processing level automatically.
+input_path = (
+    Path.cwd().resolve()
+    / "data"
+    / "bcmer_tm_all_START-20200409T000000_END-20200410T000000"
+    "_CRE-20240717T132010-ParamEventBootSciHK-short"
+    / "cal"
+)
+output_path = Path("/tmp/")
+
+reader = mr.MERTISDataPackReader(input_dir=input_path, output_dir=output_path, lazy=True)
+reader.data_collector()
+
+product = reader.get_tis_product()
+print(f"Frames proxy: {product['frames']}")
+print(f"Shape (no I/O): {product['frames'].shape}")
+print(f"Path: {product['path'].name}")
+```
+
 ## Array Proxy
 
 ```{python}

@@ -501,3 +501,206 @@ class MERTISDataPackReader:
         if self._frames_cache is None:
             self._frames_cache = self.frames
         return self._frames_cache
+
+    def get_tis_product(self, file_key=None):
+        """
+        Get a TIS product with lazy-loaded science data and metadata.
+
+        Convenience helper for accessing TIS data without manually navigating
+        collect_data and re-opening FITS files. Per ADR-006, returns LazyArray
+        wrappers that defer I/O until data is accessed.
+
+        Args:
+            file_key (str, optional): File stem/key to retrieve. If None, returns
+                the first available TIS file.
+
+        Returns:
+            dict: Dictionary with keys:
+                - 'fits': astropy.io.fits.HDUList (memmap)
+                - 'frames': LazyArray for science data
+                - 'wavelengths': LazyArray or None
+                - 'metadata': LazyCSVLoader or None (for HK files)
+                - 'path': pathlib.Path to the FITS file
+
+        Raises:
+            RuntimeError: If data_collector() has not been called.
+            ValueError: If no TIS files are available or file_key not found.
+
+        Example:
+            >>> reader = MERTISDataPackReader(dir, lazy=True)
+            >>> reader.data_collector()
+            >>> product = reader.get_tis_product()  # first file
+            >>> frames = product['frames']  # LazyArray, no I/O yet
+            >>> print(frames.shape)  # Still no I/O
+            >>> data = frames.materialize()  # Now I/O happens
+        """
+        if not hasattr(self, 'collect_data'):
+            raise RuntimeError(
+                "data_collector() must be called before get_tis_product(). "
+                "Call reader.data_collector() first."
+            )
+
+        tis_entries = self.collect_data.get('tis', [])
+        if not tis_entries:
+            raise ValueError(f"No TIS files available in {self.input_dir}")
+
+        # Select file
+        if file_key is None:
+            entry = tis_entries[0]
+        else:
+            matching = [e for e in tis_entries if e['path'].stem == file_key]
+            if not matching:
+                raise ValueError(f"No TIS file found with key {file_key!r}")
+            entry = matching[0]
+
+        fits_path = entry['path']
+        lazy_frames = entry['fits_data']  # Already a LazyArray
+
+        # Open FITS file for header/metadata access (memmap, no scaling)
+        from astropy.io import fits
+        hdulist = fits.open(str(fits_path), memmap=True, do_not_scale_image_data=True)
+
+        # Find wavelength HDU
+        wavelengths = None
+        level = self.processing_level
+        science_hdu_name = None
+
+        for hdu_name in self._get_tis_science_hdu_names():
+            if hdu_name in hdulist:
+                science_hdu_name = hdu_name
+                break
+
+        # Look for corresponding wavelength HDU
+        if science_hdu_name:
+            wav_hdu_name = science_hdu_name.replace('_SCIENCE_DATA', '_SCIENCE_DATA_WAVELENGTH')
+            if wav_hdu_name in hdulist:
+                from .lazy_loading import LazyArray
+                wav_data = hdulist[wav_hdu_name].data
+                lazy_wav = LazyArray(wav_data, header=dict(hdulist[wav_hdu_name].header))
+                wavelengths = lazy_wav
+
+        # Metadata from HK files if available
+        metadata = None
+        hk_entries = self.collect_data.get('hk_default', []) or self.collect_data.get('hk_extended', [])
+        if hk_entries:
+            # Just use the first HK entry - don't check columns (triggers schema resolution)
+            metadata = hk_entries[0]['data']
+
+        return {
+            'fits': hdulist,
+            'frames': lazy_frames,
+            'wavelengths': wavelengths,
+            'metadata': metadata,
+            'path': fits_path
+        }
+
+    def get_frames(self, file_key=None):
+        """
+        Get science frames dictionary with lazy-loaded arrays.
+
+        Args:
+            file_key (str, optional): Specific file key. If None, returns all files.
+
+        Returns:
+            dict or LazyArray: If file_key provided, returns LazyArray for that file.
+                Otherwise returns dict {file_key: LazyArray}.
+
+        Raises:
+            RuntimeError: If data_collector() has not been called.
+        """
+        if not hasattr(self, 'collect_data'):
+            raise RuntimeError(
+                "data_collector() must be called before get_frames(). "
+                "Call reader.data_collector() first."
+            )
+
+        tis_entries = self.collect_data.get('tis', [])
+        if not tis_entries:
+            return {}
+
+        if file_key is None:
+            return {e['path'].stem: e['fits_data'] for e in tis_entries}
+        else:
+            for entry in tis_entries:
+                if entry['path'].stem == file_key:
+                    return entry['fits_data']
+            raise ValueError(f"No TIS file found with key {file_key!r}")
+
+    def get_wavelengths(self, file_key=None):
+        """
+        Get wavelength data for TIS products.
+
+        Args:
+            file_key (str, optional): Specific file key. If None, returns dict of all files.
+
+        Returns:
+            dict or LazyArray or None: Wavelength data as LazyArray (lazy-loaded).
+                Returns None if wavelengths not available (e.g., RAW level).
+
+        Raises:
+            RuntimeError: If data_collector() has not been called.
+        """
+        if not hasattr(self, 'collect_data'):
+            raise RuntimeError(
+                "data_collector() must be called before get_wavelengths(). "
+                "Call reader.data_collector() first."
+            )
+
+        from astropy.io import fits
+        from .lazy_loading import LazyArray
+
+        tis_entries = self.collect_data.get('tis', [])
+        if not tis_entries:
+            return {} if file_key is None else None
+
+        result = {}
+        for entry in tis_entries:
+            fits_path = entry['path']
+            hdulist = fits.open(str(fits_path), memmap=True, do_not_scale_image_data=True)
+
+            # Find wavelength HDU
+            wav_hdu_name = None
+            for hdu_name in self._get_tis_science_hdu_names():
+                if hdu_name in hdulist:
+                    wav_hdu_name = hdu_name.replace('_SCIENCE_DATA', '_SCIENCE_DATA_WAVELENGTH')
+                    break
+
+            if wav_hdu_name and wav_hdu_name in hdulist:
+                wav_data = hdulist[wav_hdu_name].data
+                result[entry['path'].stem] = LazyArray(wav_data, header=dict(hdulist[wav_hdu_name].header))
+
+        if file_key is None:
+            return result
+        else:
+            return result.get(file_key)
+
+    def get_metadata(self, file_type='hk_default', file_key=None):
+        """
+        Get metadata (HK data) from collected files.
+
+        Args:
+            file_type (str): Type of HK data ('hk_default' or 'hk_extended').
+            file_key (str, optional): Specific file key. If None, returns dict of all files.
+
+        Returns:
+            dict or LazyCSVLoader or pd.DataFrame: Metadata as LazyCSVLoader in lazy mode,
+                or DataFrame in eager mode.
+        """
+        if not hasattr(self, 'collect_data'):
+            raise RuntimeError(
+                "data_collector() must be called before get_metadata(). "
+                "Call reader.data_collector() first."
+            )
+
+        entries = self.collect_data.get(file_type, [])
+        if not entries:
+            return {} if file_key is None else None
+
+        if file_key is None:
+            return {e['path'].stem: e['data'] for e in entries}
+        else:
+            for entry in entries:
+                if entry['path'].stem == file_key:
+                    return entry['data']
+            # Try without file_key filter
+            return {e['path'].stem: e['data'] for e in entries}

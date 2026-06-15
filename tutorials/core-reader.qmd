@@ -58,6 +58,44 @@ print(f"Wavelengths: {list(ms_reader.wavelengths.keys())}")
 print(f"Metadata tables: {list(ms_reader.mertis_tis_metadata.keys())}")
 ```
 
+## Use Helper Methods
+
+`MERTISDataPackReader` provides dedicated helpers for convenient access to lazy-loaded products.
+For a quick peek without materialising data, prefer them over navigating `collect_data` directly.
+
+```{python}
+#| echo: true
+ms_reader_lazy = mr.MERTISDataPackReader(
+    input_dir=input_path,
+    output_dir=output_path,
+    log_level="INFO",
+    lazy=True,
+)
+ms_reader_lazy.data_collector()
+
+product = ms_reader_lazy.get_tis_product()
+print(f"Product keys: {sorted(product.keys())}")
+print(f"Frames proxy: {product['frames']}")
+print(f"Frame shape (no I/O): {product['frames'].shape}")
+if product['wavelengths'] is not None:
+    print(f"Wavelengths shape: {product['wavelengths'].shape}")
+```
+
+Direct access shortcuts for repeated lookups:
+
+```{python}
+#| echo: true
+all_frames = ms_reader_lazy.get_frames()
+first_key = next(iter(all_frames))
+print(f"Available frame keys: {list(all_frames.keys())}")
+
+all_wavelengths = ms_reader_lazy.get_wavelengths()
+print(f"Available wavelength keys: {list(all_wavelengths.keys())}")
+
+frame_lazy = ms_reader_lazy.get_frames(file_key=next(iter(all_frames)))
+print(f"Selected frame proxy: {frame_lazy}")
+```
+
 ## Reuse the Cached Frames
 
 ```{python}
