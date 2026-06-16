@@ -9,17 +9,23 @@ description = "helper routines to read ESA/Bepicolombo space mission - DLR MERTI
 readme = "README.md"
 requires-python = ">=3.7"
 license = {text = "MIT"}
-authors = [{name = "Mario D Amore", email = "mario.damore@dlr.de"}]
+authors = [ { name = "Mario D Amore", email = "mario.damore@dlr.de" } ]
 keywords = ['planetary', 'instrument', 'data']
-classifiers = ["Natural Language :: English", "Intended Audience :: Developers", "Development Status :: 2 - Pre-Alpha", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only"]
+classifiers = [
+    "Natural Language :: English", 
+    "Intended Audience :: Science/Research", 
+    "Development Status :: 4 - Beta", 
+    "Programming Language :: Python :: 3"
+]
 dependencies = ['rich', 'numpy', 'pandas', 'astropy', 'matplotlib', 'xmltodict', 'polars', 'scipy', 'pds4_tools>=1.4']
 
 [project.optional-dependencies]
 docs = ["quartodoc>=0.11", "griffe<2", "jupytext>=1.16"]
 
 [project.urls]
-Repository = "https://github.com/mariodamore/mertisreader/tree/master/"
-Documentation = "https://mariodamore.github.io/mertisreader/"
+homepage = "https://github.com/mariodamore/mertisreader"
+repository = "https://github.com/mariodamore/mertisreader"
+documentation = "https://mariodamore.github.io/mertisreader/"
 
 [tool.hatch.version]
 path = "mertisreader/__init__.py"
