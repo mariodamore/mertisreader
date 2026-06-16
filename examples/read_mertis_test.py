@@ -39,8 +39,15 @@ print("Libraries imported successfully.")
 # %%
 def find_repo_root(start: Optional[Path] = None) -> Path:
     """Find the repository root by looking for the data and package directories."""
-    current = Path(start or Path.cwd()).resolve()
-    for candidate in (current, *current.parents):
+    import mertisreader as _mr  # noqa: E402 – local import to avoid circular deps
+
+    anchor = Path(start or Path.cwd()).resolve()
+    if not ((anchor / "data").exists() and (anchor / "mertisreader").exists()):
+        file_anchor = Path(_mr.__file__).resolve().parent.parent
+        if (file_anchor / "data").exists() and (file_anchor / "mertisreader").exists():
+            anchor = file_anchor
+
+    for candidate in (anchor, *anchor.parents):
         if (candidate / "data").exists() and (candidate / "mertisreader").exists():
             return candidate
     raise FileNotFoundError("Could not locate the repository root.")
