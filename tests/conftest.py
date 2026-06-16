@@ -145,17 +145,17 @@ def lazy_csv_from_real_file(raw_hk_csv, raw_hk_xml):
 
 @pytest.fixture
 def tmp_csv_file(tmp_path):
-    """Minimal temporary CSV file with three numeric columns."""
+    """Minimal headerless CSV data (like real HK DAT files)."""
     csv_path = tmp_path / "test_data.csv"
-    csv_path.write_text("a,b,c\n1,2,3\n4,5,6\n7,8,9\n")
+    csv_path.write_text("1,2,3\n4,5,6\n7,8,9\n")
     return csv_path
 
 
 @pytest.fixture
 def tmp_empty_csv(tmp_path):
-    """CSV file containing only a header row, no data rows."""
+    """Truly empty file — no header, no data rows."""
     csv_path = tmp_path / "empty.csv"
-    csv_path.write_text("col_x,col_y\n")
+    csv_path.write_text("")
     return csv_path
 
 

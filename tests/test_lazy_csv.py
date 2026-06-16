@@ -32,7 +32,7 @@ from mertisreader.lazy_loading import LazyCSVLoader
 
 class TestLazyCSVLoaderInit:
     def test_init_with_valid_file(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         assert loader._csv_path == pathlib.Path(tmp_csv_file)
 
     def test_init_with_column_list(self, tmp_csv_file):
@@ -46,21 +46,21 @@ class TestLazyCSVLoaderInit:
         assert loader._csv_path == missing
 
     def test_init_sets_not_materialized(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         assert loader._materialized is False
 
     def test_repr_shows_lazy_before_materialize(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         r = repr(loader)
         assert "lazy" in r.lower()
 
     def test_repr_shows_materialized_after(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         loader.materialize()
         assert "materialized" in repr(loader).lower()
 
     def test_str_matches_repr(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         assert str(loader) == repr(loader)
 
 
@@ -70,38 +70,38 @@ class TestLazyCSVLoaderInit:
 
 class TestLazyCSVLoaderMaterialize:
     def test_materialize_returns_dataframe(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         result = loader.materialize()
         assert isinstance(result, pd.DataFrame)
 
     def test_materialize_correct_columns(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         df = loader.materialize()
         assert set(df.columns) == {"a", "b", "c"}
 
     def test_materialize_correct_row_count(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         df = loader.materialize()
         assert len(df) == 3  # "a,b,c\n1,2,3\n4,5,6\n7,8,9\n"
 
     def test_materialize_correct_values(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         df = loader.materialize()
         assert list(df["a"]) == [1, 4, 7]
 
     def test_materialize_sets_flag(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         loader.materialize()
         assert loader._materialized is True
 
     def test_materialize_repeated_returns_equal_dataframes(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         df1 = loader.materialize()
         df2 = loader.materialize()
         pd.testing.assert_frame_equal(df1, df2)
 
     def test_materialize_returns_copy(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         df1 = loader.materialize()
         df2 = loader.materialize()
         assert df1 is not df2
@@ -113,13 +113,13 @@ class TestLazyCSVLoaderMaterialize:
             loader.materialize()
 
     def test_materialize_empty_csv_returns_empty_df(self, tmp_empty_csv):
-        loader = LazyCSVLoader(tmp_empty_csv)
+        loader = LazyCSVLoader(tmp_empty_csv, columns=["col_x", "col_y"])
         df = loader.materialize()
         assert isinstance(df, pd.DataFrame)
         assert len(df) == 0
 
     def test_materialize_empty_csv_preserves_columns(self, tmp_empty_csv):
-        loader = LazyCSVLoader(tmp_empty_csv)
+        loader = LazyCSVLoader(tmp_empty_csv, columns=["col_x", "col_y"])
         df = loader.materialize()
         assert set(df.columns) == {"col_x", "col_y"}
 
@@ -131,7 +131,7 @@ class TestLazyCSVLoaderMaterialize:
         assert caught == []
 
     def test_shape_property_creates_lazy_plan(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         with pytest.raises(AttributeError):
             _ = loader.shape
 
@@ -142,31 +142,31 @@ class TestLazyCSVLoaderMaterialize:
 
 class TestLazyCSVLoaderFilter:
     def test_filter_reduces_rows(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         loader.filter(pl.col("a") > 1)
         df = loader.materialize()
         assert len(df) == 2  # rows 4 and 7
 
     def test_filter_correct_values(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         loader.filter(pl.col("a") == 4)
         df = loader.materialize()
         assert list(df["a"]) == [4]
 
     def test_filter_chained(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         loader.filter(pl.col("a") > 1).filter(pl.col("a") < 7)
         df = loader.materialize()
         assert list(df["a"]) == [4]
 
     def test_filter_empty_result(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         loader.filter(pl.col("a") > 999)
         df = loader.materialize()
         assert len(df) == 0
 
     def test_filter_returns_self(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         result = loader.filter(pl.col("a") > 0)
         assert result is loader
 
@@ -177,24 +177,24 @@ class TestLazyCSVLoaderFilter:
 
 class TestLazyCSVLoaderSelect:
     def test_select_single_column(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         loader.select("a")
         df = loader.materialize()
         assert list(df.columns) == ["a"]
 
     def test_select_multiple_columns(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         loader.select(["a", "b"])
         df = loader.materialize()
         assert set(df.columns) == {"a", "b"}
 
     def test_select_returns_self(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         result = loader.select("a")
         assert result is loader
 
     def test_getitem_returns_lazyframe_slice(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         result = loader[0:2]
         assert hasattr(result, "collect")
 
@@ -205,14 +205,14 @@ class TestLazyCSVLoaderSelect:
 
 class TestLazyCSVLoaderWithColumns:
     def test_with_columns_adds_computed_column(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         loader.with_columns((pl.col("a") * 2).alias("a_double"))
         df = loader.materialize()
         assert "a_double" in df.columns
         assert list(df["a_double"]) == [2, 8, 14]
 
     def test_with_columns_returns_self(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         result = loader.with_columns((pl.col("a") + 1).alias("a1"))
         assert result is loader
 
@@ -223,14 +223,14 @@ class TestLazyCSVLoaderWithColumns:
 
 class TestLazyCSVLoaderHeadTail:
     def test_head_limits_rows(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         loader.head(1)
         df = loader.materialize()
         assert len(df) == 1
         assert list(df["a"]) == [1]
 
     def test_tail_limits_rows(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         loader.tail(1)
         df = loader.materialize()
         assert len(df) == 1
@@ -243,14 +243,14 @@ class TestLazyCSVLoaderHeadTail:
 
 class TestLazyCSVLoaderChaining:
     def test_filter_select_chain(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         loader.filter(pl.col("a") > 1).select(["a", "c"])
         df = loader.materialize()
         assert set(df.columns) == {"a", "c"}
         assert len(df) == 2
 
     def test_select_with_columns_chain(self, tmp_csv_file):
-        loader = LazyCSVLoader(tmp_csv_file)
+        loader = LazyCSVLoader(tmp_csv_file, columns=["a", "b", "c"])
         loader.select(["a", "b"]).with_columns((pl.col("a") + pl.col("b")).alias("sum"))
         df = loader.materialize()
         assert "sum" in df.columns

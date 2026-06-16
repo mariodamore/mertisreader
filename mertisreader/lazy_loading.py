@@ -204,14 +204,21 @@ class LazyCSVLoader:
     def _ensure_lazy(self):
         """Ensure lazy frame is created."""
         if self._lazyframe is None:
-            if self._columns:
-                self._lazyframe = pl.scan_csv(
-                    self._csv_path,
-                    has_header=False,
-                    new_columns=self._columns,
-                )
-            else:
-                self._lazyframe = pl.scan_csv(self._csv_path, has_header=False)
+            try:
+                if self._columns:
+                    self._lazyframe = pl.scan_csv(
+                        self._csv_path,
+                        has_header=False,
+                        new_columns=self._columns,
+                    )
+                else:
+                    self._lazyframe = pl.scan_csv(self._csv_path, has_header=False)
+            except pl.exceptions.NoDataError:
+                if self._columns:
+                    empty_df = pl.DataFrame({col: [] for col in self._columns})
+                    self._lazyframe = empty_df.lazy()
+                else:
+                    raise
             if self._columns:
                 self._lazyframe = self._lazyframe.select(self._columns)
 
