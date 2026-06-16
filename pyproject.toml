@@ -10,9 +10,9 @@ readme = "README.md"
 requires-python = ">=3.7"
 license = {text = "MIT"}
 authors = [{name = "Mario D Amore", email = "mario.damore@dlr.de"}]
-keywords = ['planetary', ',', 'instrument,', 'data']
+keywords = ['planetary', 'instrument', 'data']
 classifiers = ["Natural Language :: English", "Intended Audience :: Developers", "Development Status :: 2 - Pre-Alpha", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only"]
-dependencies = ['rich', 'numpy', 'pandas', 'astropy', 'matplotlib', 'xmltodict', 'polars', 'scipy', 'pds4_tools']
+dependencies = ['rich', 'numpy', 'pandas', 'astropy', 'matplotlib', 'xmltodict', 'polars', 'scipy', 'pds4_tools>=1.4']
 
 [project.optional-dependencies]
 docs = ["quartodoc>=0.11", "griffe<2", "jupytext>=1.16"]
